@@ -1,5 +1,5 @@
-* 0.9.2
- - refactoring
+* 0.9.3
+ - refactoring (eidete working)
 
 * 0.9.1:
  - add `hen.sh`
