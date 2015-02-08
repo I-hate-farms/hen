@@ -66,7 +66,6 @@ Copy `hen.sh` at the root of your project (at the same level as your CMakeLists.
 Run 
 ```
 ./hen.sh build
-
 ```
 
 `hen.sh` will automatically download and install the cmake templates in the `cmake/` folder.
@@ -74,7 +73,7 @@ Run
 
 > Note: hen set `CMAKE_INSTALL_PREFIX` to `/usr` and uses the value `BUILD_TYPE` for `CMAKE_BUILD_TYPE`
 
-## Differences with other cmake setup
+## Differences with other cmake setups
 - Only one cmake file `CMakeLists.txt` is needed for the entire project. No need to have a cmake file in sub folder or in the `po` folder
 -  Additional files are generated: no need to have `Config.vala.cmake` or `.deps` or `.deps.cmake` or `.pc` or `.pc.cmake` files
 -  No need to bother with pc packages (managed with `pkg_check_modules`). hen can deduce the list from the vala package (and handle the case when the pc package is different from the vala package name via [a dependency map](docs/dependencies.md))  
