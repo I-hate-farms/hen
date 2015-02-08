@@ -97,6 +97,8 @@ if(NOT WIN32)
   set(BoldMagenta "${Esc}[1;35m")
   set(BoldCyan    "${Esc}[1;36m")
   set(BoldWhite   "${Esc}[1;37m")
+  set(FatalColor  "${BoldRed}")
+  set(MessageColor"${BoldWhite}")
 endif()
 
 set (SOURCE_PATHS "")
@@ -140,7 +142,7 @@ macro(prepare_elementary)
     parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;PACKAGES;C_DEFINES;VALA_DEFINES;SCHEMA;VALA_OPTIONS;CONFIG_NAME;LINKING;C_OPTIONS" "" ${ARGN})
 
     if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-        message( "CMAKE_INSTALL_PREFIX is not set. '/usr' is used by default")
+        message( "${MessageColor}CMAKE_INSTALL_PREFIX is not set${NC}. '/usr' is used by default")
         set (CMAKE_INSTALL_PREFIX "/usr")
     endif()
 
@@ -150,14 +152,14 @@ macro(prepare_elementary)
         endif()
     else()
         if(NOT CMAKE_BUILD_TYPE STREQUAL BUILD_TYPE)
-            message( "CMAKE_BUILD_TYPE is set to ${CMAKE_BUILD_TYPE}. The value of BUILD_TYPE (${BUILD_TYPE}) is ignored.")
+            message( "${MessageColor}CMAKE_BUILD_TYPE is set to ${CMAKE_BUILD_TYPE}${NC}. The value of BUILD_TYPE (${BUILD_TYPE}) is ignored.")
         endif()
     endif()
 
     if(ARGS_BINARY_NAME)
         project (${ARGS_BINARY_NAME})
     else()
-        message( FATAL_ERROR "You must specify a BINARY_NAME")
+        message( FATAL_ERROR "${FatalColor}You must specify a BINARY_NAME${NC}")
     endif()
 
     # TODO handle the case where the source is not precised
@@ -165,7 +167,7 @@ macro(prepare_elementary)
         list(APPEND SOURCE_PATHS ${ARGS_SOURCE_PATH})
         list(REMOVE_DUPLICATES SOURCE_PATHS)
     else()
-        message ("Error, you must provide a SOURCE_PATH argument")
+        message( FATAL_ERROR "${FatalColor}Error, you must provide a SOURCE_PATH argument${NC}")
     endif()
 
     # Add the source path to the vala files
@@ -203,13 +205,13 @@ macro(prepare_elementary)
     if(ARGS_VERSION)
         set (ELEM_VERSION ${ARGS_VERSION})
     else()
-        message( FATAL_ERROR "You must specify a VERSION. Example: 1.0")
+        message( FATAL_ERROR "${FatalColor}You must specify a VERSION${NC}. Example: 1.0")
     endif()
 
     if(ARGS_TITLE)
         set (ELEM_TITLE ${ARGS_TITLE})
     else()
-        message( FATAL_ERROR "You must specify a TITLE. Example: \"My application\"")
+        message( FATAL_ERROR "${FatalColor}You must specify a TITLE${NC}. Example: \"My application\"")
     endif()
 
     # Add schema
@@ -219,7 +221,7 @@ macro(prepare_elementary)
 
     # Checking vala version
     if(NOT VALA_VERSION_MIN)
-        message ("Using Vala 0.26.0 as minimum")
+        message ("${MessageColor}Using Vala 0.26.0 as minimum${NC}")
         SET(VALA_VERSION_MIN "0.26.0" )
     endif()
     find_package (Vala REQUIRED)

@@ -8,24 +8,24 @@ macro(build_elementary_app)
     if( NOT ARGS_ICON)
         #message( FATAL_ERROR "Your application must have an ICON. Example: data/${ARGS_BINARY_NAME}.svg")
         set(ARGS_ICON "data/${ARGS_BINARY_NAME}.svg")
-        message ("${White}Using ICON=data/${ARGS_BINARY_NAME}.svg${NC}")
+        message ("${MessageColor}Using ICON=data/${ARGS_BINARY_NAME}.svg${NC}")
     endif()
 
     if( NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON})
-        message( FATAL_ERROR "${White}The ICON file doesn't exist${NC}. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON}")
+        message( FATAL_ERROR "${FatalColor}The ICON file doesn't exist${NC}. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON}")
     endif()
 
     # DESKTOP is not mandatory for apps
     if( NOT ARGS_DESKTOP)
         #message( FATAL_ERROR "Your application must have an DESKTOP file. Example: data/${ARGS_BINARY_NAME}.desktop")
         set(ARGS_DESKTOP "data/${ARGS_BINARY_NAME}.desktop")
-        message ("${White}Using DESKTOP=data/${ARGS_BINARY_NAME}.desktop${NC}")
+        message ("${MessageColor}Using DESKTOP=data/${ARGS_BINARY_NAME}.desktop${NC}")
         #message ("Warning no DESKTOP defined: your application won't be displayed in slingshot")
     else()
 
     endif()
     if( NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_DESKTOP})
-        message( FATAL_ERROR "${White}The DESKTOP file doesn't exist${NC}. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_DESKTOP}")
+        message( FATAL_ERROR "${FatalColor}The DESKTOP file doesn't exist${NC}. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_DESKTOP}")
     endif()
 
     prepare_elementary (

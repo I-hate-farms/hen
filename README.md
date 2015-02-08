@@ -7,7 +7,7 @@ All is needed in **one only cmake** `CMakeLists.txt` filefile for your whole pro
 cmake_minimum_required (VERSION 2.8)
 cmake_policy (VERSION 2.8)
 list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
-include (Elementary)
+include (Hen)
 
 set (VALA_VERSION_MIN "0.26")
 
