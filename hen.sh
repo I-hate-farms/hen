@@ -2,12 +2,16 @@
 # 
 OPERATION="build"
 
+DEST_FOLDER=cmake-test
+SOURCE_URL=
+
 if [ -n "$1" ]; then
     OPERATION=$1
 fi
 
 do_update () {
 	echo "This is udpdate"
+
 }
 
 do_prepare () {
