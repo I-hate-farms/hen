@@ -1,6 +1,10 @@
 - support uninstall
 - support po translation files
 
+* 0.9.5
+ - fix comments
+ - add rebuild task
+ 
 * 0.9.4
  - add list options
  - add colors

@@ -5,3 +5,5 @@ Here are the defined hen.sh commands:
    - hen.sh prepare: generate the cmake files 
    - hen.sh build: do everything to build the application
    - hen.sh list: enumerates the make tasks that are defined
+   - hen.sh rebuild: recreate the build folder and build the application
+

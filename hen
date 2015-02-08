@@ -1,8 +1,9 @@
 #!/bin/bash
 # File history 
-#  - 0.1: update and help
-#  - 0.2: build and prepare
-#  - 0.3: list
+#  - 0.1: add task update and help
+#  - 0.2: add task build and prepare
+#  - 0.3: add task list
+#  - 0.4: add task rebuild 
 
 OPERATION="build"
 
@@ -86,6 +87,14 @@ do_build () {
       cd ..        
 }
 
+do_rebuild () {
+  echo -e "${white}Regenerating your build ...${NC}"
+  if [ -d ${BUILD_FOLDER} ] ; then
+    rm -rf ${BUILD_FOLDER}
+  fi 
+  do_build 
+}
+
 do_help () {
 	if [ -d ${DEST_FOLDER} ] ; then
     	LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
@@ -118,8 +127,10 @@ case "$OPERATION" in
    ;;   
    "list")do_list
    ;;
+   "rebuild")do_rebuild
+   ;;  
    "help")do_help
-   ;;
+   ;; 
    "--help")do_help
    ;;     
    "--?")do_help

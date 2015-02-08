@@ -65,7 +65,7 @@ Copy `hen.sh` at the root of your project (at the same level as your CMakeLists.
 
 Run 
 ```
-./hen.sh build
+./hen build
 ```
 
 `hen.sh` will automatically download and install the cmake templates in the `cmake/` folder.

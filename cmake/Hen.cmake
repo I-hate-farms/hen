@@ -20,6 +20,7 @@
 #    - 0.16: support uninstall
 #    - 0.17: refactor
 #    - 0.18: color, glib 2.23 by default
+#    - 0.19: support library with depending app (vala-stacktrace)
 
 # RELEASE
 # TODO * fix po file generation
@@ -37,7 +38,7 @@
 
 # TODO add glib if needed (for very basic cli app)
 # TODO generate README and INSTALL
-#
+# TODO generate debian files
 
 # TODO compute .h folder from .c paths (ASSUMED)
 #
@@ -158,7 +159,7 @@ macro(hen_build)
     endif()
 
     if(ARGS_BINARY_NAME)
-        message( "${FatalColor}Processing ${ARGS_BINARY_NAME}${NC}")
+        message( "${MessageColor}Creating build for ${ARGS_BINARY_NAME}...${NC}")
         project (${ARGS_BINARY_NAME})
     else()
         message( FATAL_ERROR "${FatalColor}You must specify a BINARY_NAME${NC}")
@@ -331,9 +332,9 @@ macro(hen_build)
         local_check_package ("${vala_local_pkg}")
     endforeach()
     # TODO Add vapi folder if present
-    message (" DEPS_CFLAGS : '${DEPS_CFLAGS}'")
-    message (" DEPS_LIBRARIES: '${DEPS_LIBRARIES}'")
-    message (" DEPS_LIBRARY_DIRS: '${DEPS_LIBRARY_DIRS}'")
+    #message (" DEPS_CFLAGS : '${DEPS_CFLAGS}'")
+    #message (" DEPS_LIBRARIES: '${DEPS_LIBRARIES}'")
+    #message (" DEPS_LIBRARY_DIRS: '${DEPS_LIBRARY_DIRS}'")
 
     # Generate config file
     set (ELEM_RELEASE_NAME ${ARGS_RELEASE_NAME})
