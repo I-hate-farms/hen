@@ -1,8 +1,10 @@
 #!/bin/bash
-# 
+# File history 
+#  - 0.1: update and help
+
 OPERATION="build"
 
-DEST_FOLDER=./cmake-test
+DEST_FOLDER=./cmake
 TEMP_FOLDER=./hen-tmp
 SOURCE_URL=https://github.com/I-hate-zoos/hen/raw/master/dist/
 PACKAGE_NAME=hen-latest.zip
