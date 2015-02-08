@@ -2,7 +2,7 @@
 # File history 
 #  - 0.1: update and help
 #  - 0.2: build and prepare
-#  - 0.3: build and prepare
+#  - 0.3: list
 
 OPERATION="build"
 
@@ -72,10 +72,10 @@ do_prepare () {
 }
 
 do_build () {
-      echo -e "${white}Building your application ...${NC}"
       if [ ! -d ${BUILD_FOLDER} ] ; then
         do_prepare 
       fi 
+      echo -e "${white}Building your application ...${NC}"
       cd ${BUILD_FOLDER}
       make 
       cd ..        
@@ -86,8 +86,10 @@ do_help () {
     	LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
     	echo -e "${white}Hen ${LOCAL_VERSION}${NC}"
     	echo ""
-    fi 
-	cat ./cmake/Hen-HELP.txt
+      cat ./cmake/Hen-HELP.txt
+  else
+    echo -e "${white}No help is available${NC}. Please update hen with: $0 update"
+  fi 
 }
 
 do_list () {

@@ -304,7 +304,7 @@ macro(prepare_elementary)
         link_libraries (${DEPS_LIBRARIES})
         link_directories (${DEPS_LIBRARY_DIRS})
     endif()
-    # TOOD Add vapi folder if present
+    # TODO Add vapi folder if present
     #message (" DEPS_CFLAGS : ${DEPS_CFLAGS}")
     #message (" DEPS_LIBRARIES: ${DEPS_LIBRARIES}")
     #message (" DEPS_LIBRARY_DIRS: ${DEPS_LIBRARY_DIRS}")
