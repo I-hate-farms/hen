@@ -64,6 +64,11 @@ do_build () {
 }
 
 do_help () {
+	if [ -d ${DEST_FOLDER}/cmake ] ; then
+    	LOCAL_VERSION=`cat ${DEST_FOLDER}/cmake/Hen-VERSION.txt`
+    	echo -e "${white}Hen ${LOCAL_VERSION}${NC}"
+    	echo ""
+    fi 
 	cat ./cmake/Hen-HELP.txt
 }
 
