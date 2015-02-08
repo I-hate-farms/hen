@@ -31,10 +31,11 @@ do_update () {
     echo "Checking for newer version..."
     wget --quiet -P ${TEMP_FOLDER} ${VERSION_URL}
     SERVER_VERSION=`cat ${VERSION_FILE}`
-    if [ -d ${DEST_FOLDER}/cmake ] ; then
-    	LOCAL_VERSION=`cat ${DEST_FOLDER}/cmake/Hen-VERSION.txt`
+    if [ -d ${DEST_FOLDER} ] ; then
+    	LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
+    	echo " Local version : ${LOCAL_VERSION}"
     fi 
-    echo " Local version : ${LOCAL_VERSION}"
+
     echo -e " Server version: ${white}${SERVER_VERSION}${NC}"
 
     # Is an update required?
@@ -66,8 +67,8 @@ do_build () {
 }
 
 do_help () {
-	if [ -d ${DEST_FOLDER}/cmake ] ; then
-    	LOCAL_VERSION=`cat ${DEST_FOLDER}/cmake/Hen-VERSION.txt`
+	if [ -d ${DEST_FOLDER} ] ; then
+    	LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
     	echo -e "${white}Hen ${LOCAL_VERSION}${NC}"
     	echo ""
     fi 

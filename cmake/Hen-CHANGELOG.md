@@ -1,9 +1,11 @@
-## version: 0.9.1
- - add hen.sh
+* 0.9.2
+ - refactoring
+
+* 0.9.1:
+ - add `hen.sh`
  - publish 0.9.1 to github
 
-## version: 0.9
-
+* 0.9: 
 - 0.1 : initial release
 - 0.2 : support schemas
 - 0.3 : support app
