@@ -159,7 +159,9 @@ macro(hen_build)
     endif()
 
     if(ARGS_BINARY_NAME)
+        message ("")
         message( "${MessageColor}Creating build for ${ARGS_BINARY_NAME}...${NC}")
+        message ("---")
         project (${ARGS_BINARY_NAME})
     else()
         message( FATAL_ERROR "${FatalColor}You must specify a BINARY_NAME${NC}")
@@ -287,9 +289,6 @@ macro(hen_build)
         # return "true" if package is in debian repo
         is_vala_package_in_debian (${vala_package} in_debian)
 
-        is_vala_package_local (${vala_package} is_local)
-        #message ("DEP ${vala_package} ${pc_package}")
-
         if(vala_package STREQUAL "posix" OR NOT in_debian STREQUAL "true" OR vala_package STREQUAL "linux")
             # message ("Ignoring checking for ${pkg}")
             list(APPEND vapi_packages "${vala_package}")
@@ -311,10 +310,6 @@ macro(hen_build)
         if( NOT vala_package STREQUAL "gthread-2.0"  )
             set(VALA_PACKAGES ${VALA_PACKAGES} ${vala_package})
         endif()
-
-        #if( is_local STREQUAL "true" )
-        #    set(VALA_LOCAL_PACKAGES ${VALA_LOCAL_PACKAGES} "${vala_package}.vapi")
-        #endif()
     endforeach()
 
     set (DEPS_CFLAGS "")
@@ -345,18 +340,6 @@ macro(hen_build)
     
     if (ARGS_LINKING)
         set( LIBRARY_NAME  ${ARGS_BINARY_NAME})
-        #message ("YYY: ${CMAKE_CURRENT_LIST_DIR}")
-         #message ("YYY: ${CMAKE_FILES_DIRECTORY}")
-         #message ("YYY: ${CMAKE_CURRENT_BINARY_DIR}")
-         
-         #message ("YYY: ${EXECUTABLE_OUTPUT_PATH}")
-         set( OUTPUT_VAPI_PATH "${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/${ARGS_BINARY_NAME}.dir")
-         #message ("AAA: ${OUTPUT_VAPI_PATH}")
-         #message ("BBB: ${OUTPUT_VAPI_PATH}/${LIBRARY_NAME}.vapi") 
-         # Store the vapi dirs so they can be used by other sub projects that might use
-         # the library
-         #list (APPEND VAPI_INCLUDE_DIR "${OUTPUT_VAPI_PATH}")
-        #add_local_package (${ARGS_BINARY_NAME}, ${OUTPUT_VAPI_PATH} )
         # Precompile vala files for library
         vala_precompile (VALA_C ${ARGS_BINARY_NAME}
             ${VALA_FILES}
@@ -376,35 +359,24 @@ macro(hen_build)
         # For libraries
         GENERATE_VAPI
             ${LIBRARY_NAME}
-            #${OUTPUT_VAPI_PATH}/${LIBRARY_NAME}
         GENERATE_HEADER
             ${LIBRARY_NAME}
         )
         set( ELEM_VAPI_DIR ${CMAKE_BINARY_DIR})
 
     else()
-        #set( VALA_INCLUDE_VAPI_DIR "")
-        #foreach(vapi_dir "${VAPI_INCLUDE_DIR}")
-        #    set( VALA_INCLUDE_VAPI_DIR ${VALA_INCLUDE_VAPI_DIR} "--vapidir=${vapi_dir}")
-        #endforeach() 
-        #message ("VALA_INCLUDE_VAPI_DIR: ${VALA_INCLUDE_VAPI_DIR}")
         # Precompile vala files for app
         vala_precompile (VALA_C ${ARGS_BINARY_NAME}
             ${VALA_FILES}
             ${CONFIG_FILE}
         PACKAGES
             ${VALA_PACKAGES}
-        #CUSTOM_VAPIS
-            #/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/build/CMakeFiles/vala-stacktrace.dir/vala-stacktrace.vapi
-            #${VALA_LOCAL_PACKAGES}
         OPTIONS
             # TODO : deprecated ??
             --thread
             # TODO
             --vapidir=${CMAKE_BINARY_DIR}
             --vapidir=${CMAKE_CURRENT_SOURCE_DIR}/vapi
-            #${VALA_INCLUDE_VAPI_DIR}
-            #--vapidir=/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/build/CMakeFiles/vala-stacktrace.dir
             ${VALA_DEFINES}
             ${EXTRA_VALA_OPTIONS}
             ${ARGS_VALA_OPTIONS}

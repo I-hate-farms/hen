@@ -4,6 +4,7 @@
 #  - 0.2: add task build and prepare
 #  - 0.3: add task list
 #  - 0.4: add task rebuild 
+#  - 0.5: fix warnings
 
 OPERATION="build"
 
@@ -54,6 +55,11 @@ do_update () {
 	    fi 
 	    unzip -q ${PACKAGE_FILE} -d ${DEST_FOLDER}
 
+      # Delete the build folder so the files will be regenerated next time
+      if [ -d ${BUILD_FOLDER} ] ; then
+        rm -rf ${BUILD_FOLDER}
+      fi 
+
 	    # Cleaning up
 	    rm -rf ${TEMP_FOLDER}
 
@@ -75,12 +81,14 @@ do_prepare () {
       mkdir ${BUILD_FOLDER}
       cd ${BUILD_FOLDER}
       cmake .. 
+      cd ..
 }
 
 do_build () {
       if [ ! -d ${BUILD_FOLDER} ] ; then
         do_prepare 
       fi 
+      echo ""
       echo -e "${white}Building your application ...${NC}"
       cd ${BUILD_FOLDER}
       make 

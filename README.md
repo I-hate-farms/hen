@@ -61,17 +61,22 @@ Write a hen specfic `CMakeLists.txt` file as described in [the documentation](do
 
 > Note: `CMakeLists.txt` may contain many build_elementary_xxx calls if your project produces many binary files
 
-Copy `hen.sh` at the root of your project (at the same level as your CMakeLists.txt file)
+Copy the `hen` script file at the root of your project (at the same level as your CMakeLists.txt file)
 
-Run 
+Run:
 ```
 ./hen build
 ```
 
-`hen.sh` will automatically download and install the cmake templates in the `cmake/` folder.
+`hen` will automatically download and install the cmake templates in the `cmake/` folder.
 > **Caution:** if a  `cmake/` folder already exists, it will be deleted and replaced.
 
 > Note: hen set `CMAKE_INSTALL_PREFIX` to `/usr` and uses the value `BUILD_TYPE` for `CMAKE_BUILD_TYPE`
+
+For more help about the `hen` command line, run:
+```
+./hen help
+``` 
 
 ## Differences with other cmake setups
 - Only one cmake file `CMakeLists.txt` is needed for the entire project. No need to have a cmake file in sub folder or in the `po` folder
