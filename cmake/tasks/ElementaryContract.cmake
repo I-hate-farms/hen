@@ -8,25 +8,25 @@ macro(build_elementary_contract)
     if( NOT ARGS_ICON)
         #message( FATAL_ERROR "Your application must have an ICON. Example: data/${ARGS_BINARY_NAME}.svg")
         set(ARGS_ICON "data/${ARGS_BINARY_NAME}.svg")
-        message ("Using ICON=data/${ARGS_BINARY_NAME}.svg")
+        message ("${White}Using ICON=data/${ARGS_BINARY_NAME}.svg${NC}")
     endif()
 
     if( NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON})
-        message( FATAL_ERROR "The ICON file doesn't exist. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON}")
+        message( FATAL_ERROR "${White}The ICON file doesn't exist${NC}. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON}")
     endif()
 
     # DESKTOP is not mandatory for apps
     if( ARGS_DESKTOP)
         if( NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_DESKTOP})
-            message( FATAL_ERROR "The DESKTOP file doesn't exist. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_DESKTOP}")
+            message( FATAL_ERROR "${White}The DESKTOP file doesn't exist${NC}. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_DESKTOP}")
         endif()
     endif()
 
     if( NOT ARGS_CONTRACT)
-        message( FATAL_ERROR "You must specify an CONTRACT file for your contract. Example: data/my_contract.contract")
+        message( FATAL_ERROR "${White}You must specify an CONTRACT file for your contract${NC}. Example: data/my_contract.contract")
     endif()
     if( NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_CONTRACT})
-        message( FATAL_ERROR "The CONTRACT file doesn't exist. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_CONTRACT}")
+        message( FATAL_ERROR "${White}The CONTRACT file doesn't exist${NC}. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_CONTRACT}")
     endif()
 
     prepare_elementary (

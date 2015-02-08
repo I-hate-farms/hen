@@ -3,11 +3,11 @@ macro(build_elementary_library)
     parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOVERSION;LINKING;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS" "" ${ARGN})
 
     if( NOT ARGS_LINKING)
-        message( FATAL_ERROR "You must specify a LINKING: static or shared.")
+        message( FATAL_ERROR "${White}You must specify a LINKING: static or shared${NC}.")
     endif()
 
     if( NOT ARGS_LINKING STREQUAL "shared" AND NOT ARGS_LINKING STREQUAL "static")
-        message( FATAL_ERROR "The value LINKING must be either static or shared.")
+        message( FATAL_ERROR "${White}The value LINKING must be either static or shared${NC}.")
     endif()
 
     set (DATADIR "")

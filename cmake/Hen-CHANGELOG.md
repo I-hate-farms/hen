@@ -1,5 +1,10 @@
+* 0.9.4
+ - add list options
+ - add colors
+
 * 0.9.3
  - refactoring (eidete working)
+ - add build and prepare options
 
 * 0.9.1:
  - add `hen.sh`
