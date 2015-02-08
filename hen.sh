@@ -1,6 +1,7 @@
 #!/bin/bash
 # File history 
 #  - 0.1: update and help
+#  - 0.2: build and prepare
 
 OPERATION="build"
 
