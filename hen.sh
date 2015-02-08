@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # 
 OPERATION="build"
 
@@ -12,12 +12,16 @@ VERSION_URL=${SOURCE_URL}/Hen-VERSION.txt
 PACKAGE_FILE=${TEMP_FOLDER}/${PACKAGE_NAME}
 VERSION_FILE=${TEMP_FOLDER}/Hen-VERSION.txt
 
+
+red='\033[0;31m'
+white='\033[1;37m'
+NC='\033[0m' # No Color
+
 if [ -n "$1" ]; then
     OPERATION=$1
 fi
 
 do_update () {
-	echo "This is udpdate"
     if [ -d ${TEMP_FOLDER} ] ; then
     	rm -rf ${TEMP_FOLDER}
     fi
@@ -25,22 +29,30 @@ do_update () {
     echo "Checking for newer version..."
     wget --quiet -P ${TEMP_FOLDER} ${VERSION_URL}
     SERVER_VERSION=`cat ${VERSION_FILE}`
-    if [ -d ${DEST_FOLDER} ] ; then
-    	LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
+    if [ -d ${DEST_FOLDER}/cmake ] ; then
+    	LOCAL_VERSION=`cat ${DEST_FOLDER}/cmake/Hen-VERSION.txt`
     fi 
-    echo " Server version: ${SERVER_VERSION}"
     echo " Local version : ${LOCAL_VERSION}"
-    echo "Getting the new files from server..."
-    wget --quiet -P ${TEMP_FOLDER} ${PACKAGE_URL}
-    if [ -d ${DEST_FOLDER} ] ; then
-    	rm -rf ${DEST_FOLDER}
-    fi 
-    unzip -q ${PACKAGE_FILE} -d ${DEST_FOLDER}
+    echo -e " Server version: ${white}${SERVER_VERSION}${NC}"
 
-    # Cleaning up
-    rm -rf ${TEMP_FOLDER}
+    # Is an update required?
+	if [ "${SERVER_VERSION}" == "${LOCAL_VERSION}" ]; then
+    	echo "Your version is up to date (${LOCAL_VERSION})"
+	else
+		echo "Newer version found!"
+		echo "Getting the new files from server..."
+	    wget --quiet -P ${TEMP_FOLDER} ${PACKAGE_URL}
+	    if [ -d ${DEST_FOLDER} ] ; then
+	    	rm -rf ${DEST_FOLDER}
+	    fi 
+	    unzip -q ${PACKAGE_FILE} -d ${DEST_FOLDER}
 
-    echo "Hen updated to ${SERVER_VERSION}"
+	    # Cleaning up
+	    rm -rf ${TEMP_FOLDER}
+
+	    echo -e "${white}Hen updated to ${SERVER_VERSION}${NC}"
+    fi
+
 }
 
 do_prepare () {
