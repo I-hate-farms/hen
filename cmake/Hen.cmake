@@ -72,7 +72,11 @@ include (tasks/ElementaryLibrary)
 add_definitions (-w)
 
 if( NOT DIR_ELEMENTARY_CMAKE )
-    set(DIR_ELEMENTARY_CMAKE ${CMAKE_CURRENT_LIST_DIR})
+    set(DIR_ELEMENTARY_TEMPLATES ${CMAKE_CURRENT_LIST_DIR}/templates)
+endif()
+
+if( NOT DIR_ELEMENTARY_TEMPLATES )
+    set(DIR_ELEMENTARY_TEMPLATES ${DIR_ELEMENTARY_CMAKE}/templates)
 endif()
 
 set (SOURCE_PATHS "")
@@ -82,12 +86,13 @@ set (SOURCE_PATHS "")
 macro(create_uninstall_target )
     # uninstall target
     configure_file(
-        "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+        "${DIR_ELEMENTARY_TEMPLATES}/cmake_uninstall.cmake.in"
         "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
         IMMEDIATE @ONLY)
 
-    add_custom_target(uninstall
-        COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
+    # TODO handle uninstall
+    #add_custom_target(uninstall
+    #    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 endmacro()
 
 
@@ -286,7 +291,7 @@ macro(prepare_elementary)
     set (ELEM_RELEASE_NAME ${ARGS_RELEASE_NAME})
     if( ARGS_CONFIG_NAME)
         set (CONFIG_FILE /tmp/config-${ARGS_BINARY_NAME}.vala)
-        configure_file (${DIR_ELEMENTARY_CMAKE}/${ARGS_CONFIG_NAME} ${CONFIG_FILE})
+        configure_file (${DIR_ELEMENTARY_TEMPLATES}/${ARGS_CONFIG_NAME} ${CONFIG_FILE})
     endif()
 
     if (ARGS_LINKING)

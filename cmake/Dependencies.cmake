@@ -8,6 +8,10 @@ if( NOT DIR_ELEMENTARY_CMAKE )
     set(DIR_ELEMENTARY_CMAKE ${CMAKE_CURRENT_LIST_DIR})
 endif()
 
+if( NOT DIR_ELEMENTARY_TEMPLATES )
+    set(DIR_ELEMENTARY_TEMPLATES ${DIR_ELEMENTARY_CMAKE}/templates)
+endif()
+
 macro (read_dependency_file)
     if( NOT DEPEND_FILE_READ )
 

@@ -14,6 +14,7 @@ VERSION_URL=${SOURCE_URL}/Hen-VERSION.txt
 PACKAGE_FILE=${TEMP_FOLDER}/${PACKAGE_NAME}
 VERSION_FILE=${TEMP_FOLDER}/Hen-VERSION.txt
 
+BUILD_FOLDER=./build
 
 red='\033[0;31m'
 white='\033[1;37m'
@@ -59,11 +60,23 @@ do_update () {
 }
 
 do_prepare () {
-	echo "This is prepare"
+      echo -e "${white}Preparing your build ...${NC}"
+      if [ -d ${BUILD_FOLDER} ] ; then
+        rm -rf ${BUILD_FOLDER}
+      fi 
+      mkdir ${BUILD_FOLDER}
+      cd ${BUILD_FOLDER}
+      cmake .. 
 }
 
 do_build () {
-	echo "This is build"
+      echo -e "${white}Building your application ...${NC}"
+      if [ ! -d ${BUILD_FOLDER} ] ; then
+        do_prepare 
+      fi 
+      cd ${BUILD_FOLDER}
+      make 
+      cd ..        
 }
 
 do_help () {

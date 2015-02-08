@@ -50,8 +50,8 @@ macro(build_elementary_library)
     # Set for the variables substitution in the pc file
     set (DOLLAR "$")
     # TODO fix the output path
-    configure_file (${DIR_ELEMENTARY_CMAKE}/lib.pc.cmake ${CMAKE_BINARY_DIR}/${ARGS_BINARY_NAME}.pc)
-    configure_file (${DIR_ELEMENTARY_CMAKE}/lib.deps.cmake ${CMAKE_BINARY_DIR}/${ARGS_BINARY_NAME}.deps)
+    configure_file (${DIR_ELEMENTARY_TEMPLATES}/lib.pc.cmake ${CMAKE_BINARY_DIR}/${ARGS_BINARY_NAME}.pc)
+    configure_file (${DIR_ELEMENTARY_TEMPLATES}/lib.deps.cmake ${CMAKE_BINARY_DIR}/${ARGS_BINARY_NAME}.deps)
 
     if( ARGS_LINKING STREQUAL "static")
         add_library (${ARGS_BINARY_NAME} STATIC ${VALA_C} ${C_FILES})
