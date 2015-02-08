@@ -2,6 +2,7 @@
 # File history 
 #  - 0.1: update and help
 #  - 0.2: build and prepare
+#  - 0.3: build and prepare
 
 OPERATION="build"
 
@@ -89,12 +90,26 @@ do_help () {
 	cat ./cmake/Hen-HELP.txt
 }
 
+do_list () {
+  echo -e "${white}Hen${NC} defines the following make tasks"
+  echo -e "  - ${white}[default]${NC} : build your application along with extra files if applicable (desktop, vapi, pc, deps...)"
+  echo -e "  - ${white}install${NC} : install your application to the previously defined PREFIX (./usr by default)"
+  echo -e "  - ${white}pot${NC} : generates the translation files in the po folder"
+  echo "" 
+  echo "You can invoke those tasks in the ./build folder: "
+  echo "  cd build"
+  echo "  make pot"
+}
+
+
 case "$OPERATION" in
    "update") do_update  
    ;;
    "prepare") do_prepare
    ;;
    "build")do_build
+   ;;   
+   "list")do_list
    ;;
    "help")do_help
    ;;
