@@ -190,9 +190,11 @@ macro(vala_precompile output target_name)
     set(vapi_arguments "")
     if(ARGS_GENERATE_VAPI)
         list(APPEND out_files "${DIRECTORY}/${ARGS_GENERATE_VAPI}.vapi")
+        # CARL list(APPEND out_files "${ARGS_GENERATE_VAPI}.vapi")
         list(APPEND out_files_display "${ARGS_GENERATE_VAPI}.vapi")
         set(vapi_arguments "--library=${ARGS_GENERATE_VAPI}" "--vapi=${ARGS_GENERATE_VAPI}.vapi")
-
+        # CARL set(vapi_arguments "--library=${target_name}" "--vapi=${ARGS_GENERATE_VAPI}.vapi")
+        
         # Header and internal header is needed to generate internal vapi
         if (NOT ARGS_GENERATE_HEADER)
             set(ARGS_GENERATE_HEADER ${ARGS_GENERATE_VAPI})

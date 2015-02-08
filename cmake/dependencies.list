@@ -13,7 +13,7 @@
 #   . (optional): vala package if different from pc package
 
 # Vala
-gee-8.0                     -> libgee-0.8-dev
+gee-0.8                     -> libgee-0.8-dev
 
 gdk-x11-3.0                 -> <built-in>
 x11                         -> <built-in>

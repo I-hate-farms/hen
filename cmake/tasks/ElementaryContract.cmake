@@ -29,7 +29,7 @@ macro(build_elementary_contract)
         message( FATAL_ERROR "${FatalColor}The CONTRACT file doesn't exist${NC}. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_CONTRACT}")
     endif()
 
-    prepare_elementary (
+    hen_build (
         BINARY_NAME
             ${ARGS_BINARY_NAME}
         TITLE

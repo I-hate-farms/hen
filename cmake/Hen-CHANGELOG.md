@@ -1,6 +1,11 @@
+- support uninstall
+- support po translation files
+
 * 0.9.4
  - add list options
  - add colors
+ - fix library task (vala-stacktrace working)
+ - add --target-glib 2.32 by default (and emit a warning if set in the cmake file)
 
 * 0.9.3
  - refactoring (eidete working)
@@ -26,4 +31,3 @@
 - 0.13: use BUILD_TYPE for the build and set vala define BUILD_IS_DEBUG and BUILD_IS_RELEASE
 - 0.14: support and install contracts
 - 0.15: implement *.vala and *.c files
-- 0.16: support uninstall

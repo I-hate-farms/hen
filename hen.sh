@@ -62,6 +62,11 @@ do_update () {
 }
 
 do_prepare () {
+      # if the Hen version can't be found, it means that the 
+      # Hen needs to be installed
+      if [ ! -f "${DEST_FOLDER}/Hen-VERSION.txt" ] ; then
+        do_update 
+      fi 
       echo -e "${white}Preparing your build ...${NC}"
       if [ -d ${BUILD_FOLDER} ] ; then
         rm -rf ${BUILD_FOLDER}
