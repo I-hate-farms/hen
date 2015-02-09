@@ -1,6 +1,14 @@
 - support uninstall
 - support po translation files
 
+* 0.9.8
+ - misc fixes for apt dependencies
+ - misc formatting fixes
+ - hen is now updated with updates
+
+* 0.9.7
+ - add an internal release task
+
 * 0.9.6
  - apt packages are installed automatically
 

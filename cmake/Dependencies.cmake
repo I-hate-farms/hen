@@ -85,14 +85,17 @@ macro (install_apt_packges apt_packages)
 
     message ("")
     message( "${MessageColor}Installing the dependencies${NC} for ${ARGS_BINARY_NAME} via ${MessageColor}apt${NC}...")
-    message ("---")
+    message ("----------")
 
     string( REPLACE "," " " pkgs "${apt_packages}")
     string( REPLACE ";" " " pkgs "${pkgs}")
 
     EXEC_PROGRAM( sudo
         ARGS 
-            apt-get install -y "${pkgs} > /dev/null")
+            apt-get install -y "${pkgs} >"
+        OUTPUT_VARIABLE output)
+
+    message ("OUTPUT: ${output}")
 endmacro()
 
 # Returns true if the vala_package can be found in the
