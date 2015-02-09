@@ -83,6 +83,10 @@ endmacro()
 
 macro (install_apt_packges apt_packages)
 
+    message ("")
+    message( "${MessageColor}Installing the dependencies${NC} for ${ARGS_BINARY_NAME} via ${MessageColor}apt${NC}...")
+    message ("---")
+
     string( REPLACE "," " " pkgs "${apt_packages}")
     string( REPLACE ";" " " pkgs "${pkgs}")
 
