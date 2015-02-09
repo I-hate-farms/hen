@@ -1,3 +1,7 @@
+* 0.9.6
+ - apt packages are installed automatically
+ - add more packages to dependencies.list
+ 
 * 0.9.5
  - fix comments
  - add rebuild task

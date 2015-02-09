@@ -281,6 +281,7 @@ macro(hen_build)
     set (COMPLETE_DIST_PC_PACKAGES "")
     # Used in libs.deps.make
     set (ELEM_DEPS_PC_PACKAGES "")
+    set (APT_PC_PACKAGES "")
     foreach(vala_package ${ARGS_PACKAGES})
 
         set (pc_package "")
@@ -303,6 +304,9 @@ macro(hen_build)
         if(in_debian STREQUAL "true" AND NOT vala_package STREQUAL "linux" AND NOT vala_package STREQUAL "posix")
             set(COMPLETE_DIST_PC_PACKAGES " ${COMPLETE_DIST_PC_PACKAGES} ${pc_package}")
             set(ELEM_DEPS_PC_PACKAGES  "${ELEM_DEPS_PC_PACKAGES}${pc_package}\n")
+            set (apt_pkg "")
+            get_apt_pc_packages( ${vala_package} apt_pkg)
+            set(APT_PC_PACKAGES ${APT_PC_PACKAGES} "${apt_pkg}")
         endif()
 
         # TODO Handle threading better with the options etc
@@ -311,7 +315,7 @@ macro(hen_build)
             set(VALA_PACKAGES ${VALA_PACKAGES} ${vala_package})
         endif()
     endforeach()
-
+    install_apt_packges ("${APT_PC_PACKAGES}")
     set (DEPS_CFLAGS "")
     set (DEPS_LIBRARIES "")
     set (DEPS_LIBRARY_DIRS "")

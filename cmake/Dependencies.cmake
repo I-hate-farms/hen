@@ -3,6 +3,7 @@
 # File History:
 #    - 0.1 : initial release
 #    - 0.2 : fix deps hardcoded run-passwd
+#    - 0.3 : install apt packages
 
 if( NOT DIR_ELEMENTARY_CMAKE )
     set(DIR_ELEMENTARY_CMAKE ${CMAKE_CURRENT_LIST_DIR})
@@ -65,7 +66,9 @@ macro (read_dependency_file)
                         else()
                             list (APPEND list_vala_packages ${first_col})
                         endif()
-
+                        if( second_col)
+                            list (APPEND list_apt_packages ${second_col})
+                        endif()
                         # message("first = ${first_col}")
                         # message("second = ${second_col}")
                         # message("third = ${third_col}")
@@ -78,8 +81,14 @@ macro (read_dependency_file)
     endif()
 endmacro()
 
-macro (install_dependencies)
+macro (install_apt_packges apt_packages)
 
+    string( REPLACE "," " " pkgs "${apt_packages}")
+    string( REPLACE ";" " " pkgs "${pkgs}")
+
+    EXEC_PROGRAM( sudo
+        ARGS 
+            apt-get install -y "${pkgs} > /dev/null")
 endmacro()
 
 # Returns true if the vala_package can be found in the
@@ -135,5 +144,16 @@ macro (local_check_package vala_package)
     else ()
         message ( FATAL_ERROR "${FatalColor}Local vala package not found${NC}: ${vala_package}") 
     endif()
+endmacro()
 
+macro(get_apt_pc_packages vala_package apt_packages)
+    read_dependency_file()
+
+    list(FIND list_vala_packages ${vala_package} index)
+    set (apt_packages "")
+    if( index GREATER -1 )
+        list(GET list_apt_packages ${index} apt_pkg)
+        string( REPLACE "," " " final_pkg "${apt_pkg}")
+        set (apt_packages "${final_pkg}")
+    endif()
 endmacro()

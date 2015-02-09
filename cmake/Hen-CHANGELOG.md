@@ -1,6 +1,9 @@
 - support uninstall
 - support po translation files
 
+* 0.9.6
+ - apt packages are installed automatically
+
 * 0.9.5
  - fix comments
  - add rebuild task

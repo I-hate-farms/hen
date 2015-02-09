@@ -5,7 +5,6 @@
 #  - 0.3: add task list
 #  - 0.4: add task rebuild 
 #  - 0.5: fix warnings
-#  - 0.6: add task rel 
 
 OPERATION="build"
 

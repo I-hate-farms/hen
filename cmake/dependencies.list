@@ -6,6 +6,7 @@
 #    - 0.2 : supports gala, switchboard
 #    - 0.3 : fix x11 and gdk-x11-3.0 for eidete
 #    - 0.4 : add sqlite3
+#    - 0.5 : add ox
 
 # Columns:
 #   . (required): pc package
@@ -72,3 +73,5 @@ plank                       -> libplank-dev
 unity                       -> libunity-dev
 cheese-gtk                  -> libcheese-gtk-dev
 sqlite3                     -> libsqlite3-dev
+
+packagekit-glib2            -> libpackagekit-glib2-dev, packagekit
