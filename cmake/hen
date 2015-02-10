@@ -35,7 +35,7 @@ do_update () {
     fi
     mkdir ${TEMP_FOLDER} 
     echo ""
-    echo "${white}Checking for newer version...${NC}"
+    echo -e "${white}Checking for newer version...${NC}"
     echo "----------"
     wget --quiet -P ${TEMP_FOLDER} ${VERSION_URL}
     SERVER_VERSION=`cat ${VERSION_FILE}`
