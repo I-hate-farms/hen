@@ -3,6 +3,7 @@
 # File History:
 #    - 0.1 : refactoring
 #    - 0.2 : fix library with depending app
+#    - 0.3 : generate icon and desktop if missing
 
 macro(application)
     parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS;ICON;DESKTOP" "" ${ARGN})
@@ -11,16 +12,42 @@ macro(application)
     set (PKGDATADIR "")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
 
+    # Copy the default icon if the image is missing and not defined in the project file
+    if( NOT ARGS_ICON )
+        set( ICON_FILE "data/${ARGS_BINARY_NAME}.png")
+        if( NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/data/${ARGS_BINARY_NAME}.svg" AND NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${ICON_FILE}" )
+            file( COPY "${DIR_ELEMENTARY_TEMPLATES}/happy-swine.png"  DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/data")
+            file( RENAME "${CMAKE_CURRENT_SOURCE_DIR}/data/happy-swine.png" "${CMAKE_CURRENT_SOURCE_DIR}/data/${ARGS_BINARY_NAME}.png")
+            set(ARGS_ICON "${ICON_FILE}")
+            message ("${MessageColor}Generating default icon${NC}: ${ICON_FILE}.")
+        endif()
+    endif()
     if( NOT ARGS_ICON)
         #message( FATAL_ERROR "Your application must have an ICON. Example: data/${ARGS_BINARY_NAME}.svg")
-        set(ARGS_ICON "data/${ARGS_BINARY_NAME}.svg")
-        message ("${MessageColor}Using ICON=data/${ARGS_BINARY_NAME}.svg${NC}")
+        if( EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/data/${ARGS_BINARY_NAME}.svg")
+            set(ARGS_ICON "data/${ARGS_BINARY_NAME}.svg")
+            message ("${MessageColor}Using ICON=${ARGS_ICON}${NC}")
+        endif()
+         if( EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/data/${ARGS_BINARY_NAME}.png")
+            set(ARGS_ICON "data/${ARGS_BINARY_NAME}.png")
+            message ("${MessageColor}Using ICON=${ARGS_ICON}${NC}")
+        endif()       
     endif()
-
+    set( TEMPLATE_ICON_NAME )
     if( NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON})
         message( FATAL_ERROR "${FatalColor}The ICON file doesn't exist${NC}. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON}")
     endif()
+    get_filename_component(TEMPLATE_ICON_NAME "${ARGS_ICON}" NAME)
 
+    # Generate a desktop file if the desktop file missing and not defined in the project file
+    if( NOT ARGS_DESKTOP)
+        set( DESKTOP_FILE "data/${ARGS_BINARY_NAME}.desktop")
+        if( NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${DESKTOP_FILE}")
+            configure_file ("${DIR_ELEMENTARY_TEMPLATES}/desktop.cmake" "${CMAKE_CURRENT_SOURCE_DIR}/${DESKTOP_FILE}")
+            set(ARGS_DESKTOP "${DESKTOP_FILE}")
+            message ("${MessageColor}Generating default dekstop${NC}: ${DESKTOP_FILE}.")
+        endif()
+    endif()
     # DESKTOP is not mandatory for apps
     if( NOT ARGS_DESKTOP)
         #message( FATAL_ERROR "Your application must have an DESKTOP file. Example: data/${ARGS_BINARY_NAME}.desktop")

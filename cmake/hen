@@ -7,6 +7,7 @@
 #  - 0.5: fix warnings
 #  - 0.6: add task rel 
 #  - 0.7: fixing formatting
+#  - 0.8: fix onboarding experience
 
 OPERATION="build"
 
@@ -30,9 +31,21 @@ if [ -n "$1" ]; then
     OPERATION=$1
 fi
 
+do_list () {
+  echo -e "${white}Hen${NC} defines the following make tasks"
+  echo -e "  - ${white}[default]${NC} : build your application along with extra files if applicable (desktop, vapi, pc, deps...)"
+  echo -e "  - ${white}install${NC} : install your application to the previously defined PREFIX (./usr by default)"
+  echo -e "  - ${white}pot${NC} : generates the translation files in the po folder"
+  echo "" 
+  echo "You can invoke those tasks in the ./build folder: "
+  echo "  cd build"
+  echo "  make pot"
+}
+
+
 do_update () {
     if [ -d ${TEMP_FOLDER} ] ; then
-    	rm -rf ${TEMP_FOLDER}
+      rm -rf ${TEMP_FOLDER}
     fi
     mkdir ${TEMP_FOLDER} 
     echo ""
@@ -41,23 +54,23 @@ do_update () {
     wget --quiet -P ${TEMP_FOLDER} ${VERSION_URL}
     SERVER_VERSION=`cat ${VERSION_FILE}`
     if [ -d ${DEST_FOLDER} ] ; then
-    	LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
-    	echo "   Local version : ${LOCAL_VERSION}"
+      LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
+      echo "   Local version : ${LOCAL_VERSION}"
     fi 
 
     echo -e "   Server version: ${white}${SERVER_VERSION}${NC}"
 
     # Is an update required?
-	if [ "${SERVER_VERSION}" == "${LOCAL_VERSION}" ]; then
-    	echo "Your version is up to date (${LOCAL_VERSION})"
-	else
-		echo "Newer version found!"
-		echo "Getting the new files from server..."
-	    wget --quiet -P ${TEMP_FOLDER} ${PACKAGE_URL}
-	    if [ -d ${DEST_FOLDER} ] ; then
-	    	rm -rf ${DEST_FOLDER}
-	    fi 
-	    unzip -q ${PACKAGE_FILE} -d ${DEST_FOLDER}
+  if [ "${SERVER_VERSION}" == "${LOCAL_VERSION}" ]; then
+      echo "Your version is up to date (${LOCAL_VERSION})"
+  else
+    echo "Newer version found!"
+    echo "Getting the new files from server..."
+      wget --quiet -P ${TEMP_FOLDER} ${PACKAGE_URL}
+      if [ -d ${DEST_FOLDER} ] ; then
+        rm -rf ${DEST_FOLDER}
+      fi 
+      unzip -q ${PACKAGE_FILE} -d ${DEST_FOLDER}
 
       # Delete the build folder so the files will be regenerated next time
       if [ -d ${BUILD_FOLDER} ] ; then
@@ -66,9 +79,9 @@ do_update () {
       # Update the current hen script file with the a new one
       cp ./cmake/hen .
 
-	    # Cleaning up
-	    rm -rf ${TEMP_FOLDER}
-	    echo -e "${white}Hen updated to ${SERVER_VERSION}${NC}"
+      # Cleaning up
+      rm -rf ${TEMP_FOLDER}
+      echo -e "${white}Hen updated to ${SERVER_VERSION}${NC}"
     fi
 
 }
@@ -88,6 +101,12 @@ do_prepare () {
       mkdir ${BUILD_FOLDER}
       cd ${BUILD_FOLDER}
       cmake .. 
+      RETVAL=$?
+      if [ "${RETVAL}" == "0" ] ; then
+        PREPARE_SUCCESS=TRUE
+      else
+        PREPARE_SUCCESS=FALSE
+      fi
       cd ..
 }
 
@@ -95,12 +114,14 @@ do_build () {
       if [ ! -d ${BUILD_FOLDER} ] ; then
         do_prepare 
       fi 
-      echo ""
-      echo -e "${white}Building your application ...${NC}"
-      echo "----------"      
-      cd ${BUILD_FOLDER}
-      make 
-      cd ..        
+      if [ "${PREPARE_SUCCESS}" != "FALSE" ] ; then 
+        echo ""
+        echo -e "${white}Building your application ...${NC}"
+        echo "----------"      
+        cd ${BUILD_FOLDER}
+        make 
+        cd ..  
+      fi
 }
 
 do_rebuild () {
@@ -111,11 +132,18 @@ do_rebuild () {
   do_build 
 }
 
+do_clean () {
+  echo -e "${white}Deleting ${BUILD_FOLDER} ...${NC}"
+  if [ -d ${BUILD_FOLDER} ] ; then
+    rm -rf ${BUILD_FOLDER}
+  fi 
+}
+
 do_help () {
-	if [ -d ${DEST_FOLDER} ] ; then
-    	LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
-    	echo -e "${white}Hen ${LOCAL_VERSION}${NC}"
-    	echo ""
+  if [ -d ${DEST_FOLDER} ] ; then
+      LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
+      echo -e "${white}Hen ${LOCAL_VERSION}${NC}"
+      echo ""
       cat ./cmake/Hen-HELP.txt
   else
     echo -e "${white}No help is available${NC}. Please update hen with: $0 update"
@@ -135,18 +163,6 @@ do_internal_release () {
   echo -e "${white}Release ready${NC}."
 }
 
-do_list () {
-  echo -e "${white}Hen${NC} defines the following make tasks"
-  echo -e "  - ${white}[default]${NC} : build your application along with extra files if applicable (desktop, vapi, pc, deps...)"
-  echo -e "  - ${white}install${NC} : install your application to the previously defined PREFIX (./usr by default)"
-  echo -e "  - ${white}pot${NC} : generates the translation files in the po folder"
-  echo "" 
-  echo "You can invoke those tasks in the ./build folder: "
-  echo "  cd build"
-  echo "  make pot"
-}
-
-
 case "$OPERATION" in
    "update") do_update  
    ;;
@@ -157,6 +173,8 @@ case "$OPERATION" in
    "list")do_list
    ;;
    "rebuild")do_rebuild
+   ;;     
+   "clean")do_clean
    ;;     
    "rel")do_internal_release
    ;;  
