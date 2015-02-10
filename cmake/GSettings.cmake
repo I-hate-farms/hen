@@ -5,19 +5,19 @@
 # File version  : 1.0
 # File History:
 #    - Alpha 1
-
+#    - O.2 remove logging
 
 option (GSETTINGS_LOCALINSTALL "Install GSettings Schemas locally instead of to the GLib prefix" ON)
 
 option (GSETTINGS_COMPILE "Compile GSettings Schemas after installation" ${GSETTINGS_LOCALINSTALL})
 
-if(GSETTINGS_LOCALINSTALL)
-    message(STATUS "GSettings schemas will be installed locally.")
-endif()
+#if(GSETTINGS_LOCALINSTALL)
+#    message(STATUS "GSettings schemas will be installed locally.")
+#endif()
 
-if(GSETTINGS_COMPILE)
-    message(STATUS "GSettings schemas will be compiled.")
-endif()
+#if(GSETTINGS_COMPILE)
+#    message(STATUS "GSettings schemas will be compiled.")
+#endif()
 
 macro(add_schema SCHEMA_NAME)
 

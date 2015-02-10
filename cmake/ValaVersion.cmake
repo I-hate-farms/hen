@@ -32,7 +32,7 @@
 # File version  : 1.0
 # File History:
 #    - Alpha 1
-
+#    - 0.2: remove logging
 
 include(ParseArguments)
 find_package(Vala REQUIRED)
@@ -70,9 +70,9 @@ macro(ensure_vala_version version)
         set(error_message "or less ")
     endif(ARGS_MINIMUM)
 
-    message(STATUS
-        "checking for ${compare_message}Vala version of ${version}"
-    )
+    #message(STATUS
+    #    "checking for ${compare_message}Vala version of ${version}"
+    #)
 
     unset(version_accepted)
 
@@ -97,7 +97,7 @@ macro(ensure_vala_version version)
         )
     endif(NOT version_accepted)
 
-    message(STATUS
-        "  found Vala, version ${VALA_VERSION}"
-    )
+    #message(STATUS
+    #    "  found Vala, version ${VALA_VERSION}"
+    #)
 endmacro(ensure_vala_version)

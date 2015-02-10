@@ -1,9 +1,9 @@
 Hen is a declarative build system for vala applications.
 
 Here are the defined hen.sh commands: 
-   - hen.sh update: update the build system and overwrite the content of cmake/
-   - hen.sh prepare: generate the cmake files 
-   - hen.sh build: do everything to build the application
-   - hen.sh list: enumerates the make tasks that are defined
-   - hen.sh rebuild: recreate the build folder and build the application
+   - ./hen update: update the build system and overwrite the content of cmake/
+   - ./hen prepare: generate the cmake files 
+   - ./hen build: do everything to build the application
+   - ./hen list: enumerates the make tasks that are defined
+   - ./hen rebuild: recreate the build folder and build the application
 

@@ -13,7 +13,7 @@ set (VALA_VERSION_MIN "0.26")
 
 set (BUILD_TYPE "Release")
 
-build_elementary_app (
+application (
     BINARY_NAME
         webcontracts
     TITLE
@@ -34,11 +34,11 @@ build_elementary_app (
 build_translations()
 ```
 
-hen builds the following binary files: 
-   - application with a UI: `build_elementary_app`
-   - command line (cli) application: `build_elementary_cli`
-   - library (static or shared): `build_elementary_library`
-   - elementary plug (shared library): `build_elementary_plug`
+hen can build the following binaries : 
+   - applications with a UI with the `application` declaration
+   - console/command line/cli applications with the `console_application`
+   - libraries (static or shared) with the `library` declaration
+   - elementary plug (shared library) with the `elementary_plug` declaration
 
 hen creates the following `make` targets:
    - `make`: build the binary with support for translations
@@ -59,7 +59,7 @@ hen generates a [build file](docs/build.md) that can be called from vala code:
 
 Write a hen specfic `CMakeLists.txt` file as described in [the documentation](docs/doc.md)
 
-> Note: `CMakeLists.txt` may contain many build_elementary_xxx calls if your project produces many binary files
+> Note: `CMakeLists.txt` will build all the binaries corresponding to the declarations (application/console_application/library/etc) in your cmakefile
 
 Copy the `hen` script file at the root of your project (at the same level as your CMakeLists.txt file)
 
@@ -86,17 +86,20 @@ For more help about the `hen` command line, run:
 ## Samples
 
 You can find samples for: 
-  - [vala-stacktrace][1]: a library and a sample cli test program
+  - [vala-stacktrace][1]: a library and a sample command line test program
   - [eidete][2]: an elementary gtk app
   - [useraccounts][4]: an elementary [switchboard][3] plug 
   - [webcontracts][5]: an elementary plug shipping with a cli application 
+  - [gtk-test][6]: a simple Gtk application
+  - [cli-test][7]: a simple command line application
 
 [1]: https://github.com/PerfectCarl/vala-stacktrace
-[2]: https://code.launchpad.net/~name-is-carl/eidete/use-hen
+[2]: https://code.launchpad.net/~name-is-carl/eidete/use-elementary.cmake
 [3]: https://launchpad.net/switchboard
-[4]: https://code.launchpad.net/~name-is-carl/switchboard-plug-useraccounts/use-hen
+[4]: https://code.launchpad.net/~name-is-carl/switchboard-plug-useraccounts/use-elementary.cmake
 [5]: https://code.launchpad.net/~elementary-apps/webcontracts/fix-for-freya
-
+[6]: none
+[7]: none
 
 ## [Documentation](docs/doc.md) 
 

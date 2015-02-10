@@ -1,4 +1,10 @@
-macro(build_elementary_contract)
+# Bundle version: 0.9
+#
+# File History:
+#    - 0.1 : refactoring
+#    - 0.2 : fix library with depending app
+
+macro(elementary_contract)
     parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS;ICON;DESKTOP;CONTRACT" "" ${ARGN})
 
     set (DATADIR "")
@@ -61,6 +67,9 @@ macro(build_elementary_contract)
     )
 
     add_executable (${ARGS_BINARY_NAME} ${VALA_C} ${C_FILES})
+    foreach( vala_local_pkg ${list_vala_local_packages})
+        add_dependencies (${ARGS_BINARY_NAME}  "${vala_local_pkg}")
+    endforeach()
     target_link_libraries (${ARGS_BINARY_NAME} ${DEPS_LIBRARIES})
 
     install_elementary_app (${ARGS_BINARY_NAME} ${ARGS_ICON} "${ARGS_DESKTOP}")

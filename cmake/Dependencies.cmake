@@ -4,6 +4,9 @@
 #    - 0.1 : initial release
 #    - 0.2 : fix deps hardcoded run-passwd
 #    - 0.3 : install apt packages
+#    - 0.4 : fix local_check_package for multiple packages (ox)
+#    - 0.5 : only install packages if necesseray (avoid sudo each time)
+#    - 0.6 : fix dependending project (ox)
 
 if( NOT DIR_ELEMENTARY_CMAKE )
     set(DIR_ELEMENTARY_CMAKE ${CMAKE_CURRENT_LIST_DIR})
@@ -83,19 +86,43 @@ endmacro()
 
 macro (install_apt_packges apt_packages)
 
-    message ("")
-    message( "${MessageColor}Installing the dependencies${NC} for ${ARGS_BINARY_NAME} via ${MessageColor}apt${NC}...")
-    message ("----------")
 
     string( REPLACE "," " " pkgs "${apt_packages}")
     string( REPLACE ";" " " pkgs "${pkgs}")
+    string( STRIP "${pkgs}" pkgs)
+    string( LENGTH "${pkgs}" pkgs_len)
+    if( pkgs_len GREATER 0 )
+        EXEC_PROGRAM( dpkg  
+            ARGS
+                -s "${pkgs}"
+            OUTPUT_VARIABLE 
+                output
+            RETURN_VALUE  
+                result_code)
+        #message ("result_code: ${result_code}")
+        #message ("OUTPUT: ${output}")
+        # INFO dpkg -S `which <command>` 
+        # and whereis wicd
+        #   wicd: /etc/wicd
+        
+        # If some packages are missing
+        if( NOT "${result_code}" STREQUAL "0")
 
-    EXEC_PROGRAM( sudo
-        ARGS 
-            apt-get install -y "${pkgs} >"
-        OUTPUT_VARIABLE output)
+            message ("")
+            message( "${MessageColor}Installing the dependencies${NC} for ${ARGS_BINARY_NAME} via ${MessageColor}apt${NC}...")
+            message ("----------")
 
-    message ("OUTPUT: ${output}")
+            EXEC_PROGRAM( sudo
+                ARGS 
+                    apt-get install -y "${pkgs}"
+                OUTPUT_VARIABLE 
+                    output
+                RETURN_VALUE 
+                    result_code)
+            # message ("result_code: ${result_code}")
+            # message ("OUTPUT: ${output}")
+        endif()
+    endif()
 endmacro()
 
 # Returns true if the vala_package can be found in the
@@ -140,14 +167,19 @@ macro (is_vala_package_local package_name is_local)
     endif()
 endmacro()
 
-macro (local_check_package vala_package)
+macro (local_check_package variable_name vala_package )
 
     list(FIND list_vala_local_packages ${vala_package} index)
-
     if( index GREATER -1 )
         list(GET list_vala_local_packages_deps ${index} deps)
-        set (DEPS_LIBRARIES ${DEPS_LIBRARIES} "-l${vala_package}")
-        set(VALA_PACKAGES ${VALA_PACKAGES} "${deps}")
+        #get_property(pack_libs VARIABLE PROPERTY "${variable_name}_LIBRARIES")
+        #message ("OOO: pack_libs:  ${pack_libs} ")
+        set ("${variable_name}_LIBRARIES" "${${variable_name}_LIBRARIES}" "${vala_package}")
+        #get_property(after_libs VARIABLE PROPERTY "${variable_name}_LIBRARIES")
+        #message ("OOO: after_libs:  ${after_libs} ")
+
+        string( REPLACE " " ";" final_deps "${deps}")
+        set(VALA_PACKAGES ${VALA_PACKAGES} "${final_deps}")
     else ()
         message ( FATAL_ERROR "${FatalColor}Local vala package not found${NC}: ${vala_package}") 
     endif()

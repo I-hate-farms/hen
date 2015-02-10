@@ -1,4 +1,15 @@
-* 0.9.6
+* 0.9.9
+ - only install apt packages if not present in the system (avoid asking for sudo without reason)
+ - fix issues with gtk3.0 and ox
+ - refactoring
+ - version number can be added to packages (they are ignored for now)
+
+* 0.9.8
+ - misc fixes for apt dependencies
+ - misc formatting fixes
+ - hen is now updated with updates
+
+ * 0.9.6
  - apt packages are installed automatically
  - add more packages to dependencies.list
  
