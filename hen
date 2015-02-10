@@ -6,6 +6,7 @@
 #  - 0.4: add task rebuild 
 #  - 0.5: fix warnings
 #  - 0.6: add task rel 
+#  - 0.7: fixing formatting
 
 OPERATION="build"
 
@@ -64,6 +65,7 @@ do_update () {
       fi 
       # Update the current hen script file with the a new one
       cp ./cmake/hen .
+
 	    # Cleaning up
 	    rm -rf ${TEMP_FOLDER}
 	    echo -e "${white}Hen updated to ${SERVER_VERSION}${NC}"
