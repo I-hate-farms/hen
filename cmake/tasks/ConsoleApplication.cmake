@@ -4,7 +4,7 @@
 #    - 0.1 : refactoring
 #    - 0.2 : fix library with depending app
 
-macro(build_elementary_cli)
+macro(console_application)
     parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS" "" ${ARGN})
 
     set (DATADIR "")

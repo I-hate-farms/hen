@@ -4,7 +4,7 @@
 #    - 0.1 : refactoring
 #    - 0.2 : fix library with depending app
 
-macro(build_elementary_plug)
+macro(elementary_plug)
     parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;PLUG_CATEGORY;SOURCE_PATH;VALA_FILES;C_FILES;PACKAGES;C_DEFINES;VALA_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS" "" ${ARGN})
 
     if( NOT ARGS_PLUG_CATEGORY)

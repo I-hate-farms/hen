@@ -1,5 +1,14 @@
 - support uninstall
+- generate debian files and BUILD.md
+- support system icons for ICON
 - support po translation files
+- support threads
+
+* 0.9.9
+ - only install apt packages if not present in the system (avoid asking for sudo without reason)
+ - fix issues with gtk3.0 and ox
+ - refactoring
+ - version number can be added to packages (they are ignored for now)
 
 * 0.9.8
  - misc fixes for apt dependencies

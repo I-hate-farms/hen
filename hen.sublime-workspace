@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"BU",
+				"Build"
+			],
+			[
+				"STR",
+				"STREQUAL"
+			],
+			[
+				"Hen",
+				"Hen-VERSION"
+			],
+			[
 				"end",
 				"endforeach"
 			]
@@ -12,26 +24,66 @@
 	"buffers":
 	[
 		{
-			"file": "cmake/Hen.cmake",
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/Hen.cmake",
 			"settings":
 			{
-				"buffer_size": 13025,
+				"buffer_size": 14219,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "hen",
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/FindVala.cmake",
 			"settings":
 			{
-				"buffer_size": 3660,
+				"buffer_size": 2848,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/CMakeLists.txt",
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/ValaVersion.cmake",
 			"settings":
 			{
-				"buffer_size": 845,
+				"buffer_size": 3917,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/eidete/CMakeLists.txt",
+			"settings":
+			{
+				"buffer_size": 1262,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/ox/app/CMakeLists.txt",
+			"settings":
+			{
+				"buffer_size": 1132,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/webcontracts/CMakeLists.txt",
+			"settings":
+			{
+				"buffer_size": 1865,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/ox/app/CMakeLists.ori.txt",
+			"settings":
+			{
+				"buffer_size": 2660,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/Dependencies.cmake",
+			"settings":
+			{
+				"buffer_size": 6751,
 				"line_ending": "Unix"
 			}
 		}
@@ -92,34 +144,94 @@
 	},
 	"expanded_folders":
 	[
-		"/home/cran/Documents/Projects/i-hate-zoos/hen",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/tasks",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/templates"
+		"/home/cran/Documents/Projects/i-hate-zoos/ox",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/tasks",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/src"
 	],
 	"file_history":
 	[
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Dependencies.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/ValaPrecompile.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/src/AppCenter.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/CMakeLists.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/src/CMakeLists.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/Hen-CHANGELOG.md",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/ValaPrecompile.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/GSettings.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/Hen.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/Dependencies.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/temp/hen-tests/vala-stacktrace/cmake/Hen.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/Hen.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/Dependencies.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/switchboard-plug-useraccounts/CMakeLists.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/hen",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/README.md",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/README.md",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/dist/Hen-VERSION.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/Hen-VERSION.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/libappstore/doc/CMakeLists.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/org.pantheon.appcenter.gschema.xml",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/libappstore/README",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/hen",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/plugins/info-expander/info-expander.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/deb-packaging/debian/source/format",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/templates/config_app.vala.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/src/MainWindow.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/src/Services/PluginsManager.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/libappstore/tools/DbBuilder.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/libappstore/lib/AppsManager.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/Hen-HELP.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/dependencies.list",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/CMakeLists.ori.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen-VERSION.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/hen",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/eidete/CMakeLists.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/tasks/ElementaryContract.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/core/AppsManager.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/core/DBManager.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/core/libmenu.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/core/Backend.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/tasks/ElementaryApp.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/src/appcentercore.pc.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/templates/config_plug.vala.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/src/Widgets/Toolbar.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/src/Utils.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/src/Services/Unity.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/src/config.vala.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/vapi/peas-gtk.vapi",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen-HELP.txt",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen-CHANGELOG.md",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/CHANGELOG.md",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/GSettings.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Dependencies.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/.gitignore",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/dependencies.list",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/libappstore/CMakeLists.ori.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/CMakeLists.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/dist/Hen-VERSION.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/libappstore/lib/CMakeLists.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/libappstore/lib/Main.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/src/CMakeLists.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/CMakeLists.ori.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/deb-packaging/debian/control",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/CMakeLists.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/cmake/Dependencies.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/cmake/Hen-CHANGELOG.md",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/README.md",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/cmake/Hen.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/cmake/dependencies.list",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/data/appcenter.desktop",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/data/90appcenter",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/ValaPrecompile.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/switchboard-plug-useraccounts/CMakeLists.txt",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/README",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen-HELP.txt",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/hen.sh",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/.gitignore",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen-VERSION.txt",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/tasks/ElementaryPlug.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/tasks/ElementaryApp.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/tasks/ElementaryLibrary.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/tasks/ElementaryCli.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/ValaPrecompile.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/Hen.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/tasks/ElementaryLibrary.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/CMakeLists.txt",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/tasks/ElementaryCli.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/tasks/ElementaryApp.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/templates/lib.pc.cmake",
@@ -149,8 +261,6 @@
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/tasks/ElementaryPlug.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/build/vala-stacktrace.vapi",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/templates/config_cli.vala.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/dependencies.list",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/tasks/ElementaryContract.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/eidete/po/eidete.pot",
 		"/home/cran/Documents/scripts/user.sh",
@@ -159,7 +269,6 @@
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/eidete/cmake/tasks/ElementaryContract.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/eidete/cmake/Hen.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/eidete/hen.sh",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/eidete/CMakeLists.txt",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/tasks/elementary-app.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/dist/Hen-VERSION",
 		"/home/cran/Documents/Projects/web/blonk/src/profile.jade",
@@ -170,24 +279,18 @@
 		"/home/cran/Documents/Projects/web/blonk/README.md",
 		"/home/cran/Documents/Projects/web/blonk/src/scripts/main.ts",
 		"/home/cran/Documents/Projects/web/blonk/src/mixins.jade",
-		"/home/cran/Documents/Projects/web/blonk/src/scripts/base.js",
-		"/home/cran/Documents/Projects/web/blonk/src/index.jade",
-		"/home/cran/Documents/Projects/web/blonk/notes.txt",
-		"/home/cran/Documents/Projects/web/blonk/dist/scripts/bundle.js",
-		"/home/cran/Documents/Projects/web/blonk/dist/profile.html",
-		"/home/cran/.config/sublime-text-3/Packages/User/grunt.sublime-build",
-		"/home/cran/.config/sublime-text-3/Packages/User/SublimeGrunt.sublime-settings",
-		"/home/cran/Documents/Projects/web/blonk/src/blonk.sublime-project"
+		"/home/cran/Documents/Projects/web/blonk/src/scripts/base.js"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 25.0
 	},
 	"find_in_files":
 	{
 		"height": 93.0,
 		"where_history":
 		[
+			"/home/cran/Documents/Projects/i-hate-zoos/ox",
 			"<open folders>"
 		]
 	},
@@ -196,6 +299,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"SSS",
+			"LAUNCHER",
+			"PLUGINDIR",
+			"packagekit-glib2",
 			"GENERATE_VAPI",
 			"elementary.cmake",
 			"create_uninstall_target",
@@ -212,31 +319,31 @@
 		],
 		"reverse": false,
 		"show_context": true,
-		"use_buffer2": true,
+		"use_buffer2": false,
 		"whole_word": false,
 		"wrap": false
 	},
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "cmake/Hen.cmake",
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/Hen.cmake",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13025,
+						"buffer_size": 14219,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1285,
-								1285
+								12245,
+								12245
 							]
 						],
 						"settings":
@@ -246,49 +353,77 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 102.0,
+						"translation.y": 4607.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "hen",
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/FindVala.cmake",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3660,
+						"buffer_size": 2848,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								174,
-								174
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/CMake/CMake.tmLanguage"
 						},
 						"translation.x": -0.0,
-						"translation.y": 1734.0,
+						"translation.y": 510.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/CMakeLists.txt",
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/ValaVersion.cmake",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 845,
+						"buffer_size": 3917,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3280,
+								3280
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CMake/CMake.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 901.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/eidete/CMakeLists.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1262,
 						"regions":
 						{
 						},
@@ -311,6 +446,124 @@
 					},
 					"stack_index": 1,
 					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/ox/app/CMakeLists.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1132,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1101,
+								1101
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CMake/CMake.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 253.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/webcontracts/CMakeLists.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1865,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1012,
+								1012
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CMake/CMake.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 357.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/ox/app/CMakeLists.ori.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2660,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 849.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/Dependencies.cmake",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6751,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5346,
+								5346
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CMake/CMake.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2295.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
 				}
 			]
 		}
@@ -321,7 +574,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 33.0
 	},
 	"layout":
 	{
@@ -352,7 +605,7 @@
 	},
 	"output.find_results":
 	{
-		"height": 0.0
+		"height": 27.0
 	},
 	"project": "hen.sublime-project",
 	"replace":
@@ -392,7 +645,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 363.0,
+	"side_bar_width": 318.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
