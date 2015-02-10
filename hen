@@ -42,10 +42,10 @@ do_update () {
     SERVER_VERSION=`cat ${VERSION_FILE}`
     if [ -d ${DEST_FOLDER} ] ; then
     	LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
-    	echo " Local version : ${LOCAL_VERSION}"
+    	echo "   Local version : ${LOCAL_VERSION}"
     fi 
 
-    echo -e " Server version: ${white}${SERVER_VERSION}${NC}"
+    echo -e "   Server version: ${white}${SERVER_VERSION}${NC}"
 
     # Is an update required?
 	if [ "${SERVER_VERSION}" == "${LOCAL_VERSION}" ]; then

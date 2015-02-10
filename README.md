@@ -40,20 +40,6 @@ hen can build the following binaries :
    - libraries (static or shared) with the `library` declaration
    - elementary plug (shared library) with the `elementary_plug` declaration
 
-hen creates the following `make` targets:
-   - `make`: build the binary with support for translations
-       - generates a `Build` vala namespace   
-       - generates the `pc` and `deps` file if the binary is a library 
-       - uses translation files if available in the `po` folder
-   - `make install`: install the binary along with provided files (.desktop, icons, contracts)
-   - `make pot`: create the translations files
-
-hen generates a [build file](docs/build.md) that can be called from vala code:  
-```java
-   void print_info () {
-      stout.printf ("Usage: %s flickr /my/path/to/image.png\n", Build.BINARY_NAME);
-   }
-```
 
 ## How to use
 
@@ -100,6 +86,23 @@ You can find samples for:
 [5]: https://code.launchpad.net/~elementary-apps/webcontracts/fix-for-freya
 [6]: none
 [7]: none
+
+## Hen and make
+
+hen creates the following `make` targets:
+   - `make`: build the binary with support for translations
+       - generates a `Build` vala namespace   
+       - generates the `pc` and `deps` file if the binary is a library 
+       - uses translation files if available in the `po` folder
+   - `make install`: install the binary along with provided files (.desktop, icons, contracts)
+   - `make pot`: create the translations files
+
+hen generates a [build file](docs/build.md) that can be called from vala code:  
+```java
+   void print_info () {
+      stout.printf ("Usage: %s flickr /my/path/to/image.png\n", Build.BINARY_NAME);
+   }
+```
 
 ## [Documentation](docs/doc.md) 
 
