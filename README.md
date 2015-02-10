@@ -13,6 +13,7 @@ set (VALA_VERSION_MIN "0.26")
 
 set (BUILD_TYPE "Release")
 
+# This new application will conquer the world
 application (
     BINARY_NAME
         webcontracts
@@ -31,8 +32,18 @@ application (
         libsoup-2.4
 )
 
+# Needed if you want to use po translations
 build_translations()
 ```
+Features: 
+  - build and install gui/console applications, libraries and plugins using a simple declarative syntax
+  - generate a wide array of files for you: .desktop and icons for applications, .pc .deps for lbraries
+  - one stop commmand script `./hen` for all the common tasks: build, rebuild, install, etc.
+  - auto-install itself and more important *auto-update* via `./hen update`
+
+## [Getting started](docs/getting-started.md) 
+
+## How to use
 
 hen can build the following binaries : 
    - applications with a UI with the `application` declaration
@@ -40,17 +51,14 @@ hen can build the following binaries :
    - libraries (static or shared) with the `library` declaration
    - elementary plug (shared library) with the `elementary_plug` declaration
 
-
-## How to use
-
 Write a hen specfic `CMakeLists.txt` file as described in [the documentation](docs/doc.md)
 
 > Note: `CMakeLists.txt` will build all the binaries corresponding to the declarations (application/console_application/library/etc) in your cmakefile
 
-Copy the `hen` script file at the root of your project (at the same level as your CMakeLists.txt file)
+Copy the [hen](/cmake/hen) script file (and just that) at the root of your project (at the same level as your CMakeLists.txt file) and make it executable.
 
 Run:
-```
+```shell 
 ./hen build
 ```
 
@@ -60,7 +68,7 @@ Run:
 > Note: hen set `CMAKE_INSTALL_PREFIX` to `/usr` and uses the value `BUILD_TYPE` for `CMAKE_BUILD_TYPE`
 
 For more help about the `hen` command line, run:
-```
+```shell
 ./hen help
 ``` 
 

@@ -40,7 +40,7 @@ do_update () {
     echo "----------"
     wget --quiet -P ${TEMP_FOLDER} ${VERSION_URL}
     SERVER_VERSION=`cat ${VERSION_FILE}`
-    if [ -d ${DEST_FOLDER} ] ; then
+    if [ -f ${DEST_FOLDER}/Hen-VERSION.txt ] ; then
     	LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
     	echo " Local version : ${LOCAL_VERSION}"
     fi 
