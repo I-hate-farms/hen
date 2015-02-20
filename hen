@@ -233,7 +233,7 @@ do_list () {
 case "$OPERATION" in
    "update") do_update
    ;;
-   "force-update") do_update
+   "force-update") do_force_update
    ;;
    "prepare") do_prepare
    ;;
