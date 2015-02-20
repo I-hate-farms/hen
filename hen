@@ -10,6 +10,7 @@
 #  - 0.8 : add install task and improve error handling
 #  - 0.9 : rename cmake to .hen
 #  - 0.10: add valadoc and deb-build
+#  - 0.11: add force-update
 # TODO: install-dgb, deb-prepare, build+run, run
 # FIXME file with () in the name makes the build fail
 
@@ -97,6 +98,13 @@ do_update () {
         echo -e "${white}Hen updated to ${SERVER_VERSION}${NC}"
     fi
 
+}
+
+do_force_update () {    
+    if [ -d ${DEST_FOLDER} ] ; then
+        rm -rf ${DEST_FOLDER}
+    fi
+    do_update 
 }
 
 do_prepare () {
@@ -224,6 +232,8 @@ do_list () {
 
 case "$OPERATION" in
    "update") do_update
+   ;;
+   "force-update") do_update
    ;;
    "prepare") do_prepare
    ;;
