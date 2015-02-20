@@ -1,8 +1,11 @@
+* 0.9.13
+ - fix regression if your project requires built-in dependencies 
+ 
 * 0.9.12
  - rename cmake folder to .hen 
  - add tasks: valadoc
  - first stab at deb building and providing default icons
- 
+
 * 0.9.10
  - generate desktop and icon file
  - add clean task 
