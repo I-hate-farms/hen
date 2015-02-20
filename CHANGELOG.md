@@ -1,5 +1,7 @@
 * 0.9.13
- - fix regression if your project requires built-in dependencies 
+ - add force-update task
+ - fix regression if your project requires built-in dependencies (eidete) 
+ - fix regression in installing desktop icon (eidete-videobin)
  
 * 0.9.12
  - rename cmake folder to .hen 
