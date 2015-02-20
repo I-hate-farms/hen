@@ -1,3 +1,14 @@
+* 0.9.12
+ - rename cmake folder to .hen 
+ - add tasks: valadoc
+ - first stab at deb building and providing default icons
+ 
+* 0.9.10
+ - generate desktop and icon file
+ - add clean task 
+ - improve onboarding experience
+ - more documentation
+ 
 * 0.9.9
  - only install apt packages if not present in the system (avoid asking for sudo without reason)
  - fix issues with gtk3.0 and ox

@@ -2,17 +2,19 @@ Download [hen](https://raw.githubusercontent.com/I-hate-farms/hen/master/hen) in
 
 Make it executable (on linux via `chmod +x hen`)
 
-Write a simple project file for your application 
+Write a simple project named `CMakeLists.txt` file for your application 
 
-```
+```java
 cmake_minimum_required (VERSION 2.8)
 cmake_policy (VERSION 2.8)
 list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include (Hen)
 
+set (BUILD_TYPE "Release")
+
 application (
     BINARY_NAME
-        happy-swine
+        happy-pig
     TITLE
         "A swine are happy"
     VERSION

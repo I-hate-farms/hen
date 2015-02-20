@@ -24,64 +24,74 @@
 	"buffers":
 	[
 		{
-			"file": "/home/cran/Documents/Projects/i-hate-zoos/campfire/tutorials/test.md",
-			"settings":
-			{
-				"buffer_size": 159,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/cran/Documents/Projects/i-hate-zoos/campfire/pages/index.jade",
-			"settings":
-			{
-				"buffer_size": 414,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "docs/getting-started.md",
 			"settings":
 			{
-				"buffer_size": 902,
+				"buffer_size": 955,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/naked-gui-app/hen",
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/cmake/Hen-CHANGELOG.md",
 			"settings":
 			{
-				"buffer_size": 4401,
+				"buffer_size": 1763,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/naked-gui-app/cmake/Hen-CHANGELOG.md",
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/src/main.vala",
 			"settings":
 			{
-				"buffer_size": 1575,
+				"buffer_size": 1010,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "using Gtk;\n\nint main (string[] args) {\n    Gtk.init (ref args);\n\n    var window = new Window ();\n    window.title = \"First GTK+ Program\";\n    window.border_width = 10;\n    window.window_position = WindowPosition.CENTER;\n    window.set_default_size (350, 70);\n    window.destroy.connect (Gtk.main_quit);\n\n    var button = new Button.with_label (\"Click me!\");\n    button.clicked.connect (() => {\n        button.label = \"Thank you\";\n    });\n\n    window.add (button);\n    window.show_all ();\n\n    Gtk.main ();\n    return 0;\n}",
-			"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/naked-gui-app/src/main.vala",
-			"file_size": 0,
-			"file_write_time": 130680569472478084,
+			"file": "/home/cran/Documents/Projects/elementary/eidete/fix-for-freya/src/eidete.vala",
 			"settings":
 			{
-				"buffer_size": 521,
+				"buffer_size": 23693,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "cmake_minimum_required (VERSION 2.8)\ncmake_policy (VERSION 2.8)\nlist (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)\ninclude (Hen)\n\napplication (\n    BINARY_NAME\n        happy-swine\n    TITLE\n        \"A swine are happy\"\n    VERSION\n        \"1.0\"\n    SOURCE_PATH\n        src\n    PACKAGES\n        gtk+-3.0\n)",
-			"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/naked-gui-app/CMakeLists.txt",
-			"file_size": 341,
-			"file_write_time": 130680574900558129,
+			"file": "/home/cran/Documents/Projects/elementary/eidete/fix-for-freya/src/Widgets/end_dialog.vala",
 			"settings":
 			{
-				"buffer_size": 310,
+				"buffer_size": 8101,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/cmake/tasks/Application.cmake",
+			"settings":
+			{
+				"buffer_size": 5032,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/cmake/templates/desktop.cmake",
+			"settings":
+			{
+				"buffer_size": 246,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/data/happy-pig.desktop",
+			"settings":
+			{
+				"buffer_size": 182,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/cran/Documents/Projects/i-hate-zoos/campfire/README.md",
+			"settings":
+			{
+				"buffer_size": 1016,
 				"line_ending": "Unix"
 			}
 		}
@@ -142,35 +152,62 @@
 	},
 	"expanded_folders":
 	[
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/docs",
-		"/home/cran/Documents/Projects/i-hate-zoos/ox/app"
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/src"
 	],
 	"file_history":
 	[
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/README.md",
+		"/home/cran/Documents/Projects/elementary/eidete/fix-for-freya/CMakeLists.txt",
+		"/home/cran/.local/share/applications/android-sdk.desktop",
+		"/home/cran/Téléchargements/happy-swine-new.svg",
+		"/home/cran/Documents/Projects/elementary/eidete/fix-for-freya/data/eidete.desktop",
+		"/home/cran/Documents/Projects/elementary/eidete/fix-for-freya/data/eidete.svg",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/CHANGELOG.md",
+		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/data/appcenter-url.desktop",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/eidete/data/eidete.desktop",
+		"/home/cran/Documents/Projects/elementary/noise/instant-git/data/noise.desktop",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/data/happy-pig.desktop",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/cmake/templates/desktop.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/cmake/tasks/Application.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/cmake/Hen-CHANGELOG.md",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/hen",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/hen",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/new file",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/cmake/Hen.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/CMakeLists.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen-CHANGELOG.md",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen-VERSION.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/cmake/templates/lib.pc.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/templates/desktop.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/tasks/Application.cmake",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/hen",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/naked-gui-app/CMakeLists.txt",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/src/main.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/naked-gui-app/src/main.vala",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/data/happy-swine.desktop",
+		"/home/cran/Documents/Projects/i-hate-zoos/campfire/tutorials/test.md",
+		"/home/cran/Documents/Projects/i-hate-zoos/campfire/pages/index.jade",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/naked-gui-app/hen",
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/naked-gui-app/cmake/Hen-CHANGELOG.md",
 		"/home/cran/Documents/Projects/i-hate-zoos/campfire/README.md",
 		"/home/cran/Documents/Projects/i-hate-zoos/campfire/layout/layout.jade",
 		"/home/cran/Documents/Projects/i-hate-zoos/campfire/.gitignore",
 		"/home/cran/Documents/Projects/i-hate-zoos/campfire/CHANGELOG.md",
 		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/Hen-VERSION.txt",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/hen",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/eidete/CMakeLists.txt",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/switchboard-plug-useraccounts/CMakeLists.txt",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/webcontracts/CMakeLists.txt",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/hen",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/CMakeLists.txt",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/Hen-VERSION.txt",
 		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/hen",
 		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/hen",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen-CHANGELOG.md",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/CHANGELOG.md",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/tasks/Application.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/tasks/ConsoleApplication.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/tasks/ElementaryContract.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/tasks/ElementaryPlug.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen-HELP.txt",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/Hen-VERSION.txt",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/dist/Hen-VERSION.txt",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen/cmake/tasks/Library.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/ox/app/cmake/Hen-CHANGELOG.md",
@@ -248,33 +285,7 @@
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/templates/lib.pc.cmake",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/build/vala-stacktrace.deps",
 		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/build/vala-stacktrace.pc",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/src/Stacktrace.vala",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/build/CMakeFiles/vala-stacktrace.dir/vala-stacktrace.vapi",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/README.Vala.rst",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/hen.sh",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/Hen-CHANGELOG.md",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/templates/config_app.vala.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/GSettings.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/ParseArguments.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/templates/config_plug.vala.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/templates/config_lib.vala.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/dependencies.list",
-		"/home/cran/Documents/Projects/i-hate-zoos/ox/appcenter/CMakeLists.txt",
-		"/home/cran/Documents/Projects/i-hate-zoos/ox/appcenter/plugins/elementary-home/elementary-home.plugin",
-		"/home/cran/Documents/Projects/i-hate-zoos/ox/appcenter/plugins/elementary-home/CMakeLists.txt",
-		"/home/cran/Documents/Projects/i-hate-zoos/ox/appcenter/src/appcentercore.pc.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/ox/appcenter/plugins/elementary-home/elementary-home.vala",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/ValaVersion.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/CHANGELOG.md",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/build/CMakeFiles/CMakeRuleHashes.txt",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/run_samples.sh",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/tasks/ElementaryContract.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/tasks/ElementaryPlug.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/build/vala-stacktrace.vapi",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/cmake/templates/config_cli.vala.cmake",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/eidete/po/eidete.pot",
-		"/home/cran/Documents/scripts/user.sh",
-		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/eidete/cmake/tasks/ElementaryLibrary.cmake"
+		"/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/src/Stacktrace.vala"
 	],
 	"find":
 	{
@@ -322,80 +333,24 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/home/cran/Documents/Projects/i-hate-zoos/campfire/tutorials/test.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 159,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/home/cran/Documents/Projects/i-hate-zoos/campfire/pages/index.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 414,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "docs/getting-started.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 902,
+						"buffer_size": 955,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								151,
-								151
+								724,
+								724
 							]
 						],
 						"settings":
@@ -406,54 +361,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/naked-gui-app/hen",
+					"buffer": 1,
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/cmake/Hen-CHANGELOG.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4401,
+						"buffer_size": 1763,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								262,
-								262
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/naked-gui-app/cmake/Hen-CHANGELOG.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1575,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								941,
-								941
+								270,
+								270
 							]
 						],
 						"settings":
@@ -464,24 +389,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/naked-gui-app/src/main.vala",
+					"buffer": 2,
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/src/main.vala",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 521,
+						"buffer_size": 1010,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								521,
-								521
+								976,
+								976
 							]
 						],
 						"settings":
@@ -494,24 +419,82 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/naked-gui-app/CMakeLists.txt",
+					"buffer": 3,
+					"file": "/home/cran/Documents/Projects/elementary/eidete/fix-for-freya/src/eidete.vala",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 310,
+						"buffer_size": 23693,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								213,
+								213
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Vala/vala/Vala.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 1734.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/cran/Documents/Projects/elementary/eidete/fix-for-freya/src/Widgets/end_dialog.vala",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8101,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2973,
+								2973
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Vala/vala/Vala.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 459.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/cmake/tasks/Application.cmake",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5032,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4958,
+								4958
 							]
 						],
 						"settings":
@@ -521,10 +504,94 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
+						"translation.y": 1428.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/cmake/templates/desktop.cmake",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 246,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								187,
+								187
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CMake/CMake.tmLanguage"
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/hen-tests/happy-swine-gui-app/data/happy-pig.desktop",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 182,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								182,
+								182
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/home/cran/Documents/Projects/i-hate-zoos/campfire/README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1016,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1016,
+								1016
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -603,11 +670,11 @@
 	"settings":
 	{
 	},
-	"show_minimap": true,
+	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 318.0,
+	"side_bar_width": 330.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
