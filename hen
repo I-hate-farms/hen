@@ -11,6 +11,7 @@
 #  - 0.9 : rename cmake to .hen
 #  - 0.10: add valadoc and deb-build
 #  - 0.11: add force-update
+#  - 0.12: update delete build folder
 # TODO: install-dgb, deb-prepare, build+run, run
 # FIXME file with () in the name makes the build fail
 
@@ -93,9 +94,14 @@ do_update () {
       # Update the current hen script file with the a new one
       cp ${DEST_FOLDER}/hen .
 
-        # Cleaning up
-        rm -rf ${TEMP_FOLDER}
-        echo -e "${white}Hen updated to ${SERVER_VERSION}${NC}"
+      # Delete the build folder forcing a rebuild the next time
+      if [ -d "./build/" ] ; then
+        rm -rf "./build/"
+      fi
+      
+      # Cleaning up
+      rm -rf ${TEMP_FOLDER}
+      echo -e "${white}Hen updated to ${SERVER_VERSION}${NC}"
     fi
 
 }
