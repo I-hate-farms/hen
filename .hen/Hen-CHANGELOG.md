@@ -4,6 +4,8 @@
 - support po translation files
 - support threads
 
+* 0.9.14
+ - use improved valadoc css
 
 * 0.9.13
  - add force-update task

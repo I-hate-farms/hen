@@ -1,3 +1,9 @@
+# Bundle version: 0.9
+#
+# File History:
+#    - 0.1 :
+#    - 0.2 : add comment
+
 include(ParseArguments)
 find_package(Valadoc REQUIRED)
 
@@ -34,5 +40,7 @@ macro(valadoc target outdir)
 	DEPENDS
 		${in_files}
 		${ARGS_CUSTOM_VAPIS}
+	COMMENT
+		"Generating valadoc in ${outdir}"
 	)
 endmacro(valadoc)

@@ -5,9 +5,10 @@ All is needed in **one only cmake** `CMakeLists.txt` filefile for your whole pro
 
 ```java
 cmake_minimum_required (VERSION 2.8)
-cmake_policy (VERSION 2.8)
-list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/.hen)
 include (Hen)
+
+# Start of the project 
 
 set (BUILD_TYPE "Release")
 
@@ -38,7 +39,10 @@ Features:
   - generate a wide array of files for you: .desktop and icons for applications, .pc .deps for lbraries
   - one stop commmand script `./hen` for all the common tasks: build, rebuild, install, etc.
   - auto-install itself and more important *auto-update* via `./hen update`
-
+  - generate valadoc (valadoc CSS contributed by Tom Beckmann)
+  
+  http://i-hate-farms.github.io/stacktrace/vala-stacktrace/index.htm
+  
 ## [Getting started](docs/getting-started.md) 
 
 ## How to use

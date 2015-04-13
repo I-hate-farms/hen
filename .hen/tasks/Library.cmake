@@ -80,18 +80,26 @@ macro(library)
 
     install_elementary_library (${ARGS_BINARY_NAME} ${ARGS_LINKING})
 
+    build_valadoc () 
+
+endmacro()
+
+macro(build_valadoc)
     # Create dist folder if necessary 
     SET( DIST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist")
-    if(NOT EXISTS "${DIST_PATH}/valadoc")
-        file(MAKE_DIRECTORY "${DIST_PATH}/valadoc")
+    SET( DIST_VALADOC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist/valadoc/${ARGS_BINARY_NAME}")
+    
+    if(NOT EXISTS "${DIST_VALADOC_PATH}")
+        file(MAKE_DIRECTORY "${DIST_VALADOC_PATH}")
     endif()
-    valadoc ( ${ARGS_BINARY_NAME}  "${DIST_PATH}/valadoc" ${VALA_FILES}
+    
+    valadoc ( ${ARGS_BINARY_NAME} "${DIST_VALADOC_PATH}" ${VALA_FILES}
         PACKAGES
             ${VALA_PACKAGES}
         #OPTIONS
         #CUSTOM_VAPIS
         )
-
+    file( COPY "${DIR_ELEMENTARY_TEMPLATES}/valadoc_style.css" "${DIST_VALADOC_PATH}/${ARGS_BINARY_NAME}")
 endmacro()
 
 macro(install_elementary_library ELEM_NAME BUILD_TYPE)

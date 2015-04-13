@@ -191,6 +191,9 @@ do_rebuild () {
   if [ -d ${BUILD_FOLDER} ] ; then
     rm -rf ${BUILD_FOLDER}
   fi
+  if [ -d "./dist"} ] ; then
+    rm -rf "./dist"
+  fi  
   do_build
 }
 
