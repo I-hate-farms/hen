@@ -2,6 +2,8 @@
 #
 # File History:
 #    - 0.1 : initial release
+#    - 0.2 : target specific make task 
+
 macro (create_execution_tasks)
 	SET( EXECNAME "")
 	if( PROJECT_TYPE STREQUAL "APPLICATION")
@@ -15,7 +17,7 @@ macro (create_execution_tasks)
 	if(EXECNAME) 
 		# Run 
 		add_custom_target(
-			run
+			run_${ARGS_BINARY_NAME}
 		COMMAND 
 			${EXECNAME}
 		WORKING_DIRECTORY
@@ -24,7 +26,7 @@ macro (create_execution_tasks)
 			"Running ${ARGS_BINARY_NAME}..."
 		)
 		add_custom_target(
-			debug
+			debug_${ARGS_BINARY_NAME}
 		COMMAND 
 			gdb -ex=run --args ${EXECNAME}
 		WORKING_DIRECTORY
@@ -54,4 +56,18 @@ macro (create_execution_tasks)
 	#		"Error"
 	#	)
 	endif()
+
+	if( NOT EXECUTION_TOP_TARGET_ADDED AND EXECNAME)
+		add_custom_target(
+			run
+		DEPENDS
+			run_${ARGS_BINARY_NAME}
+		)
+		add_custom_target(
+			debug
+		DEPENDS
+			debug_${ARGS_BINARY_NAME}
+		)
+		set(EXECUTION_TOP_TARGET_ADDED "true")
+	endif ()
 endmacro()    

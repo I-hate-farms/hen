@@ -2,6 +2,7 @@
 #
 # File History:
 #    - 0.1 : initial release
+#    - 0.2 : target specific make task 
 
 macro (package_debian)
 
@@ -34,4 +35,14 @@ macro (package_debian)
  	COMMENT 
  		"Executing PackageDebianExec.cmake"
  	)
+
+ 	if( NOT PACKAGE_DEBIAN_TOP_TARGET_ADDED)
+		add_custom_target(
+			package_debian
+		DEPENDS
+			package_debian_${ARGS_BINARY_NAME}
+		)
+		set(PACKAGE_DEBIAN_TOP_TARGET_ADDED "true")
+	endif ()
+
 endmacro()	

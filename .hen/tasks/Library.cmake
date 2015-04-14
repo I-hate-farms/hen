@@ -73,21 +73,6 @@ macro(library)
     configure_file (${DIR_ELEMENTARY_TEMPLATES}/lib.deps.cmake ${CMAKE_BINARY_DIR}/${ARGS_BINARY_NAME}.deps)
     add_local_package (${ARGS_BINARY_NAME} ${COMPLETE_DIST_PC_PACKAGES} )
 
-    if( ARGS_LINKING STREQUAL "static")
-        add_library (${ARGS_BINARY_NAME} STATIC ${VALA_C} ${C_FILES})
-    else()
-        add_library (${ARGS_BINARY_NAME} SHARED ${VALA_C} ${C_FILES})
-        if( NOT ARGS_SOVERSION)
-            message ("${MessageColor}The parameter SO_VERSION is not specified${NC} so '0' is used.")
-            set( ARGS_SOVERSION "0")
-        endif()
-
-        set_target_properties (${ARGS_BINARY_NAME} PROPERTIES
-            OUTPUT_NAME ${ARGS_BINARY_NAME}
-            VERSION ${ARGS_VERSION}
-            SOVERSION ${ARGS_SOVERSION}
-        )
-    endif()
     target_link_libraries (${ARGS_BINARY_NAME} ${DEPS_LIBRARIES})
 
     install_elementary_library (${ARGS_BINARY_NAME} ${ARGS_LINKING})

@@ -337,8 +337,27 @@ macro(hen_build)
     # message ("VALA_C: ${VALA_C}")
     # Build files ${ARGS_SOURCE_PATH}
     include_directories (${CMAKE_CURRENT_SOURCE_DIR})
+    if( BINARY_TYPE STREQUAL "APPLICATION")
+        add_executable (${ARGS_BINARY_NAME} ${VALA_C} ${C_FILES})
+    endif ()
+    if( BINARY_TYPE STREQUAL "LIBRARY")
+        if( ARGS_LINKING STREQUAL "static")
+            add_library (${ARGS_BINARY_NAME} STATIC ${VALA_C} ${C_FILES})
+        else()
+            add_library (${ARGS_BINARY_NAME} SHARED ${VALA_C} ${C_FILES})
+            if( NOT ARGS_SOVERSION)
+                message ("${MessageColor}The parameter SO_VERSION is not specified${NC} so '0' is used.")
+                set( ARGS_SOVERSION "0")
+            endif()
 
-    add_executable (${ARGS_BINARY_NAME} ${VALA_C} ${C_FILES})
+            set_target_properties (${ARGS_BINARY_NAME} PROPERTIES
+                OUTPUT_NAME ${ARGS_BINARY_NAME}
+                VERSION ${ARGS_VERSION}
+                SOVERSION ${ARGS_SOVERSION}
+            )
+        endif()
+    endif ()
+
     handle_packages () 
     # TODO include_directories and 
     # Add the C defines

@@ -205,7 +205,8 @@ do_package () {
       echo "----------"
       cd ${BUILD_FOLDER}
       # By default we build for debian
-      if [ -n "$PARAM" ]; then
+      if [ ! -n "$2" ] ; then
+          echo "hello"
           PARAM=debian
       fi
       make package_${PARAM}
