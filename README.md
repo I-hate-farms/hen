@@ -6,25 +6,24 @@ It implements sane defaults and uses [cmake](http://cmake.org/) under the hood, 
 All is needed in **only one** `project.hen` file describing your whole project.
 
 ```java
-set (BUILD_TYPE "Release")
-
 # This new application will conquer the world
 application (
+    AUTHOR
+        "Your self <your.self@home.com>"
+    HOMEPAGE
+        "https://home.com/your-application"      
+    LICENSE
+        "Apache 2.0"  
     BINARY_NAME
-        webcontracts
+        your-application
     TITLE
-        "Sharing Accounts"
+        "This application will be great"
     VERSION
-        "0.2"
+        "1.0"
     SOURCE_PATH
         src
     PACKAGES
         gtk+-3.0
-        json-glib-1.0
-        granite
-        rest-0.7
-        webkitgtk-3.0
-        libsoup-2.4
 )
 
 ```
