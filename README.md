@@ -35,6 +35,8 @@ application (
 # Needed if you want to use po translations
 build_translations()
 ```
+Then type `hen build` to build your application and `hen package` to create `.deb` files ready for distribution.
+
 ## Features: 
   - build and install gui/console applications, libraries and plugins using a simple declarative syntax
   - generate a wide array of files for you: .desktop and icons for applications, .pc .deps for lbraries
@@ -43,39 +45,6 @@ build_translations()
 
 ## [Getting started](docs/getting-started.md) 
 
-## How to use
-
-hen can build the following binaries : 
-   - applications with a UI with the `application` declaration
-   - console/command line/cli applications with the `console_application`
-   - libraries (static or shared) with the `library` declaration
-   - elementary plug (shared library) with the `elementary_plug` declaration
-
-Write a hen specfic `CMakeLists.txt` file as described in [the documentation](docs/doc.md)
-
-> Note: `CMakeLists.txt` will build all the binaries corresponding to the declarations (application/console_application/library/etc) in your cmakefile
-
-Copy the [hen](/cmake/hen) script file (and just that) at the root of your project (at the same level as your CMakeLists.txt file) and make it executable.
-
-Run:
-```shell 
-./hen build
-```
-
-`hen` will automatically download and install the cmake templates in the `cmake/` folder.
-> **Caution:** if a  `cmake/` folder already exists, it will be deleted and replaced.
-
-> Note: hen set `CMAKE_INSTALL_PREFIX` to `/usr` and uses the value `BUILD_TYPE` for `CMAKE_BUILD_TYPE`
-
-For more help about the `hen` command line, run:
-```shell
-./hen help
-``` 
-
-## Differences with other cmake setups
-- Only one cmake file `CMakeLists.txt` is needed for the entire project. No need to have a cmake file in sub folder or in the `po` folder
--  Additional files are generated: no need to have `Config.vala.cmake` or `.deps` or `.deps.cmake` or `.pc` or `.pc.cmake` files
--  No need to bother with pc packages (managed with `pkg_check_modules`). hen can deduce the list from the vala package (and handle the case when the pc package is different from the vala package name via [a dependency map](docs/dependencies.md))  
 
 ## Samples
 
