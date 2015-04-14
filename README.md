@@ -37,14 +37,23 @@ build_translations()
 ```
 Then type `hen build` to build your application and `hen package` to create `.deb` files ready for distribution.
 
+If you want to run your application, type `hen run` or `hen debug` to start a `gdb` debugging session.
+
 ## Features: 
   - build and install gui/console applications, libraries and plugins using a simple declarative syntax
   - generate a wide array of files for you: .desktop and icons for applications, .pc .deps for lbraries
   - one stop commmand script `./hen` for all the common tasks: build, rebuild, install, etc.
   - auto-install itself and more important *auto-update* via `./hen update`
 
-## [Getting started](docs/getting-started.md) 
+## Getting started 
 
+```
+# Install the spores ppa if not done already 
+curl -sL  http://i-hate-farms.github.io/spores/install | sudo bash -  
+apt-get install hen 
+```
+
+More information in the [gettting started section](docs/getting-started.md).
 
 ## Samples
 
