@@ -23,7 +23,7 @@ macro (read_dependency_file)
         set( list_pc_packages "")
 
         set( depend_file "${DIR_ELEMENTARY_CMAKE}/dependencies.list")
-        message ("Reading ${depend_file}")
+        # message ("Reading ${depend_file}")
 
         file(STRINGS ${depend_file} file_content)
         set (line_number 0)
@@ -116,7 +116,7 @@ macro (install_apt_packges apt_packages)
             message ("")
             message( "${MessageColor}Installing the dependencies${NC} for ${ARGS_BINARY_NAME} via ${MessageColor}apt${NC}...")
             message ("----------")
-
+            message ("This may take a while...")
             EXEC_PROGRAM( sudo
                 ARGS 
                     apt-get install -y "${pkgs}"

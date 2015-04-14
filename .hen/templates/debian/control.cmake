@@ -11,6 +11,7 @@ Homepage: @ARGS_HOMEPAGE@
 
 Package: @ARGS_PACKAGE_NAME@
 Architecture: any
+Depends: @DOLLAR@{misc:Depends}, @DOLLAR@{shlibs:Depends}
 Pre-Depends: dpkg (>= 1.15.6)
 Description: @ELEM_TITLE@
   @ARGS_BINARY_NAME@: @ELEM_TITLE@ 
