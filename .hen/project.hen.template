@@ -1,9 +1,10 @@
 
+# You can also set Debug as your default build
 set (BUILD_TYPE "Release")
 
 # Change the application task to console, library 
 # dependening on the nature of your application
-# More information at https://github.com/I-hate-farms/hen/blob/master/docs/doc.md
+# There are more tasks available at https://github.com/I-hate-farms/hen/blob/master/docs/task.md
 
 # This new application will conquer the world
 application (
@@ -23,5 +24,9 @@ application (
         src
     PACKAGES
         gtk+-3.0
-        webkitgtk-3.0
 )
+
+
+# More information at https://github.com/I-hate-farms/hen/blob/master/docs/doc.md
+
+# PS: how to pick a license: http://choosealicense.com/
