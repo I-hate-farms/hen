@@ -43,7 +43,6 @@ If you want to run your application, type `hen run` or `hen debug` to start a `g
 ## Getting started 
 
 ```
-# Install the spores ppa if not done already 
 curl -sL  http://i-hate-farms.github.io/hen/install | bash -  
 ```
 
