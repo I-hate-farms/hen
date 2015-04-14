@@ -53,8 +53,8 @@ do_setup () {
         RETURN_CODE=$?
         if [ "${RETURN_CODE}" == "0" ] ; then
           echo -e "${white}Installation done successfully.${NC}"
-          if [ ! -d ${TEMP_FOLDER} ] ; then
-            mkdir ~/.cache/hen/}
+          if [ ! -d ~/.cache/hen/ ] ; then
+            mkdir ~/.cache/hen/
           fi
           touch ~/.cache/hen/setup_done
         fi
