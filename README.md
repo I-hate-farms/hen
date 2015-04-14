@@ -51,8 +51,7 @@ If you want to run your application, type `hen run` or `hen debug` to start a `g
 
 ```
 # Install the spores ppa if not done already 
-curl -sL  http://i-hate-farms.github.io/spores/install | sudo bash -  
-apt-get install hen 
+curl -sL  http://i-hate-farms.github.io/hen/install | bash -  
 ```
 
 More information in the [gettting started section](docs/getting-started.md).
