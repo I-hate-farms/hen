@@ -37,6 +37,8 @@ build_translations()
 ```
 Then type `hen build` to build your application and `hen package` to create `.deb` files ready for distribution.
 
+![sample](docs/hen-screenshot.png) 
+
 If you want to run your application, type `hen run` or `hen debug` to start a `gdb` debugging session.
 
 ## Features: 
