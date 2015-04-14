@@ -11,6 +11,8 @@ macro(console_application)
     set (PKGDATADIR "")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
 
+    set (BINARY_TYPE "CONSOLE")
+
     hen_build (
         BINARY_NAME
             ${ARGS_BINARY_NAME}
@@ -49,6 +51,10 @@ macro(console_application)
     target_link_libraries (${ARGS_BINARY_NAME} ${DEPS_LIBRARIES})
 
     install_elementary_cli (${ARGS_BINARY_NAME})
+    # Support tasks 
+    build_valadoc () 
+    package_debian ()
+    create_execution_tasks ()
 endmacro()
 
 macro(install_elementary_cli ELEM_NAME)

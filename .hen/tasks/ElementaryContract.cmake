@@ -10,6 +10,8 @@ macro(elementary_contract)
     set (DATADIR "")
     set (PKGDATADIR "")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
+    
+    set (BINARY_TYPE "CONTRACT")
 
     if( NOT ARGS_ICON)
         #message( FATAL_ERROR "Your application must have an ICON. Example: data/${ARGS_BINARY_NAME}.svg")
@@ -76,7 +78,10 @@ macro(elementary_contract)
 
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON} DESTINATION share/icons/hicolor/48x48/apps)
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_CONTRACT} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/contractor)
-
+    # Support tasks 
+    build_valadoc () 
+    package_debian ()
+    create_execution_tasks ()
 endmacro()
 
 macro(install_elementary_contract)

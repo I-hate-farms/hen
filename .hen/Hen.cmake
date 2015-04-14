@@ -22,7 +22,9 @@
 #    - 0.18: color, glib 2.23 by default
 #    - 0.19: support library with depending app (vala-stacktrace)
 #    - 0.20: support library with depending app (vala-stacktrace+ox)
-#    - 0.21: package debian files using cpack
+#    - 0.21: package debian files natively
+#    - 0.22: added AUTHOR, HOMEPAGE and LICENSE
+#    - 0.23: add run and debug tasks
 
 # RELEASE
 # TODO * fix po file generation
@@ -57,6 +59,8 @@
 #    include (CPack)
 #    add_custom_target (dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
+cmake_minimum_required (VERSION 2.8)
+
 find_package (PkgConfig)
 
 include (ParseArguments)
@@ -66,6 +70,8 @@ include (GNUInstallDirs)
 include (GSettings)
 include (Dependencies)
 include (Valadoc)
+include (PackageDebian)
+include (Execution)
 
 include (tasks/Application)
 include (tasks/ConsoleApplication)
@@ -145,7 +151,7 @@ macro(build_translations)
 endmacro()
 
 macro(hen_build)
-    parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;PACKAGES;C_DEFINES;VALA_DEFINES;SCHEMA;VALA_OPTIONS;CONFIG_NAME;LINKING;C_OPTIONS" "" ${ARGN})
+    parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;PACKAGES;C_DEFINES;VALA_DEFINES;SCHEMA;VALA_OPTIONS;CONFIG_NAME;LINKING;C_OPTIONS;AUTHOR;HOMEPAGE;LICENSE" "" ${ARGN})
 
     if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
         message( "${MessageColor}CMAKE_INSTALL_PREFIX is not set${NC}. '/usr' is used by default")
@@ -440,6 +446,7 @@ macro(handle_packages)
             set (apt_pkg "")
             get_apt_pc_packages( ${vala_package} apt_pkg)
             set(APT_PC_PACKAGES ${APT_PC_PACKAGES} "${apt_pkg}")
+            set(COMPLETE_DIST_APT_PACKAGES "${COMPLETE_DIST_APT_PACKAGES}               ${apt_pkg},\n")
         endif()
 
         # TODO Handle threading better with the options etc
@@ -449,6 +456,8 @@ macro(handle_packages)
         endif()
 
     endforeach()
+    # Add a dependency to glib
+    set(COMPLETE_DIST_APT_PACKAGES "${COMPLETE_DIST_APT_PACKAGES}               libglib2.0-dev,")
     install_apt_packges ("${APT_PC_PACKAGES}")
     #set (DEPS_CFLAGS "")
     #set (DEPS_LIBRARIES "")

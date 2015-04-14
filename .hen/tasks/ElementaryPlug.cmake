@@ -15,6 +15,8 @@ macro(elementary_plug)
     set (PKGDATADIR "${DATADIR}/${ARGS_PLUG_CATEGORY}/${ARGS_BINARY_NAME}")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
 
+    set (BINARY_TYPE "PLUG")
+
     hen_build (
         BINARY_NAME
             ${ARGS_BINARY_NAME}
@@ -57,6 +59,10 @@ macro(elementary_plug)
 
     install_elementary_plug (${ARGS_BINARY_NAME})
     create_uninstall_target ()
+    # Support tasks 
+    build_valadoc () 
+    package_debian ()
+    create_execution_tasks ()
 endmacro()
 
 macro(install_elementary_plug ELEM_NAME)

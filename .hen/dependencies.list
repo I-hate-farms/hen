@@ -8,6 +8,7 @@
 #    - 0.4 : add sqlite3
 #    - 0.5 : add ox
 #    - 0.6 : add sqlheavy-0.1
+#    - 0.7 : add gconf for elementary-tweaks
 
 # Columns:
 #   . (required): pc package
@@ -51,6 +52,8 @@ dbusmenu-glib-0.4           -> libdbusmenu-glib-dev, libdbus-glib-1-dev, libdbus
 
 # Needed ??
 glib-2.0                    -> libglib2.0-dev
+# Gio is part of glib
+gio-2.0                     -> libglib2.0-dev
 libgpod-1.0                 -> libgpod-dev
 indicate-0.7                -> libindicate-dev                        -> Indicate-0.7
 json-glib-1.0               -> libjson-glib-dev
@@ -77,3 +80,4 @@ cheese-gtk                  -> libcheese-gtk-dev
 sqlite3                     -> libsqlite3-dev
 
 packagekit-glib2            -> libpackagekit-glib2-dev, packagekit
+gconf-2.0                   -> libgconf2-dev

@@ -5,9 +5,10 @@
 #    - 0.2 : fix glib.h: No such file or directory (vala-stacktrace working)
 #    - 0.3 : fix library with depending app
 #    - 0.4 : add valadoc 
+#    - 0.5 : improve valadoc 
 
 macro(library)
-    parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOVERSION;LINKING;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS" "" ${ARGN})
+    parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOVERSION;LINKING;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS;AUTHOR;HOMEPAGE;LICENSE" "" ${ARGN})
 
     if( NOT ARGS_LINKING)
         message( FATAL_ERROR "${FatalColor}You must specify a LINKING: static or shared${NC}.")
@@ -20,6 +21,8 @@ macro(library)
     set (DATADIR "")
     set (PKGDATADIR "")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
+
+    set (BINARY_TYPE "LIBRARY")
 
     hen_build (
         BINARY_NAME
@@ -52,6 +55,12 @@ macro(library)
             ${ARGS_LINKING}
         C_OPTIONS
              ${ARGS_C_OPTIONS}
+        AUTHOR
+             ${ARGS_AUTHOR}
+        HOMEPAGE
+             ${ARGS_HOMEPAGE}
+        LICENSE
+             ${ARGS_LICENSE}
     )
 
     # Set for the variables substitution in the pc file
@@ -79,15 +88,16 @@ macro(library)
     target_link_libraries (${ARGS_BINARY_NAME} ${DEPS_LIBRARIES})
 
     install_elementary_library (${ARGS_BINARY_NAME} ${ARGS_LINKING})
-
+    # Support tasks 
     build_valadoc () 
-
+    package_debian ()
+    create_execution_tasks ()
 endmacro()
 
 macro(build_valadoc)
     # Create dist folder if necessary 
     SET( DIST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist")
-    SET( DIST_VALADOC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist/valadoc/${ARGS_BINARY_NAME}")
+    SET( DIST_VALADOC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist/${ARGS_BINARY_NAME}/valadoc/")
     
     if(NOT EXISTS "${DIST_VALADOC_PATH}")
         file(MAKE_DIRECTORY "${DIST_VALADOC_PATH}")
@@ -99,17 +109,27 @@ macro(build_valadoc)
         #OPTIONS
         #CUSTOM_VAPIS
         )
-    file( COPY "${DIR_ELEMENTARY_TEMPLATES}/valadoc_style.css" "${DIST_VALADOC_PATH}/${ARGS_BINARY_NAME}")
+    # Replace valadoc default style.css
+    # message ("XXX: ${DIST_VALADOC_PATH}/style.css")
+    #file (REMOVE "${DIST_VALADOC_PATH}/style.css")
+    #file (COPY "${DIR_ELEMENTARY_TEMPLATES}/valadoc_style.css" DESTINATION "${DIST_VALADOC_PATH}")
+    #file (RENAME "${DIST_VALADOC_PATH}/valadoc_style.css" "${DIST_VALADOC_PATH}/style.css")
 endmacro()
 
 macro(install_elementary_library ELEM_NAME BUILD_TYPE)
     if (${BUILD_TYPE} STREQUAL "shared" )
-        install (TARGETS ${ELEM_NAME} DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR})
+        # Notes: 
+        # the DESTINATION in an install() statement is relative to the INSTALL_PREFIX 
+        # install (TARGETS ${ELEM_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}) could work ?
+        # +ngladitz
+        # "${CMAKE_INSTALL_LIBDIR}" expands to e.g. "lib/x86_64-linux-gnu" if your prefix is "/usr" but to lib if you prefix is "/usr/local" 
+        # List all vars with cmake -LAH in build/ 
+        install (TARGETS ${ELEM_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR})
         # Install lib stuffs
-        install (FILES ${CMAKE_BINARY_DIR}/${ELEM_NAME}.pc              DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/pkgconfig/)
-        install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ELEM_NAME}.vapi    DESTINATION ${CMAKE_INSTALL_FULL_DATAROOTDIR}/vala/vapi/)
-        install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ELEM_NAME}.deps    DESTINATION ${CMAKE_INSTALL_FULL_DATAROOTDIR}/vala/vapi/)
-        install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ELEM_NAME}.h       DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR}/${ELEM_NAME}/)
+        install (FILES ${CMAKE_BINARY_DIR}/${ELEM_NAME}.pc              DESTINATION pkgconfig/)
+        install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ELEM_NAME}.vapi    DESTINATION share/vala/vapi/)
+        install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ELEM_NAME}.deps    DESTINATION share/vala/vapi/)
+        install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ELEM_NAME}.h       DESTINATION ${ELEM_NAME}/)
     endif ()
     create_uninstall_target ()
 endmacro()

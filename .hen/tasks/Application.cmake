@@ -11,6 +11,8 @@ macro(application)
     set (DATADIR "")
     set (PKGDATADIR "")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
+    
+    set (BINARY_TYPE "APPLICATION")
 
     # Copy the default icon if the image is missing and not defined in the project file
     if( NOT ARGS_ICON )
@@ -103,6 +105,10 @@ macro(application)
     target_link_libraries (${ARGS_BINARY_NAME} ${DEPS_LIBRARIES})
 
     install_elementary_app (${ARGS_BINARY_NAME} ${ARGS_ICON} "${ARGS_DESKTOP}")
+    # Support tasks 
+    build_valadoc () 
+    package_debian ()
+    create_execution_tasks ()
 endmacro()
 
 macro(install_elementary_app ELEM_NAME ELEM_ICON ELEM_DESKTOP)
