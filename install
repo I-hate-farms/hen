@@ -1,0 +1,2 @@
+curl -sL https://raw.githubusercontent.com/I-hate-farms/hen/master/hen 
+chmod +x hen 
