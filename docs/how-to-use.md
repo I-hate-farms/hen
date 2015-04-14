@@ -31,3 +31,20 @@ For more help about the `hen` command line, run:
 - Only one cmake file `CMakeLists.txt` is needed for the entire project. No need to have a cmake file in sub folder or in the `po` folder
 -  Additional files are generated: no need to have `Config.vala.cmake` or `.deps` or `.deps.cmake` or `.pc` or `.pc.cmake` files
 -  No need to bother with pc packages (managed with `pkg_check_modules`). hen can deduce the list from the vala package (and handle the case when the pc package is different from the vala package name via [a dependency map](docs/dependencies.md))  
+
+## Hen and make
+
+hen creates the following `make` targets:
+   - `make`: build the binary with support for translations
+       - generates a `Build` vala namespace   
+       - generates the `pc` and `deps` file if the binary is a library 
+       - uses translation files if available in the `po` folder
+   - `make install`: install the binary along with provided files (.desktop, icons, contracts)
+   - `make pot`: create the translations files
+
+hen generates a [build file](docs/build.md) that can be called from vala code:  
+```java
+   void print_info () {
+      stout.printf ("Usage: %s flickr /my/path/to/image.png\n", Build.BINARY_NAME);
+   }
+```
