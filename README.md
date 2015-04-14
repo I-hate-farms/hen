@@ -1,14 +1,15 @@
 ## Introduction
-**hen** is a set of predefined [cmake](http://cmake.org/) macros to build vala projects in a simple declarative way using sane defaults.
+**hen** builds and packages your vala projects in a simple declarative way.
 
-All is needed in **one only cmake** `CMakeLists.txt` filefile for your whole project
+It implements sane defaults and uses [cmake](http://cmake.org/) under the hood, meaning it works where cmake works (nearly everywhere)
+
+All is needed in **one only hen specific cmake** `CMakeLists.txt` file describing your whole project.
 
 ```java
 cmake_minimum_required (VERSION 2.8)
-list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/.hen)
+cmake_policy (VERSION 2.8)
+list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include (Hen)
-
-# Start of the project 
 
 set (BUILD_TYPE "Release")
 
@@ -34,50 +35,25 @@ application (
 # Needed if you want to use po translations
 build_translations()
 ```
-Features: 
+Then type `hen build` to build your application and `hen package` to create `.deb` files ready for distribution.
+
+If you want to run your application, type `hen run` or `hen debug` to start a `gdb` debugging session.
+
+## Features: 
   - build and install gui/console applications, libraries and plugins using a simple declarative syntax
   - generate a wide array of files for you: .desktop and icons for applications, .pc .deps for lbraries
   - one stop commmand script `./hen` for all the common tasks: build, rebuild, install, etc.
   - auto-install itself and more important *auto-update* via `./hen update`
-  - generate valadoc (valadoc CSS contributed by Tom Beckmann)
-  
-  http://i-hate-farms.github.io/stacktrace/vala-stacktrace/index.htm
-  
-## [Getting started](docs/getting-started.md) 
 
-## How to use
+## Getting started 
 
-hen can build the following binaries : 
-   - applications with a UI with the `application` declaration
-   - console/command line/cli applications with the `console_application`
-   - libraries (static or shared) with the `library` declaration
-   - elementary plug (shared library) with the `elementary_plug` declaration
-
-Write a hen specfic `CMakeLists.txt` file as described in [the documentation](docs/doc.md)
-
-> Note: `CMakeLists.txt` will build all the binaries corresponding to the declarations (application/console_application/library/etc) in your cmakefile
-
-Copy the [hen](/cmake/hen) script file (and just that) at the root of your project (at the same level as your CMakeLists.txt file) and make it executable.
-
-Run:
-```shell 
-./hen build
+```
+# Install the spores ppa if not done already 
+curl -sL  http://i-hate-farms.github.io/spores/install | sudo bash -  
+apt-get install hen 
 ```
 
-`hen` will automatically download and install the cmake templates in the `cmake/` folder.
-> **Caution:** if a  `cmake/` folder already exists, it will be deleted and replaced.
-
-> Note: hen set `CMAKE_INSTALL_PREFIX` to `/usr` and uses the value `BUILD_TYPE` for `CMAKE_BUILD_TYPE`
-
-For more help about the `hen` command line, run:
-```shell
-./hen help
-``` 
-
-## Differences with other cmake setups
-- Only one cmake file `CMakeLists.txt` is needed for the entire project. No need to have a cmake file in sub folder or in the `po` folder
--  Additional files are generated: no need to have `Config.vala.cmake` or `.deps` or `.deps.cmake` or `.pc` or `.pc.cmake` files
--  No need to bother with pc packages (managed with `pkg_check_modules`). hen can deduce the list from the vala package (and handle the case when the pc package is different from the vala package name via [a dependency map](docs/dependencies.md))  
+More information in the [gettting started section](docs/getting-started.md).
 
 ## Samples
 
@@ -97,22 +73,6 @@ You can find samples for:
 [6]: none
 [7]: none
 
-## Hen and make
-
-hen creates the following `make` targets:
-   - `make`: build the binary with support for translations
-       - generates a `Build` vala namespace   
-       - generates the `pc` and `deps` file if the binary is a library 
-       - uses translation files if available in the `po` folder
-   - `make install`: install the binary along with provided files (.desktop, icons, contracts)
-   - `make pot`: create the translations files
-
-hen generates a [build file](docs/build.md) that can be called from vala code:  
-```java
-   void print_info () {
-      stout.printf ("Usage: %s flickr /my/path/to/image.png\n", Build.BINARY_NAME);
-   }
-```
 
 ## [Documentation](docs/doc.md) 
 
