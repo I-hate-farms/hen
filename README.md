@@ -1,7 +1,9 @@
 ## Introduction
-**hen** is a set of predefined [cmake](http://cmake.org/) macros to build vala projects in a simple declarative way using sane defaults.
+**hen** builds and packages your vala projects in a simple declarative way.
 
-All is needed in **one only cmake** `CMakeLists.txt` filefile for your whole project
+It implements sane defaults and uses [cmake](http://cmake.org/) under the hood, meaning it works where cmake works (nearly everywhere)
+
+All is needed in **one only hen specific cmake** `CMakeLists.txt` file describing your whole project.
 
 ```java
 cmake_minimum_required (VERSION 2.8)
@@ -33,7 +35,7 @@ application (
 # Needed if you want to use po translations
 build_translations()
 ```
-Features: 
+## Features: 
   - build and install gui/console applications, libraries and plugins using a simple declarative syntax
   - generate a wide array of files for you: .desktop and icons for applications, .pc .deps for lbraries
   - one stop commmand script `./hen` for all the common tasks: build, rebuild, install, etc.
