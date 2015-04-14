@@ -15,17 +15,18 @@ macro (package_debian)
 			string(FIND ${Var} "CMAKE_" pos)
 		
 	    # If variable doesn't start with CMAKE and is defined
+	    set (VALUE ${${Var}})
 	    if(${Var})
-		    string(REPLACE "\\" "\\\\" ${Var} ${${Var}})
+		    string(REPLACE "\\" "\\\\" VALUE ${${Var}})
 		  endif ()
 		  if( pos EQUAL -1 )
-		  	file(APPEND ${CacheForScript} "set(${Var} \"${${Var}}\")\n")
+		  	file(APPEND ${CacheForScript} "set(${Var} \"${VALUE}\")\n")
 		  endif()
 		
 	endforeach()
 
 	add_custom_target(
-		package_debian
+		package_debian_${ARGS_BINARY_NAME}
  	COMMAND 
  		cmake -D "CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}" -D "CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}" -D "VARIABLES_FILE=${CacheForScript}" -P "${DIR_ELEMENTARY_TEMPLATES}/../PackageDebianExec.cmake" 
  	WORKING_DIRECTORY

@@ -22,7 +22,9 @@ macro(library)
     set (PKGDATADIR "")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
 
+    set (PROJECT_TYPE "LIBRARY")
     set (BINARY_TYPE "LIBRARY")
+    
     set (ARGS_PACKAGE_NAME "lib${ARGS_BINARY_NAME}-dev")
 
     hen_build (

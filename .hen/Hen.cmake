@@ -143,7 +143,8 @@ macro(build_translations)
             # TODO remove src here
             #message ("SOURCE PATHS: ${SOURCE_PATHS}")
             add_translations_catalog (${PO_FOLDER} ${GETTEXT_PACKAGE} ${SOURCE_PATHS})
-            add_definitions (-DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\")
+            # add_definitions (-DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\")
+            # target_compile_definitions(${ARGS_BINARY_NAME} PUBLIC -DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\") 
         endif ()
         # PO files are only computed once
         #set (DISABLE_PO "true")
@@ -212,7 +213,7 @@ macro(hen_build)
 
     # If no file list is provided use the *.vala files in ARGS_SOURCE_PATH
     # recursively
-    if( NOT ARGS_C_FILES)
+    if( NOT ARGS_C_FILES AND NOT VALA_FILES)
         file(GLOB_RECURSE C_FILES "${ARGS_SOURCE_PATH}/*.c")
     endif()
     #add_subdirectory (${ARGS_SOURCE_PATH} ${CMAKE_BINARY_DIR}/${ARGS_BINARY_NAME})
@@ -259,15 +260,7 @@ macro(hen_build)
     if( CMAKE_BUILD_TYPE STREQUAL "Release")
         set( VALA_DEFINES ${VALA_DEFINES} "--define=BUILD_IS_RELEASE")
     endif()
-    # Add the C defines
-    foreach(def ${ARGS_C_DEFINES})
-        add_definitions ("-D${def}")
-    endforeach()
 
-    # Add the C options
-    foreach(opt ${ARGS_C_OPTIONS})
-        add_definitions ("${opt}")
-    endforeach()
 
     # Sometimes glib is missing. We're adding it each time to be on the safe side
     # Is this still useful?
@@ -284,14 +277,11 @@ macro(hen_build)
         set( EXTRA_VALA_OPTIONS "--target-glib=2.32" )
     endif()
     
-    handle_packages () 
     # if you don't mind keeping the naming convention 
     # you could do that in a loop for all variables too e.g. foreach(TYPE CFLAGS LIBRARIES ...) 
     # TODO Add vapi folder if present
 
-    # Handle debian packages 
-    # handle_debian () 
- 
+    compute_packages()
     # Generate config file
     set (ELEM_RELEASE_NAME ${ARGS_RELEASE_NAME})
     if( ARGS_CONFIG_NAME)
@@ -348,39 +338,25 @@ macro(hen_build)
     # Build files ${ARGS_SOURCE_PATH}
     include_directories (${CMAKE_CURRENT_SOURCE_DIR})
 
+    add_executable (${ARGS_BINARY_NAME} ${VALA_C} ${C_FILES})
+    handle_packages () 
+    # TODO include_directories and 
+    # Add the C defines
+    foreach(def ${ARGS_C_DEFINES})
+        # add_definitions ("-D${def}")
+        target_compile_definitions(${ARGS_BINARY_NAME} PUBLIC -D${def})
+    endforeach()
+
+    # Add the C options
+    foreach(opt ${ARGS_C_OPTIONS})
+        # add_definitions ("${opt}")
+        set_target_properties( ${ARGS_BINARY_NAME} PROPERTIES COMPILE_OPTIONS ${opt})
+    endforeach()
     #include_directories (${ARGS_SOURCE_PATH})
 endmacro()
 
-macro(handle_debian)
-    # See: http://www.cmake.org/Wiki/CMake:CPackPackageGenerators#DEB_.28UNIX_only.29
-    # http://www.cmake.org/cmake/help/v2.8.8/cpack.html#variable:CPACK_PACKAGE_DESCRIPTION_SUMMARY
-    # SET(CPACK_SET_DESTDIR "on")
-    # SET(CPACK_PACKAGING_INSTALL_PREFIX "/tmp")
-    SET(CPACK_GENERATOR "DEB")
-     
-    # SET(CPACK_PACKAGE_DESCRIPTION "kate service menu for folders")
-    SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${ARGS_TITLE}")
-    SET(CPACK_PACKAGE_VENDOR "nowardev")
-    SET(CPACK_PACKAGE_CONTACT "nowardev@gmail.com")
-    SET(CPACK_PACKAGE_VERSION  "${ARGS_VERSION}")
-    # SET(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}_${MAJOR_VERSION}.${MINOR_VERSION}.${CPACK_PACKAGE_VERSION_PATCH}")
-    # SET(CPACK_SOURCE_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}_${MAJOR_VERSION}.${MINOR_VERSION}.${CPACK_PACKAGE_VERSION_PATCH}")
-    #demo dependencies
-    #SET(CPACK_DEBIAN_PACKAGE_DEPENDS " kate , plasma-desktop, libc6 (>= 2.1.3) ")
-     
-    #dependencies for this service menu
-    SET(CPACK_DEBIAN_PACKAGE_DEPENDS " kate , dolphin ")
-     
-    SET(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
-    #SET(CPACK_DEBIAN_PACKAGE_SECTION "kde")
-    SET(CPACK_DEBIAN_ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
-     
-    SET(CPACK_COMPONENTS_ALL Libraries ApplicationData)
 
-    include (CPack)
-endmacro()
-
-macro(handle_packages)
+macro(compute_packages)
     # Handle the packges
     set (VALA_PACKAGES "")
     set (VALA_LOCAL_PACKAGES "")
@@ -389,7 +365,8 @@ macro(handle_packages)
     # Used in libs.deps.make
     set (ELEM_DEPS_PC_PACKAGES "")
     set (APT_PC_PACKAGES "")
-
+    set (PACKAGES "")
+    
     # Pre process the package list to get the version and version operators if specified
     foreach(vala_package ${ARGS_PACKAGES})
 
@@ -417,10 +394,12 @@ macro(handle_packages)
         endif ()
     endforeach()
 
+    # set (checked_pc_packages "")
+    # set (vapi_packages "")
     foreach(vala_package ${PACKAGES})
 
         string( STRIP "${vala_package}" vala_package)
-
+        # message ("PACK: ${vala_package} ")
         set (pc_package "")
         get_pc_package (${vala_package} pc_package)
         set (in_debian "")
@@ -428,12 +407,12 @@ macro(handle_packages)
         is_vala_package_in_debian (${vala_package} in_debian)
 
         if(vala_package STREQUAL "posix" OR NOT in_debian STREQUAL "true" OR vala_package STREQUAL "linux")
-            # message ("Ignoring checking for ${pkg}")
+            # message ("Ignoring checking for ${vala_package}")
             list(APPEND vapi_packages "${vala_package}")
             # Is this correct???
             #list(APPEND checked_pc_packages "${pc_package}")
         else()
-            # message ("Adding checked pkg ${pkg}")
+            # message ("Adding checked pkg ${pc_package}")
             list(APPEND checked_pc_packages "${pc_package}")
         endif()
 
@@ -456,6 +435,9 @@ macro(handle_packages)
         endif()
 
     endforeach()
+endmacro()    
+
+macro(handle_packages)
     # Add a dependency to glib
     set(COMPLETE_DIST_APT_PACKAGES "${COMPLETE_DIST_APT_PACKAGES}               libglib2.0-dev,")
     install_apt_packges ("${APT_PC_PACKAGES}")
@@ -466,10 +448,12 @@ macro(handle_packages)
     #set (bin_cflags "")
     #set (bin_libs "")
     #set (bin_lib_dirs "")
-    #message ("Checked ${checked_pc_packages}")
+    # message ("Checked ${checked_pc_packages}")
+    set (DEPSNAME "DEPS_${ARGS_BINARY_NAME}_VAR")
+    set (${DEPSNAME} "")
     if( checked_pc_packages )
         # message ("CHEKING: ${checked_pc_packages}...")
-        set (DEPSNAME "DEPS_${ARGS_BINARY_NAME}_VAR")
+        
         pkg_check_modules (${DEPSNAME} REQUIRED QUIET ${checked_pc_packages})
         
     endif()
@@ -480,15 +464,24 @@ macro(handle_packages)
     # Setting the flags so that the required libraries are found 
     # at compile time and linkin time
     if( NOT "${${DEPSNAME}_CFLAGS}" STREQUAL "" )
-        #message ("!!! CFLAGS : ${${DEPSNAME}_CFLAGS}")
-        add_definitions (${${DEPSNAME}_CFLAGS})
+        # message ("!!! CFLAGS : ${${DEPSNAME}_CFLAGS}")
+        # add_definitions (${${DEPSNAME}_CFLAGS})
+        set (MY_CFLAGS "")
+        foreach( flag ${${DEPSNAME}_CFLAGS} )
+            SET (MY_CFLAGS "${MY_CFLAGS} ${flag}")
+        endforeach()
+        # message ("!!! MY_CFLAGS : ${MY_CFLAGS}")
+        set_target_properties( ${ARGS_BINARY_NAME} PROPERTIES COMPILE_FLAGS ${MY_CFLAGS})
     endif()
     if( NOT "${${DEPSNAME}_LIBRARY_DIRS}" STREQUAL "" )
-        #message ("!!! DIRS : ${${DEPSNAME}_LIBRARY_DIRS}")
-        link_directories (${${DEPSNAME}_LIBRARY_DIRS})
+        # message ("!!! DIRS : ${${DEPSNAME}_LIBRARY_DIRS}")
+        # link_directories (${${DEPSNAME}_LIBRARY_DIRS})
+        target_link_libraries(${ARGS_BINARY_NAME} PRIVATE ${${DEPSNAME}_LIBRARY_DIRS}) 
     endif()
     if( NOT "${${DEPSNAME}_LIBRARIES}" STREQUAL "" )
-        #message ("!!! LIBS : ${${DEPSNAME}_LIBRARIES}")
-        link_libraries (${${DEPSNAME}_LIBRARIES})
+        # message ("!!! LIBS : ${${DEPSNAME}_LIBRARIES}")
+        # link_libraries (${${DEPSNAME}_LIBRARIES})
+        target_link_libraries(${ARGS_BINARY_NAME} PRIVATE ${${DEPSNAME}_LIBRARIES}) 
     endif()
+    target_compile_definitions(${ARGS_BINARY_NAME} PUBLIC -DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\") 
 endmacro()   

@@ -12,8 +12,9 @@ macro(application)
     set (PKGDATADIR "")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
     
+    set (PROJECT_TYPE "APPLICATION")
     set (BINARY_TYPE "APPLICATION")
-
+    
     # Copy the default icon if the image is missing and not defined in the project file
     if( NOT ARGS_ICON )
         set( ICON_FILE "data/${ARGS_BINARY_NAME}.svg")
@@ -98,7 +99,6 @@ macro(application)
              ${ARGS_C_OPTIONS}
     )
 
-    add_executable (${ARGS_BINARY_NAME} ${VALA_C} ${C_FILES})
     foreach( vala_local_pkg ${list_vala_local_packages})
         add_dependencies (${ARGS_BINARY_NAME}  "${vala_local_pkg}")
     endforeach()

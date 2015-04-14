@@ -15,8 +15,9 @@ macro(elementary_plug)
     set (PKGDATADIR "${DATADIR}/${ARGS_PLUG_CATEGORY}/${ARGS_BINARY_NAME}")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
 
-    set (BINARY_TYPE "PLUG")
-
+    set (PROJECT_TYPE "PLUG")
+    set (BINARY_TYPE "LIBRARY")
+    
     hen_build (
         BINARY_NAME
             ${ARGS_BINARY_NAME}

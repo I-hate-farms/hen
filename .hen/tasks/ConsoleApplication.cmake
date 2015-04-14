@@ -11,7 +11,8 @@ macro(console_application)
     set (PKGDATADIR "")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
 
-    set (BINARY_TYPE "CONSOLE")
+    set (PROJECT_TYPE "CONSOLE")
+    set (BINARY_TYPE "APPLICATION")
 
     hen_build (
         BINARY_NAME

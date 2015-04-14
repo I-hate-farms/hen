@@ -11,8 +11,9 @@ macro(elementary_contract)
     set (PKGDATADIR "")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
     
-    set (BINARY_TYPE "CONTRACT")
-
+    set (PROJECT_TYPE "CONTRACT")
+    set (BINARY_TYPE "APPLICATION")
+    
     if( NOT ARGS_ICON)
         #message( FATAL_ERROR "Your application must have an ICON. Example: data/${ARGS_BINARY_NAME}.svg")
         set(ARGS_ICON "data/${ARGS_BINARY_NAME}.svg")
@@ -68,7 +69,7 @@ macro(elementary_contract)
              ${ARGS_C_OPTIONS}
     )
 
-    add_executable (${ARGS_BINARY_NAME} ${VALA_C} ${C_FILES})
+    # add_executable (${ARGS_BINARY_NAME} ${VALA_C} ${C_FILES})
     foreach( vala_local_pkg ${list_vala_local_packages})
         add_dependencies (${ARGS_BINARY_NAME}  "${vala_local_pkg}")
     endforeach()

@@ -2,6 +2,7 @@
 - support system icons for ICON
 - support po translation files
 - support threads
+- add valadoc task
 
 * 0.9.20 
  - new valadoc style CSS 
@@ -12,7 +13,6 @@
  - add run and debug tasks
  - add init task
  - introduce the project.hen file
- * add valadoc task
 
 * 0.9.13
  - add force-update task
