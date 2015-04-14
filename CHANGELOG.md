@@ -1,3 +1,19 @@
+- support uninstall
+- support system icons for ICON
+- support po translation files
+- support threads
+
+* 0.9.20 
+ - new valadoc style CSS 
+ - fix install of libraries in /usr and not /usr/local/lib as the path 
+   is not used by ldconfig by default
+ - add package task to build debian files
+ - add AUTHOR, COPYRIGHT, LICENSE and HOMEPAGE
+ - add run and debug tasks
+ - add init task
+ - introduce the project.hen file
+ * add valadoc task
+
 * 0.9.13
  - add force-update task
  - fix regression if your project requires built-in dependencies (eidete) 

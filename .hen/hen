@@ -11,8 +11,12 @@
 #  - 0.9 : rename cmake to .hen
 #  - 0.10: add valadoc and deb-build
 #  - 0.11: add force-update
-# TODO: install-dgb, deb-prepare, build+run, run
+#  - 0.12: update delete build folder
+#  - 0.13: add run and debug targets
+#  - 0.14: introduce project.hen file
+#  - 0.15: add init
 # FIXME file with () in the name makes the build fail
+# TODO better documentation in help and list
 
 OPERATION="build"
 
@@ -35,6 +39,7 @@ NC='\033[0m' # No Color
 if [ -n "$1" ]; then
     OPERATION=$1
 fi
+PARAM=$2
 
 do_setup () {
       # If hen hasn't been installed
@@ -93,9 +98,14 @@ do_update () {
       # Update the current hen script file with the a new one
       cp ${DEST_FOLDER}/hen .
 
-        # Cleaning up
-        rm -rf ${TEMP_FOLDER}
-        echo -e "${white}Hen updated to ${SERVER_VERSION}${NC}"
+      # Delete the build folder forcing a rebuild the next time
+      if [ -d "./build/" ] ; then
+        rm -rf "./build/"
+      fi
+      
+      # Cleaning up
+      rm -rf ${TEMP_FOLDER}
+      echo -e "${white}Hen updated to ${SERVER_VERSION}${NC}"
     fi
 
 }
@@ -113,16 +123,46 @@ do_prepare () {
       if [ ! -f "${DEST_FOLDER}/Hen-VERSION.txt" ] ; then
         do_update
       fi
+      if [ ! -f "project.hen" ] ; then
+        echo -e "${red}You need to have a project file named project.hen${NC}"
+        echo -e "Use ${white}./hen init${NC} to initialize your project"
+        exit -1
+      fi
       echo ""
       echo -e "${white}Preparing your build ...${NC}"
       echo "----------"
       if [ -d ${BUILD_FOLDER} ] ; then
         rm -rf ${BUILD_FOLDER}
       fi
+      # Renaming and expanding project.hen to CMakeLists.txt
+      if [ -f "CMakeLists.txt" ] ; then
+        # Remove old backup of present
+        if [ -f "CMakeLists.txt.backup-hen" ] ; then
+          rm CMakeLists.txt.backup-hen
+        fi        
+        mv CMakeLists.txt CMakeLists.txt.backup-hen
+      fi
+      cp ${DEST_FOLDER}/CMakeLists.template CMakeLists.txt
+      cat project.hen >> CMakeLists.txt
+
       mkdir ${BUILD_FOLDER}
       cd ${BUILD_FOLDER}
       cmake ..
       cd ..
+      if [ -f "CMakeLists.txt.backup-hen" ] ; then
+        mv CMakeLists.txt.backup-hen CMakeLists.txt
+      fi
+}
+
+do_init () {
+      if [ -f "project.hen" ] ; then
+        echo -e "${red}You already have a project.hen file.${NC}"
+        echo -e "A new one can't be generated as it would ${white}override the existing one.${NC}"
+        exit -1
+      fi
+      cp ${DEST_FOLDER}/project.hen.template project.hen
+      echo -e "Your project file ${white}project.hen${NC} has been created."
+      echo -e "After you have edited it to your needs, run ${white}./hen build${NC} to build your new project."
 }
 
 do_build () {
@@ -156,15 +196,43 @@ do_install () {
 }
 
 
-do_deb_build () {
+do_package () {
       if [ ! -d ${BUILD_FOLDER} ] ; then
         do_build
       fi
       echo ""
-      echo -e "${white}Building deb file...${NC}"
+      echo -e "${white}Building deb packages...${NC}"
       echo "----------"
       cd ${BUILD_FOLDER}
-      sudo make package
+      # By default we build for debian
+      if [ -n "$PARAM" ]; then
+          PARAM=debian
+      fi
+      make package_${PARAM}
+      cd ..
+}
+
+do_run () {
+      if [ ! -d ${BUILD_FOLDER} ] ; then
+        do_build
+      fi
+      echo ""
+      echo -e "${white}Running your application...${NC}"
+      echo "----------"
+      cd ${BUILD_FOLDER}
+      make run
+      cd ..
+}
+
+do_debug () {
+      if [ ! -d ${BUILD_FOLDER} ] ; then
+        do_build
+      fi
+      echo ""
+      echo -e "${white}Debugging with gdb...${NC}"
+      echo "----------"
+      cd ${BUILD_FOLDER}
+      make debug
       cd ..
 }
 
@@ -176,7 +244,7 @@ do_valadoc () {
       echo -e "${white}Building valadoc...${NC}"
       echo "----------"
       cd ${BUILD_FOLDER}
-      sudo make valadoc
+      make valadoc
       cd ..
 }
 
@@ -185,6 +253,9 @@ do_rebuild () {
   if [ -d ${BUILD_FOLDER} ] ; then
     rm -rf ${BUILD_FOLDER}
   fi
+  if [ -d "./dist"} ] ; then
+    rm -rf "./dist"
+  fi    
   do_build
 }
 
@@ -247,10 +318,16 @@ case "$OPERATION" in
    ;;
    "rel")do_internal_release
    ;;
-   "deb-build")do_deb_build
+   "package")do_package
    ;;
    "valadoc")do_valadoc
-   ;;   
+   ;;     
+   "run")do_run
+   ;;      
+   "init")do_init
+   ;;      
+   "debug")do_debug
+   ;;     
    "help")do_help
    ;;
    "--help")do_help
