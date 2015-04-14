@@ -1,5 +1,0 @@
-@ARGS_PACKAGE_NAME@ (@ARGS_VERSION@) trusty; urgency=low
-
-@CHANGE_LOG_BODY@
-
- -- @ARGS_AUTHOR@  @PACKAGING_DATE@

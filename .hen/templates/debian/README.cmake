@@ -1,3 +1,0 @@
- @ARGS_BINARY_NAME@
-
- @ELEM_TITLE@
