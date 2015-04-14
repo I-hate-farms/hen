@@ -1,0 +1,27 @@
+
+set (BUILD_TYPE "Release")
+
+# Change the application task to console, library 
+# dependening on the nature of your application
+# More information at https://github.com/I-hate-farms/hen/blob/master/docs/doc.md
+
+# This new application will conquer the world
+application (
+    AUTHOR
+        "Your self <your.self@home.com>"
+    HOMEPAGE
+        "https://home.com/your-application"      
+    LICENSE
+        "Apache 2.0"  
+    BINARY_NAME
+        your-application
+    TITLE
+        "This application will be great"
+    VERSION
+        "1.0"
+    SOURCE_PATH
+        src
+    PACKAGES
+        gtk+-3.0
+        webkitgtk-3.0
+)

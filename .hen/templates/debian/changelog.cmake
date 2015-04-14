@@ -1,8 +1,5 @@
 @ARGS_PACKAGE_NAME@ (@ARGS_VERSION@) trusty; urgency=low
 
-  * Add theme customization
-  * Update plank options
-  * Update terminal options
-  * Misc UI fixes
+@CHANGE_LOG_BODY@
 
- -- @ARGS_AUTHOR@ @PACKAGING_DATE@
+ -- @ARGS_AUTHOR@  @PACKAGING_DATE@

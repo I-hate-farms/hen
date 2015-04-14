@@ -7,9 +7,11 @@
  - new valadoc style CSS 
  - fix install of libraries in /usr and not /usr/local/lib as the path 
    is not used by ldconfig by default
- * add package task to build debian files
+ - add package task to build debian files
  - add AUTHOR, COPYRIGHT, LICENSE and HOMEPAGE
  - add run and debug tasks
+ - add init task
+ - introduce the project.hen file
  * add valadoc task
 
 * 0.9.13

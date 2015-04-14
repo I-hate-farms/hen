@@ -7,6 +7,28 @@
 include(ParseArguments)
 find_package(Valadoc REQUIRED)
 
+macro(build_valadoc)
+    # Create dist folder if necessary 
+    SET( DIST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist")
+    SET( DIST_VALADOC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist/${ARGS_BINARY_NAME}/valadoc/")
+    
+    if(NOT EXISTS "${DIST_VALADOC_PATH}")
+        file(MAKE_DIRECTORY "${DIST_VALADOC_PATH}")
+    endif()
+    
+    valadoc ( ${ARGS_BINARY_NAME} "${DIST_VALADOC_PATH}" ${VALA_FILES}
+        PACKAGES
+            ${VALA_PACKAGES}
+        #OPTIONS
+        #CUSTOM_VAPIS
+        )
+    # Replace valadoc default style.css
+    # message ("XXX: ${DIST_VALADOC_PATH}/style.css")
+    #file (REMOVE "${DIST_VALADOC_PATH}/style.css")
+    #file (COPY "${DIR_ELEMENTARY_TEMPLATES}/valadoc_style.css" DESTINATION "${DIST_VALADOC_PATH}")
+    #file (RENAME "${DIST_VALADOC_PATH}/valadoc_style.css" "${DIST_VALADOC_PATH}/style.css")
+endmacro()
+
 macro(valadoc target outdir)
 	parse_arguments(ARGS "PACKAGES;OPTIONS;CUSTOM_VAPIS" "" ${ARGN})
 	set(vala_pkg_opts "")

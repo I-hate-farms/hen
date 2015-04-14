@@ -23,6 +23,7 @@ macro(library)
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
 
     set (BINARY_TYPE "LIBRARY")
+    set (ARGS_PACKAGE_NAME "lib${ARGS_BINARY_NAME}-dev")
 
     hen_build (
         BINARY_NAME
@@ -92,28 +93,6 @@ macro(library)
     build_valadoc () 
     package_debian ()
     create_execution_tasks ()
-endmacro()
-
-macro(build_valadoc)
-    # Create dist folder if necessary 
-    SET( DIST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist")
-    SET( DIST_VALADOC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist/${ARGS_BINARY_NAME}/valadoc/")
-    
-    if(NOT EXISTS "${DIST_VALADOC_PATH}")
-        file(MAKE_DIRECTORY "${DIST_VALADOC_PATH}")
-    endif()
-    
-    valadoc ( ${ARGS_BINARY_NAME} "${DIST_VALADOC_PATH}" ${VALA_FILES}
-        PACKAGES
-            ${VALA_PACKAGES}
-        #OPTIONS
-        #CUSTOM_VAPIS
-        )
-    # Replace valadoc default style.css
-    # message ("XXX: ${DIST_VALADOC_PATH}/style.css")
-    #file (REMOVE "${DIST_VALADOC_PATH}/style.css")
-    #file (COPY "${DIR_ELEMENTARY_TEMPLATES}/valadoc_style.css" DESTINATION "${DIST_VALADOC_PATH}")
-    #file (RENAME "${DIST_VALADOC_PATH}/valadoc_style.css" "${DIST_VALADOC_PATH}/style.css")
 endmacro()
 
 macro(install_elementary_library ELEM_NAME BUILD_TYPE)

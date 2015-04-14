@@ -36,10 +36,34 @@ endif()
   
   # TODO Read license file
   file(STRINGS "${CURRENT_SOURCE_DIR}/LICENSE" LICENSE_TEXT)
-  set (PACKAGING_DATE "Wed, 20 Aug 2014 11:00:00 -0500")
-  set (PACKAGING_YEAR "2005")
-  set (ARGS_COPYRIGHT "${ARGS_AUTHOR}")
-  set (ARGS_PACKAGE_NAME "${ARGS_BINARY_NAME}")
+
+  # The date has the following format[19] (compatible and 
+  # with the same semantics of RFC 2822 and RFC 5322):
+  #
+  #   day-of-week, dd month yyyy hh:mm:ss +zzzz
+  # More on https://www.debian.org/doc/debian-policy/ch-source.html
+
+  # sample set (PACKAGING_DATE "Wed, 20 Aug 2014 11:00:00 -0500")
+  # Because cmake misses features here we use the date program.
+  # **Not portable**
+  EXEC_PROGRAM( 
+      date  
+    ARGS
+        --rfc-2822
+    OUTPUT_VARIABLE 
+        PACKAGING_DATE
+    RETURN_VALUE  
+        result_code)
+
+  string(TIMESTAMP PACKAGING_YEAR "%Y")
+
+  if( NOT ARGS_COPYRIGHT)
+    set (ARGS_COPYRIGHT "${ARGS_AUTHOR}")
+  endif()
+  if( NOT ARGS_PACKAGE_NAME)
+    set (ARGS_PACKAGE_NAME "${ARGS_BINARY_NAME}")
+  endif()
+
   set (DOLLAR "$")
   
   # create control file 
@@ -48,7 +72,35 @@ endif()
   # create rule file
   configure_file (${DIR_ELEMENTARY_TEMPLATES}/debian/rules.cmake ${DEBIAN_PATH}/rules)
 
-  # TODO create the changelog file
+  
+  if(EXISTS "${CURRENT_SOURCE_DIR}/CHANGELOG.md")
+    # Extract the first paragraph body of the changelog
+    SET (CHANGE_LOG_BODY "")
+    file(STRINGS "${CURRENT_SOURCE_DIR}/CHANGELOG.md" FILE_BODY)
+    SET (DONE "FALSE")
+    foreach(line IN LISTS FILE_BODY)
+    if( line)
+      if (DONE STREQUAL "FALSE")
+        string( SUBSTRING ${line} 0 1 line_start)
+        if( NOT line_start STREQUAL " ")
+          if( IN_PARAGRAPH STREQUAL "TRUE")
+            SET (DONE "TRUE")
+          endif()
+          SET (IN_PARAGRAPH "TRUE")
+        endif() 
+        if( IN_PARAGRAPH AND line_start STREQUAL " ")
+          SET (CHANGE_LOG_BODY "${CHANGE_LOG_BODY}\n${line}")
+        endif() 
+      endif()
+    endif()
+    endforeach()
+    # message ("CHANGE : ${CHANGE_LOG_BODY}")
+    # Replace the list markers with * and ensure proper spacing 
+    # More https://www.debian.org/doc/debian-policy/ch-source.html
+  else()
+    SET (CHANGE_LOG_BODY "  * changes")
+  endif()
+  
   configure_file (${DIR_ELEMENTARY_TEMPLATES}/debian/changelog.cmake ${DEBIAN_PATH}/changelog)
 
   #create a bunch of static files: compat, source/format
@@ -57,9 +109,11 @@ endif()
   configure_file (${DIR_ELEMENTARY_TEMPLATES}/debian/copyright.cmake ${DEBIAN_PATH}/copyright)
 
   # TODO override files with debian folder
-  # TODO copy README.md into README
-  configure_file (${DIR_ELEMENTARY_TEMPLATES}/debian/README.cmake ${DEBIAN_PATH}/README)
-  # TODO : library name 
+  if(EXISTS "${CURRENT_SOURCE_DIR}/README.md")
+    file (COPY "${CURRENT_SOURCE_DIR}/README.md" DESTINATION "${DEBIAN_PATH}/README")
+  else()
+    configure_file (${DIR_ELEMENTARY_TEMPLATES}/debian/README.cmake ${DEBIAN_PATH}/README)
+  endif()
 
   message ("  . Debian control files generated in ${DEBIAN_PATH}")
 	# Running debuild
@@ -71,7 +125,7 @@ endif()
           output
       RETURN_VALUE  
           result_code)
-  
+  # message ("Debuild ouput: ${output}")
   if( NOT "${result_code}" STREQUAL "0")
   	message ("${FatalColor}debuild failed${NC}, returning ${result_code}")
   	message ("Debuild ouput: ${output}")
@@ -80,8 +134,8 @@ endif()
 	SET (DIST_PATH "${CURRENT_SOURCE_DIR}/dist/${ARGS_BINARY_NAME}")
 	file (MAKE_DIRECTORY "${DIST_PATH}")
 
-	SET (DEB_FILE "${ARGS_BINARY_NAME}_${ARGS_VERSION}_amd64")
-	SET (DEB_DBG_FILE "${ARGS_BINARY_NAME}-dbg_${ARGS_VERSION}_amd64")
+	SET (DEB_FILE "${ARGS_PACKAGE_NAME}_${ARGS_VERSION}_amd64")
+	SET (DEB_DBG_FILE "${ARGS_PACKAGE_NAME}-dbg_${ARGS_VERSION}_amd64")
 
   # Move the created file to dist/
   file (RENAME "${CURRENT_SOURCE_DIR}/${DEB_FILE}.deb" "${DIST_PATH}/${DEB_FILE}.deb")
