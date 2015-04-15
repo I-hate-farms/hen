@@ -5,18 +5,18 @@
 #    - 0.2 : fix library with depending app
 
 macro(console_application)
-    parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS" "" ${ARGN})
+    parse_arguments(ARGS "NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS;AUTHOR;HOMEPAGE;LICENSE" "" ${ARGN})
 
     set (DATADIR "")
     set (PKGDATADIR "")
-    set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
+    set (GETTEXT_PACKAGE "${ARGS_NAME}")
 
     set (PROJECT_TYPE "CONSOLE")
     set (BINARY_TYPE "APPLICATION")
 
     hen_build (
-        BINARY_NAME
-            ${ARGS_BINARY_NAME}
+        NAME
+            ${ARGS_NAME}
         TITLE
             ${ARGS_TITLE}
         VERSION
@@ -43,15 +43,21 @@ macro(console_application)
             config_cli.vala.cmake
         C_OPTIONS
              ${ARGS_C_OPTIONS}
+        AUTHOR
+             ${ARGS_AUTHOR}
+        HOMEPAGE
+             ${ARGS_HOMEPAGE}
+        LICENSE
+             ${ARGS_LICENSE}
     )
 
-    add_executable (${ARGS_BINARY_NAME} ${VALA_C} ${C_FILES})
+    add_executable (${ARGS_NAME} ${VALA_C} ${C_FILES})
     foreach( vala_local_pkg ${list_vala_local_packages})
-        add_dependencies (${ARGS_BINARY_NAME}  "${vala_local_pkg}")
+        add_dependencies (${ARGS_NAME}  "${vala_local_pkg}")
     endforeach()
-    target_link_libraries (${ARGS_BINARY_NAME} ${DEPS_LIBRARIES})
+    target_link_libraries (${ARGS_NAME} ${DEPS_LIBRARIES})
 
-    install_elementary_cli (${ARGS_BINARY_NAME})
+    install_elementary_cli (${ARGS_NAME})
     # Support tasks 
     build_valadoc () 
     package_debian ()

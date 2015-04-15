@@ -7,7 +7,7 @@
 macro (create_execution_tasks)
 	SET( EXECNAME "")
 	if( PROJECT_TYPE STREQUAL "APPLICATION")
-		 SET( EXECNAME "${CMAKE_CURRENT_BINARY_DIR}/${ARGS_BINARY_NAME}")
+		 SET( EXECNAME "${CMAKE_CURRENT_BINARY_DIR}/${ARGS_NAME}")
 	endif() 
 
 	if( PROJECT_TYPE STREQUAL "PLUG")
@@ -17,22 +17,22 @@ macro (create_execution_tasks)
 	if(EXECNAME) 
 		# Run 
 		add_custom_target(
-			run_${ARGS_BINARY_NAME}
+			run_${ARGS_NAME}
 		COMMAND 
 			${EXECNAME}
 		WORKING_DIRECTORY
 			"${CMAKE_CURRENT_BINARY_DIR}"
 		COMMENT 
-			"Running ${ARGS_BINARY_NAME}..."
+			"Running ${ARGS_NAME}..."
 		)
 		add_custom_target(
-			debug_${ARGS_BINARY_NAME}
+			debug_${ARGS_NAME}
 		COMMAND 
 			gdb -ex=run --args ${EXECNAME}
 		WORKING_DIRECTORY
 			"${CMAKE_CURRENT_BINARY_DIR}"
 		COMMENT 
-			"Running ${ARGS_BINARY_NAME}..."
+			"Running ${ARGS_NAME}..."
 		)
 	#else()
 		# Can't be executed
@@ -61,12 +61,12 @@ macro (create_execution_tasks)
 		add_custom_target(
 			run
 		DEPENDS
-			run_${ARGS_BINARY_NAME}
+			run_${ARGS_NAME}
 		)
 		add_custom_target(
 			debug
 		DEPENDS
-			debug_${ARGS_BINARY_NAME}
+			debug_${ARGS_NAME}
 		)
 		set(EXECUTION_TOP_TARGET_ADDED "true")
 	endif ()

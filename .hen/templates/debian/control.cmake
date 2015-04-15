@@ -14,7 +14,7 @@ Architecture: any
 Depends: @DOLLAR@{misc:Depends}, @DOLLAR@{shlibs:Depends}
 Pre-Depends: dpkg (>= 1.15.6)
 Description: @ELEM_TITLE@
-  @ARGS_BINARY_NAME@: @ELEM_TITLE@ 
+  @ARGS_NAME@: @ELEM_TITLE@ 
 
 Package: @ARGS_PACKAGE_NAME@-dbg
 Architecture: any
@@ -24,4 +24,4 @@ Depends: @ARGS_PACKAGE_NAME@ (= @DOLLAR@{binary:Version}), @DOLLAR@{misc:Depends
 Pre-Depends: dpkg (>= 1.15.6)
 Enhances: @ARGS_PACKAGE_NAME@
 Description: @ELEM_TITLE@ (debugging symbols)
-   @ARGS_BINARY_NAME@-dbg: this package contains debugging symbols for @ARGS_BINARY_NAME@.
+   @ARGS_NAME@-dbg: this package contains debugging symbols for @ARGS_NAME@.

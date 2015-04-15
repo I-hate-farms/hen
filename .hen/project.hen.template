@@ -8,14 +8,14 @@ set (BUILD_TYPE "Release")
 
 # This new application will conquer the world
 application (
+    NAME
+        your-application
     AUTHOR
         "Your self <your.self@home.com>"
     HOMEPAGE
         "https://home.com/your-application"      
     LICENSE
         "Apache 2.0"  
-    BINARY_NAME
-        your-application
     TITLE
         "This application will be great"
     VERSION

@@ -7,7 +7,7 @@
 macro (package_debian)
 
 	# Write all the variables in the a script 
-	set(CacheForScript ${CMAKE_BINARY_DIR}/package_debian_${ARGS_BINARY_NAME}.cmake)
+	set(CacheForScript ${CMAKE_BINARY_DIR}/package_debian_${ARGS_NAME}.cmake)
 	file(WRITE ${CacheForScript} "")
 
 	get_cmake_property(Vars VARIABLES)
@@ -27,7 +27,7 @@ macro (package_debian)
 	endforeach()
 
 	add_custom_target(
-		package_debian_${ARGS_BINARY_NAME}
+		package_debian_${ARGS_NAME}
  	COMMAND 
  		cmake -D "CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}" -D "CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}" -D "VARIABLES_FILE=${CacheForScript}" -P "${DIR_ELEMENTARY_TEMPLATES}/../PackageDebianExec.cmake" 
  	WORKING_DIRECTORY
@@ -40,7 +40,7 @@ macro (package_debian)
 		add_custom_target(
 			package_debian
 		DEPENDS
-			package_debian_${ARGS_BINARY_NAME}
+			package_debian_${ARGS_NAME}
 		)
 		set(PACKAGE_DEBIAN_TOP_TARGET_ADDED "true")
 	endif ()

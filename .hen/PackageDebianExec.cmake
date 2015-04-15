@@ -61,7 +61,7 @@ endif()
     set (ARGS_COPYRIGHT "${ARGS_AUTHOR}")
   endif()
   if( NOT ARGS_PACKAGE_NAME)
-    set (ARGS_PACKAGE_NAME "${ARGS_BINARY_NAME}")
+    set (ARGS_PACKAGE_NAME "${ARGS_NAME}")
   endif()
 
   set (DOLLAR "$")
@@ -131,7 +131,7 @@ endif()
   	message ("Debuild ouput: ${output}")
   endif()
 	
-	SET (DIST_PATH "${CURRENT_SOURCE_DIR}/dist/${ARGS_BINARY_NAME}")
+	SET (DIST_PATH "${CURRENT_SOURCE_DIR}/dist/${ARGS_NAME}")
 	file (MAKE_DIRECTORY "${DIST_PATH}")
 
 	SET (DEB_FILE "${ARGS_PACKAGE_NAME}_${ARGS_VERSION}_amd64")

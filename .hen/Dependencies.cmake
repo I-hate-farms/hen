@@ -114,9 +114,11 @@ macro (install_apt_packges apt_packages)
         if( NOT "${result_code}" STREQUAL "0")
 
             message ("")
-            message( "${MessageColor}Installing the dependencies${NC} for ${ARGS_BINARY_NAME} via ${MessageColor}apt${NC}...")
+            message( "${MessageColor}Installing the dependencies${NC} for ${ARGS_NAME} via ${MessageColor}apt${NC}...")
             message ("----------")
+            message ("Apt packages to be installed: ${pkgs}")
             message ("This may take a while...")
+            
             EXEC_PROGRAM( sudo
                 ARGS 
                     apt-get install -y "${pkgs}"

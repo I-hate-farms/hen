@@ -144,7 +144,7 @@ macro(build_translations)
             #message ("SOURCE PATHS: ${SOURCE_PATHS}")
             add_translations_catalog (${PO_FOLDER} ${GETTEXT_PACKAGE} ${SOURCE_PATHS})
             # add_definitions (-DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\")
-            # target_compile_definitions(${ARGS_BINARY_NAME} PUBLIC -DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\") 
+            # target_compile_definitions(${ARGS_NAME} PUBLIC -DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\") 
         endif ()
         # PO files are only computed once
         #set (DISABLE_PO "true")
@@ -152,7 +152,7 @@ macro(build_translations)
 endmacro()
 
 macro(hen_build)
-    parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;PACKAGES;C_DEFINES;VALA_DEFINES;SCHEMA;VALA_OPTIONS;CONFIG_NAME;LINKING;C_OPTIONS;AUTHOR;HOMEPAGE;LICENSE" "" ${ARGN})
+    parse_arguments(ARGS "NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;PACKAGES;C_DEFINES;VALA_DEFINES;SCHEMA;VALA_OPTIONS;CONFIG_NAME;LINKING;C_OPTIONS;AUTHOR;HOMEPAGE;LICENSE" "" ${ARGN})
 
     if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
         message( "${MessageColor}CMAKE_INSTALL_PREFIX is not set${NC}. '/usr' is used by default")
@@ -169,13 +169,13 @@ macro(hen_build)
         endif()
     endif()
 
-    if(ARGS_BINARY_NAME)
+    if(ARGS_NAME)
         message ("")
-        message( "${MessageColor}Creating build for ${ARGS_BINARY_NAME}...${NC}")
+        message( "${MessageColor}Creating build for ${ARGS_NAME}...${NC}")
         message ("----------")
-        project (${ARGS_BINARY_NAME})
+        project (${ARGS_NAME})
     else()
-        message( FATAL_ERROR "${FatalColor}You must specify a BINARY_NAME${NC}")
+        message( FATAL_ERROR "${FatalColor}You must specify a NAME${NC}")
     endif()
 
     # TODO handle the case where the source is not precised
@@ -216,8 +216,11 @@ macro(hen_build)
     if( NOT ARGS_C_FILES AND NOT VALA_FILES)
         file(GLOB_RECURSE C_FILES "${ARGS_SOURCE_PATH}/*.c")
     endif()
-    #add_subdirectory (${ARGS_SOURCE_PATH} ${CMAKE_BINARY_DIR}/${ARGS_BINARY_NAME})
-
+    #add_subdirectory (${ARGS_SOURCE_PATH} ${CMAKE_BINARY_DIR}/${ARGS_NAME})
+    if( NOT C_FILES AND NOT VALA_FILES)
+        message( FATAL_ERROR "${FatalColor}There is no source files to build${NC}.\nYou must specify an ${MessageColor}SRC${NC} folder with buildable files in it, or list files in ${MessageColor}VALA_FILES${NC} or ${MessageColor}C_FILES${NC}.")
+    endif()
+    
     if(ARGS_VERSION)
         set (ELEM_VERSION ${ARGS_VERSION})
     else()
@@ -285,14 +288,14 @@ macro(hen_build)
     # Generate config file
     set (ELEM_RELEASE_NAME ${ARGS_RELEASE_NAME})
     if( ARGS_CONFIG_NAME)
-        set (CONFIG_FILE /tmp/config-${ARGS_BINARY_NAME}.vala)
+        set (CONFIG_FILE /tmp/config-${ARGS_NAME}.vala)
         configure_file (${DIR_ELEMENTARY_TEMPLATES}/${ARGS_CONFIG_NAME} ${CONFIG_FILE})
     endif()
     
     if (ARGS_LINKING)
-        set( LIBRARY_NAME  ${ARGS_BINARY_NAME})
+        set( LIBRARY_NAME  ${ARGS_NAME})
         # Precompile vala files for library
-        vala_precompile (VALA_C ${ARGS_BINARY_NAME}
+        vala_precompile (VALA_C ${ARGS_NAME}
             ${VALA_FILES}
             ${CONFIG_FILE}
         PACKAGES
@@ -317,7 +320,7 @@ macro(hen_build)
 
     else()
         # Precompile vala files for app
-        vala_precompile (VALA_C ${ARGS_BINARY_NAME}
+        vala_precompile (VALA_C ${ARGS_NAME}
             ${VALA_FILES}
             ${CONFIG_FILE}
         PACKAGES
@@ -338,20 +341,20 @@ macro(hen_build)
     # Build files ${ARGS_SOURCE_PATH}
     include_directories (${CMAKE_CURRENT_SOURCE_DIR})
     if( BINARY_TYPE STREQUAL "APPLICATION")
-        add_executable (${ARGS_BINARY_NAME} ${VALA_C} ${C_FILES})
+        add_executable (${ARGS_NAME} ${VALA_C} ${C_FILES})
     endif ()
     if( BINARY_TYPE STREQUAL "LIBRARY")
         if( ARGS_LINKING STREQUAL "static")
-            add_library (${ARGS_BINARY_NAME} STATIC ${VALA_C} ${C_FILES})
+            add_library (${ARGS_NAME} STATIC ${VALA_C} ${C_FILES})
         else()
-            add_library (${ARGS_BINARY_NAME} SHARED ${VALA_C} ${C_FILES})
+            add_library (${ARGS_NAME} SHARED ${VALA_C} ${C_FILES})
             if( NOT ARGS_SOVERSION)
                 message ("${MessageColor}The parameter SO_VERSION is not specified${NC} so '0' is used.")
                 set( ARGS_SOVERSION "0")
             endif()
 
-            set_target_properties (${ARGS_BINARY_NAME} PROPERTIES
-                OUTPUT_NAME ${ARGS_BINARY_NAME}
+            set_target_properties (${ARGS_NAME} PROPERTIES
+                OUTPUT_NAME ${ARGS_NAME}
                 VERSION ${ARGS_VERSION}
                 SOVERSION ${ARGS_SOVERSION}
             )
@@ -363,13 +366,13 @@ macro(hen_build)
     # Add the C defines
     foreach(def ${ARGS_C_DEFINES})
         # add_definitions ("-D${def}")
-        target_compile_definitions(${ARGS_BINARY_NAME} PUBLIC -D${def})
+        target_compile_definitions(${ARGS_NAME} PUBLIC -D${def})
     endforeach()
 
     # Add the C options
     foreach(opt ${ARGS_C_OPTIONS})
         # add_definitions ("${opt}")
-        set_target_properties( ${ARGS_BINARY_NAME} PROPERTIES COMPILE_OPTIONS ${opt})
+        set_target_properties( ${ARGS_NAME} PROPERTIES COMPILE_OPTIONS ${opt})
     endforeach()
     #include_directories (${ARGS_SOURCE_PATH})
 endmacro()
@@ -468,7 +471,7 @@ macro(handle_packages)
     #set (bin_libs "")
     #set (bin_lib_dirs "")
     # message ("Checked ${checked_pc_packages}")
-    set (DEPSNAME "DEPS_${ARGS_BINARY_NAME}_VAR")
+    set (DEPSNAME "DEPS_${ARGS_NAME}_VAR")
     set (${DEPSNAME} "")
     if( checked_pc_packages )
         # message ("CHEKING: ${checked_pc_packages}...")
@@ -490,17 +493,17 @@ macro(handle_packages)
             SET (MY_CFLAGS "${MY_CFLAGS} ${flag}")
         endforeach()
         # message ("!!! MY_CFLAGS : ${MY_CFLAGS}")
-        set_target_properties( ${ARGS_BINARY_NAME} PROPERTIES COMPILE_FLAGS ${MY_CFLAGS})
+        set_target_properties( ${ARGS_NAME} PROPERTIES COMPILE_FLAGS ${MY_CFLAGS})
     endif()
     if( NOT "${${DEPSNAME}_LIBRARY_DIRS}" STREQUAL "" )
         # message ("!!! DIRS : ${${DEPSNAME}_LIBRARY_DIRS}")
         # link_directories (${${DEPSNAME}_LIBRARY_DIRS})
-        target_link_libraries(${ARGS_BINARY_NAME} PRIVATE ${${DEPSNAME}_LIBRARY_DIRS}) 
+        target_link_libraries(${ARGS_NAME} PRIVATE ${${DEPSNAME}_LIBRARY_DIRS}) 
     endif()
     if( NOT "${${DEPSNAME}_LIBRARIES}" STREQUAL "" )
         # message ("!!! LIBS : ${${DEPSNAME}_LIBRARIES}")
         # link_libraries (${${DEPSNAME}_LIBRARIES})
-        target_link_libraries(${ARGS_BINARY_NAME} PRIVATE ${${DEPSNAME}_LIBRARIES}) 
+        target_link_libraries(${ARGS_NAME} PRIVATE ${${DEPSNAME}_LIBRARIES}) 
     endif()
-    target_compile_definitions(${ARGS_BINARY_NAME} PUBLIC -DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\") 
+    target_compile_definitions(${ARGS_NAME} PUBLIC -DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\") 
 endmacro()   

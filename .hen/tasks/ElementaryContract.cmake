@@ -5,19 +5,19 @@
 #    - 0.2 : fix library with depending app
 
 macro(elementary_contract)
-    parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS;ICON;DESKTOP;CONTRACT" "" ${ARGN})
+    parse_arguments(ARGS "NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS;ICON;DESKTOP;CONTRACT;AUTHOR;HOMEPAGE;LICENSE" "" ${ARGN})
 
     set (DATADIR "")
     set (PKGDATADIR "")
-    set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
+    set (GETTEXT_PACKAGE "${ARGS_NAME}")
     
     set (PROJECT_TYPE "CONTRACT")
     set (BINARY_TYPE "APPLICATION")
     
     if( NOT ARGS_ICON)
-        #message( FATAL_ERROR "Your application must have an ICON. Example: data/${ARGS_BINARY_NAME}.svg")
-        set(ARGS_ICON "data/${ARGS_BINARY_NAME}.svg")
-        message ("${MessageColor}Using ICON=data/${ARGS_BINARY_NAME}.svg${NC}")
+        #message( FATAL_ERROR "Your application must have an ICON. Example: data/${ARGS_NAME}.svg")
+        set(ARGS_ICON "data/${ARGS_NAME}.svg")
+        message ("${MessageColor}Using ICON=data/${ARGS_NAME}.svg${NC}")
     endif()
 
     if( NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON})
@@ -39,8 +39,8 @@ macro(elementary_contract)
     endif()
 
     hen_build (
-        BINARY_NAME
-            ${ARGS_BINARY_NAME}
+        NAME
+            ${ARGS_NAME}
         TITLE
             ${ARGS_TITLE}
         VERSION
@@ -67,15 +67,21 @@ macro(elementary_contract)
             config_app.vala.cmake
         C_OPTIONS
              ${ARGS_C_OPTIONS}
+        AUTHOR
+             ${ARGS_AUTHOR}
+        HOMEPAGE
+             ${ARGS_HOMEPAGE}
+        LICENSE
+             ${ARGS_LICENSE}
     )
 
-    # add_executable (${ARGS_BINARY_NAME} ${VALA_C} ${C_FILES})
+    # add_executable (${ARGS_NAME} ${VALA_C} ${C_FILES})
     foreach( vala_local_pkg ${list_vala_local_packages})
-        add_dependencies (${ARGS_BINARY_NAME}  "${vala_local_pkg}")
+        add_dependencies (${ARGS_NAME}  "${vala_local_pkg}")
     endforeach()
-    target_link_libraries (${ARGS_BINARY_NAME} ${DEPS_LIBRARIES})
+    target_link_libraries (${ARGS_NAME} ${DEPS_LIBRARIES})
 
-    install_elementary_app (${ARGS_BINARY_NAME} ${ARGS_ICON} "${ARGS_DESKTOP}")
+    install_elementary_app (${ARGS_NAME} ${ARGS_ICON} "${ARGS_DESKTOP}")
 
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON} DESTINATION share/icons/hicolor/48x48/apps)
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_CONTRACT} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/contractor)

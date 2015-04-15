@@ -10,13 +10,13 @@ find_package(Valadoc REQUIRED)
 macro(build_valadoc)
     # Create dist folder if necessary 
     SET( DIST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist")
-    SET( DIST_VALADOC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist/${ARGS_BINARY_NAME}/valadoc/")
+    SET( DIST_VALADOC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist/${ARGS_NAME}/valadoc/")
     
     if(NOT EXISTS "${DIST_VALADOC_PATH}")
         file(MAKE_DIRECTORY "${DIST_VALADOC_PATH}")
     endif()
     
-    valadoc ( ${ARGS_BINARY_NAME} "${DIST_VALADOC_PATH}" ${VALA_FILES}
+    valadoc ( ${ARGS_NAME} "${DIST_VALADOC_PATH}" ${VALA_FILES}
         PACKAGES
             ${VALA_PACKAGES}
         #OPTIONS

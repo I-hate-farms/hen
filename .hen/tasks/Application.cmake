@@ -6,33 +6,33 @@
 #    - 0.3 : generate icon and desktop if missing
 
 macro(application)
-    parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS;ICON;DESKTOP" "" ${ARGN})
+    parse_arguments(ARGS "NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS;ICON;DESKTOP;AUTHOR;HOMEPAGE;LICENSE" "" ${ARGN})
 
     set (DATADIR "")
     set (PKGDATADIR "")
-    set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
+    set (GETTEXT_PACKAGE "${ARGS_NAME}")
     
     set (PROJECT_TYPE "APPLICATION")
     set (BINARY_TYPE "APPLICATION")
     
     # Copy the default icon if the image is missing and not defined in the project file
     if( NOT ARGS_ICON )
-        set( ICON_FILE "data/${ARGS_BINARY_NAME}.svg")
-        if( NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/data/${ARGS_BINARY_NAME}.svg" AND NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${ICON_FILE}" )
+        set( ICON_FILE "data/${ARGS_NAME}.svg")
+        if( NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/data/${ARGS_NAME}.svg" AND NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${ICON_FILE}" )
             file( COPY "${DIR_ELEMENTARY_TEMPLATES}/happy-swine.svg"  DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/data")
-            file( RENAME "${CMAKE_CURRENT_SOURCE_DIR}/data/happy-swine.svg" "${CMAKE_CURRENT_SOURCE_DIR}/data/${ARGS_BINARY_NAME}.svg")
+            file( RENAME "${CMAKE_CURRENT_SOURCE_DIR}/data/happy-swine.svg" "${CMAKE_CURRENT_SOURCE_DIR}/data/${ARGS_NAME}.svg")
             set(ARGS_ICON "${ICON_FILE}")
             message ("${MessageColor}Generating default icon${NC}: ${ICON_FILE}.")
         endif()
     endif()
     if( NOT ARGS_ICON)
-        #message( FATAL_ERROR "Your application must have an ICON. Example: data/${ARGS_BINARY_NAME}.svg")
-        if( EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/data/${ARGS_BINARY_NAME}.svg")
-            set(ARGS_ICON "data/${ARGS_BINARY_NAME}.svg")
+        #message( FATAL_ERROR "Your application must have an ICON. Example: data/${ARGS_NAME}.svg")
+        if( EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/data/${ARGS_NAME}.svg")
+            set(ARGS_ICON "data/${ARGS_NAME}.svg")
             message ("${MessageColor}Using ICON=${ARGS_ICON}${NC}")
         endif()
-         if( EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/data/${ARGS_BINARY_NAME}.png")
-            set(ARGS_ICON "data/${ARGS_BINARY_NAME}.png")
+         if( EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/data/${ARGS_NAME}.png")
+            set(ARGS_ICON "data/${ARGS_NAME}.png")
             message ("${MessageColor}Using ICON=${ARGS_ICON}${NC}")
         endif()       
     endif()
@@ -44,7 +44,7 @@ macro(application)
 
     # Generate a desktop file if the desktop file missing and not defined in the project file
     if( NOT ARGS_DESKTOP)
-        set( DESKTOP_FILE "data/${ARGS_BINARY_NAME}.desktop")
+        set( DESKTOP_FILE "data/${ARGS_NAME}.desktop")
         if( NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${DESKTOP_FILE}")
             configure_file ("${DIR_ELEMENTARY_TEMPLATES}/desktop.cmake" "${CMAKE_CURRENT_SOURCE_DIR}/${DESKTOP_FILE}")
             set(ARGS_DESKTOP "${DESKTOP_FILE}")
@@ -53,13 +53,13 @@ macro(application)
     endif()
     # DESKTOP is not mandatory for apps
     if( NOT ARGS_DESKTOP)
-        #message( FATAL_ERROR "Your application must have an DESKTOP file. Example: data/${ARGS_BINARY_NAME}.desktop")
-        set(ARGS_DESKTOP "data/${ARGS_BINARY_NAME}.desktop")
+        #message( FATAL_ERROR "Your application must have an DESKTOP file. Example: data/${ARGS_NAME}.desktop")
+        set(ARGS_DESKTOP "data/${ARGS_NAME}.desktop")
         # For more info on desktop files, see 
         #   https://linuxcritic.wordpress.com/2010/04/07/anatomy-of-a-desktop-file/
         # and 
         #  https://wiki.archlinux.org/index.php/Desktop_entries
-        message ("${MessageColor}Using DESKTOP=data/${ARGS_BINARY_NAME}.desktop${NC}")
+        message ("${MessageColor}Using DESKTOP=data/${ARGS_NAME}.desktop${NC}")
         #message ("Warning no DESKTOP defined: your application won't be displayed in slingshot")
     else()
 
@@ -69,8 +69,8 @@ macro(application)
     endif()
 
     hen_build (
-        BINARY_NAME
-            ${ARGS_BINARY_NAME}
+        NAME
+            ${ARGS_NAME}
         TITLE
             ${ARGS_TITLE}
         VERSION
@@ -97,14 +97,20 @@ macro(application)
             config_app.vala.cmake
         C_OPTIONS
              ${ARGS_C_OPTIONS}
+        AUTHOR
+             ${ARGS_AUTHOR}
+        HOMEPAGE
+             ${ARGS_HOMEPAGE}
+        LICENSE
+             ${ARGS_LICENSE}
     )
 
     foreach( vala_local_pkg ${list_vala_local_packages})
-        add_dependencies (${ARGS_BINARY_NAME}  "${vala_local_pkg}")
+        add_dependencies (${ARGS_NAME}  "${vala_local_pkg}")
     endforeach()
-    target_link_libraries (${ARGS_BINARY_NAME} ${DEPS_LIBRARIES})
+    target_link_libraries (${ARGS_NAME} ${DEPS_LIBRARIES})
 
-    install_elementary_app (${ARGS_BINARY_NAME} ${ARGS_ICON} "${ARGS_DESKTOP}")
+    install_elementary_app (${ARGS_NAME} ${ARGS_ICON} "${ARGS_DESKTOP}")
     # Support tasks 
     build_valadoc () 
     package_debian ()

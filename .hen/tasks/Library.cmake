@@ -8,7 +8,7 @@
 #    - 0.5 : improve valadoc 
 
 macro(library)
-    parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOVERSION;LINKING;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS;AUTHOR;HOMEPAGE;LICENSE" "" ${ARGN})
+    parse_arguments(ARGS "NAME;TITLE;VERSION;RELEASE_NAME;SOVERSION;LINKING;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS;AUTHOR;HOMEPAGE;LICENSE" "" ${ARGN})
 
     if( NOT ARGS_LINKING)
         message( FATAL_ERROR "${FatalColor}You must specify a LINKING: static or shared${NC}.")
@@ -20,16 +20,16 @@ macro(library)
 
     set (DATADIR "")
     set (PKGDATADIR "")
-    set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
+    set (GETTEXT_PACKAGE "${ARGS_NAME}")
 
     set (PROJECT_TYPE "LIBRARY")
     set (BINARY_TYPE "LIBRARY")
     
-    set (ARGS_PACKAGE_NAME "lib${ARGS_BINARY_NAME}-dev")
+    set (ARGS_PACKAGE_NAME "lib${ARGS_NAME}-dev")
 
     hen_build (
-        BINARY_NAME
-            ${ARGS_BINARY_NAME}
+        NAME
+            ${ARGS_NAME}
         TITLE
             ${ARGS_TITLE}
         VERSION
@@ -69,13 +69,13 @@ macro(library)
     # Set for the variables substitution in the pc file
     set (DOLLAR "$")
     # TODO fix the output path
-    configure_file (${DIR_ELEMENTARY_TEMPLATES}/lib.pc.cmake ${CMAKE_BINARY_DIR}/${ARGS_BINARY_NAME}.pc)
-    configure_file (${DIR_ELEMENTARY_TEMPLATES}/lib.deps.cmake ${CMAKE_BINARY_DIR}/${ARGS_BINARY_NAME}.deps)
-    add_local_package (${ARGS_BINARY_NAME} ${COMPLETE_DIST_PC_PACKAGES} )
+    configure_file (${DIR_ELEMENTARY_TEMPLATES}/lib.pc.cmake ${CMAKE_BINARY_DIR}/${ARGS_NAME}.pc)
+    configure_file (${DIR_ELEMENTARY_TEMPLATES}/lib.deps.cmake ${CMAKE_BINARY_DIR}/${ARGS_NAME}.deps)
+    add_local_package (${ARGS_NAME} ${COMPLETE_DIST_PC_PACKAGES} )
 
-    target_link_libraries (${ARGS_BINARY_NAME} ${DEPS_LIBRARIES})
+    target_link_libraries (${ARGS_NAME} ${DEPS_LIBRARIES})
 
-    install_elementary_library (${ARGS_BINARY_NAME} ${ARGS_LINKING})
+    install_elementary_library (${ARGS_NAME} ${ARGS_LINKING})
     # Support tasks 
     build_valadoc () 
     package_debian ()
