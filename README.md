@@ -14,7 +14,7 @@ application (
         "https://home.com/your-application"      
     LICENSE
         "Apache 2.0"  
-    BINARY_NAME
+    NAME
         your-application
     TITLE
         "This application will be great"
@@ -34,6 +34,7 @@ Then type `hen build` to build your application and `hen package` to create `.de
 If you want to run your application, type `hen run` or `hen debug` to start a `gdb` debugging session.
 
 > note: the `project.hen` is a cmake file you can use whatever cmake instructions to spice it.
+
 ## Features: 
   - build and install gui/console applications, libraries and plugins using a simple declarative syntax
   - generate a wide array of files for you: .desktop and icons for applications, .pc .deps for lbraries
@@ -43,11 +44,16 @@ If you want to run your application, type `hen run` or `hen debug` to start a `g
 ## Getting started 
 
 ```
-# Install the spores ppa if not done already 
 curl -sL  http://i-hate-farms.github.io/hen/install | bash -  
 ```
 
 More information in the [gettting started section](docs/getting-started.md).
+
+## Rodmap to 1.0 
+  - [ ] handle application icons and images 
+  - [ ] handle po files and translations
+  - [ ] finish up valadoc task
+  - [ ] documentation and test suite
 
 ## Samples
 
