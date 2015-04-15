@@ -145,7 +145,8 @@ do_prepare () {
       fi
       cp ${DEST_FOLDER}/CMakeLists.template CMakeLists.txt
       cat project.hen >> CMakeLists.txt
-
+      cat ${DEST_FOLDER}/CMakeLists.ending.template >> CMakeLists.txt
+      
       mkdir ${BUILD_FOLDER}
       cd ${BUILD_FOLDER}
       cmake ..
