@@ -15,6 +15,7 @@
 #  - 0.13: add run and debug targets
 #  - 0.14: introduce project.hen file
 #  - 0.15: add init
+#  - 0.16: added devscripts to the list of init packages
 # FIXME file with () in the name makes the build fail
 # TODO better documentation in help and list
 
@@ -49,8 +50,7 @@ do_setup () {
         echo "----------"
         echo -e "It maky take a while but it will be ${white}done only once${NC}..."
         echo ""
-        # devscripts ??
-        sudo apt-get install -y cmake valac build-essential valadoc
+        sudo apt-get install -y cmake valac build-essential valadoc devscripts
         RETURN_CODE=$?
         if [ "${RETURN_CODE}" == "0" ] ; then
           echo -e "${white}Installation done successfully.${NC}"
