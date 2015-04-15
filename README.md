@@ -53,6 +53,7 @@ More information in the [gettting started section](docs/getting-started.md).
   - [ ] handle application icons and images 
   - [ ] handle po files and translations
   - [ ] finish up valadoc task
+  - [ ] documentation and test suite
 
 ## Samples
 
