@@ -14,7 +14,7 @@ application (
         "https://home.com/your-application"      
     LICENSE
         "Apache 2.0"  
-    BINARY_NAME
+    NAME
         your-application
     TITLE
         "This application will be great"
@@ -48,6 +48,11 @@ curl -sL  http://i-hate-farms.github.io/hen/install | bash -
 ```
 
 More information in the [gettting started section](docs/getting-started.md).
+
+## Rodmap to 1.0 
+  - [ ] handle application icons and images 
+  - [ ] handle po files and translations
+  - [ ] finish up valadoc task
 
 ## Samples
 
