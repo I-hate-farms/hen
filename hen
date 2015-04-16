@@ -159,6 +159,11 @@ do_prepare () {
 }
 
 do_init () {
+      # if the Hen version can't be found, it means that the
+      # Hen needs to be installed
+      if [ ! -f "${DEST_FOLDER}/Hen-VERSION.txt" ] ; then
+        do_update
+      fi
       if [ -f "project.hen" ] ; then
         echo -e "${red}You already have a project.hen file.${NC}"
         echo -e "A new one can't be generated as it would ${white}override the existing one.${NC}"
