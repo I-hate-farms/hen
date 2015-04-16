@@ -16,7 +16,7 @@ namespace Build {
     internal const string VERSION = "@ELEM_VERSION@";
     internal const string RELEASE_NAME = "@ELEM_RELEASE_NAME@";
     internal const string TITLE = "@ELEM_TITLE@";
-    internal const string BINARY_NAME = "@CMAKE_PROJECT_NAME@";
+    internal const string PROJECT_NAME = "@CMAKE_PROJECT_NAME@";
 
     internal const string AUTHOR = "@ARGS_AUTHOR@";
     internal const string HOMEPAGE = "@ARGS_HOMEPAGE@";
@@ -39,7 +39,7 @@ namespace Build {
         result.append (" - GETTEXT_PACKAGE : %s\n".printf(GETTEXT_PACKAGE)) ;
         result.append (" - TITLE           : %s\n".printf(TITLE)) ;
         result.append (" - VERSION         : %s\n".printf(VERSION)) ;
-        result.append (" - BINARY_NAME     : %s\n".printf(BINARY_NAME)) ;
+        result.append (" - PROJECT_NAME    : %s\n".printf(PROJECT_NAME)) ;
         result.append (" - AUTHOR          : %s\n".printf(AUTHOR)) ;
         result.append (" - HOMEPAGE        : %s\n".printf(HOMEPAGE)) ;
         result.append (" - LICENSE         : %s\n".printf(LICENSE)) ;
