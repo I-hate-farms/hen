@@ -77,3 +77,5 @@ You can find samples for:
 ## [Documentation](docs/doc.md) 
 
 ## [Changelog](CHANGELOG.md)
+
+### Released under Apache 2.0 license
