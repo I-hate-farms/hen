@@ -93,6 +93,8 @@ macro (install_apt_packges apt_packages)
 
     string( REPLACE "," " " pkgs "${apt_packages}")
     string( REPLACE ";" " " pkgs "${pkgs}")
+    string( REPLACE ";" "\n  . " pkgs "${dis_pkgs}")
+    set (dis_pkgs "  . ${dis_pkgs}")     
     string( STRIP "${pkgs}" pkgs)
     string( LENGTH "${pkgs}" pkgs_len)
 
@@ -114,9 +116,9 @@ macro (install_apt_packges apt_packages)
         if( NOT "${result_code}" STREQUAL "0")
 
             message ("")
-            message( "${MessageColor}Installing the dependencies${NC} for ${ARGS_NAME} via ${MessageColor}apt${NC}...")
+            message( "${MessageColor}Installing the dependencies${NC} for ${ARGS_NAME}...")
             message ("----------")
-            message ("Apt packages to be installed: ${pkgs}")
+            message ("Apt packages to be installed: ${dis_pkgs}")
             message ("This may take a while...")
             
             EXEC_PROGRAM( sudo
