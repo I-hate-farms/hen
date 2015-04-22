@@ -44,7 +44,10 @@ If you want to run your application, type `hen run` or `hen debug` to start a `g
 ## Getting started 
 
 ```
+# install the script locally 
 curl -sL  http://i-hate-farms.github.io/hen/install | bash -  
+# create a sample project
+./hen init
 ```
 
 More information in the [gettting started section](docs/getting-started.md).
