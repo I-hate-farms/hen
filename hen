@@ -214,8 +214,8 @@ do_install () {
       generate_cmakefile
       cd ${BUILD_FOLDER}
       sudo make install
-      restore_cmakefile
       cd ..
+      restore_cmakefile
 }
 
 
@@ -233,8 +233,8 @@ do_package () {
           PARAM=debian
       fi
       make package_${PARAM}
-      restore_cmakefile
       cd ..
+      restore_cmakefile
 }
 
 do_run () {
@@ -247,8 +247,8 @@ do_run () {
       generate_cmakefile
       cd ${BUILD_FOLDER}
       make run
-      restore_cmakefile
       cd ..
+      restore_cmakefile
 }
 
 do_debug () {
@@ -261,8 +261,8 @@ do_debug () {
       generate_cmakefile
       cd ${BUILD_FOLDER}
       make debug
-      restore_cmakefile
       cd ..
+      restore_cmakefile
 }
 
 do_valadoc () {
@@ -274,8 +274,8 @@ do_valadoc () {
       echo "----------"
       cd ${BUILD_FOLDER}
       make valadoc
-      restore_cmakefile
       cd ..
+      restore_cmakefile
 }
 
 do_rebuild () {
