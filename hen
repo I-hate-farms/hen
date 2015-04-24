@@ -137,7 +137,17 @@ do_prepare () {
       if [ -d ${BUILD_FOLDER} ] ; then
         rm -rf ${BUILD_FOLDER}
       fi
-      # Renaming and expanding project.hen to CMakeLists.txt
+      generate_cmakefile
+      
+      mkdir ${BUILD_FOLDER}
+      cd ${BUILD_FOLDER}
+      cmake ..
+      cd ..
+      restore_cmakefile
+}
+
+generate_cmakefile () {
+        # Renaming and expanding project.hen to CMakeLists.txt
       if [ -f "CMakeLists.txt" ] ; then
         # Remove old backup of present
         if [ -f "CMakeLists.txt.backup-hen" ] ; then
@@ -148,11 +158,10 @@ do_prepare () {
       cp ${DEST_FOLDER}/CMakeLists.template CMakeLists.txt
       cat project.hen >> CMakeLists.txt
       cat ${DEST_FOLDER}/CMakeLists.ending.template >> CMakeLists.txt
-      
-      mkdir ${BUILD_FOLDER}
-      cd ${BUILD_FOLDER}
-      cmake ..
-      cd ..
+}
+
+restore_cmakefile () {
+
       if [ -f "CMakeLists.txt.backup-hen" ] ; then
         mv CMakeLists.txt.backup-hen CMakeLists.txt
       fi
@@ -181,7 +190,9 @@ do_build () {
       echo ""
       echo -e "${white}Building your application ...${NC}"
       echo "----------"
+      generate_cmakefile
       cd ${BUILD_FOLDER}
+      
       make
       RETURN_CODE=$?
       if [ "$RETURN_CODE" == "0" ] ; then
@@ -190,6 +201,7 @@ do_build () {
         BUILD_SUCCESSFUL=FALSE
       fi
       cd ..
+      restore_cmakefile
 }
 
 do_install () {
@@ -199,8 +211,10 @@ do_install () {
       echo ""
       echo -e "${white}Installing your application ...${NC}"
       echo "----------"
+      generate_cmakefile
       cd ${BUILD_FOLDER}
       sudo make install
+      restore_cmakefile
       cd ..
 }
 
@@ -212,12 +226,14 @@ do_package () {
       echo ""
       echo -e "${white}Building deb packages...${NC}"
       echo "----------"
+      generate_cmakefile
       cd ${BUILD_FOLDER}
       # By default we build for debian
       if [ -z "$PARAM" ]; then
           PARAM=debian
       fi
       make package_${PARAM}
+      restore_cmakefile
       cd ..
 }
 
@@ -228,8 +244,10 @@ do_run () {
       echo ""
       echo -e "${white}Running your application...${NC}"
       echo "----------"
+      generate_cmakefile
       cd ${BUILD_FOLDER}
       make run
+      restore_cmakefile
       cd ..
 }
 
@@ -240,8 +258,10 @@ do_debug () {
       echo ""
       echo -e "${white}Debugging with gdb...${NC}"
       echo "----------"
+      generate_cmakefile
       cd ${BUILD_FOLDER}
       make debug
+      restore_cmakefile
       cd ..
 }
 
@@ -254,6 +274,7 @@ do_valadoc () {
       echo "----------"
       cd ${BUILD_FOLDER}
       make valadoc
+      restore_cmakefile
       cd ..
 }
 

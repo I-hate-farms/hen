@@ -3,6 +3,10 @@
 - support po translation files
 - support threads
 
+* 0.9.22
+  - add libvala-0.28
+  - fix ./hen build bugs
+
 * 0.9.21
   - fails if there is nothing to build
   - better messages 
