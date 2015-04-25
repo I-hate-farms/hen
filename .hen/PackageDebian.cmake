@@ -20,7 +20,8 @@ macro (package_debian)
 	    if(${Var})
 		    string(REPLACE "\\" "\\\\" VALUE ${${Var}})
 		  endif ()
-		  if( pos EQUAL -1 )
+		  if( pos EQUAL -1 OR "${Var}" STREQUAL "CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT" OR 
+		  	"${Var}" STREQUAL "CMAKE_INSTALL_PREFIX")
 		  	file(APPEND ${CacheForScript} "set(${Var} \"${VALUE}\")\n")
 		  endif()
 		

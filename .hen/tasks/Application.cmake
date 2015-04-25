@@ -105,9 +105,9 @@ macro(application)
              ${ARGS_LICENSE}
     )
 
-    foreach( vala_local_pkg ${list_vala_local_packages})
-        add_dependencies (${ARGS_NAME}  "${vala_local_pkg}")
-    endforeach()
+    #foreach( vala_local_pkg ${list_vala_local_packages})
+    #    add_dependencies (${ARGS_NAME}  "${vala_local_pkg}")
+    #endforeach()
     target_link_libraries (${ARGS_NAME} ${DEPS_LIBRARIES})
 
     install_elementary_app (${ARGS_NAME} ${ARGS_ICON} "${ARGS_DESKTOP}")

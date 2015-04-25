@@ -158,10 +158,12 @@ generate_cmakefile () {
       cp ${DEST_FOLDER}/CMakeLists.template CMakeLists.txt
       cat project.hen >> CMakeLists.txt
       cat ${DEST_FOLDER}/CMakeLists.ending.template >> CMakeLists.txt
+      # Setting up date not to fool cmake
+      touch -d "$(date -r project.hen --rfc-2822)" CMakeLists.txt 
 }
 
 restore_cmakefile () {
-
+      rm CMakeLists.txt
       if [ -f "CMakeLists.txt.backup-hen" ] ; then
         mv CMakeLists.txt.backup-hen CMakeLists.txt
       fi

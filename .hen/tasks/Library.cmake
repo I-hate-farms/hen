@@ -90,7 +90,9 @@ macro(install_elementary_library ELEM_NAME BUILD_TYPE)
         # +ngladitz
         # "${CMAKE_INSTALL_LIBDIR}" expands to e.g. "lib/x86_64-linux-gnu" if your prefix is "/usr" but to lib if you prefix is "/usr/local" 
         # List all vars with cmake -LAH in build/ 
-        install (TARGETS ${ELEM_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        message( "Install prefix is ${MessageColor}${CMAKE_INSTALL_PREFIX}${NC}")
+        message( "Install destination is ${MessageColor}${CMAKE_INSTALL_LIBDIR}${NC}")
+        install (TARGETS ${ELEM_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
         # Install lib stuffs
         install (FILES ${CMAKE_BINARY_DIR}/${ELEM_NAME}.pc              DESTINATION pkgconfig/)
         install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ELEM_NAME}.vapi    DESTINATION share/vala/vapi/)

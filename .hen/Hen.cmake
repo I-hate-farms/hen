@@ -157,6 +157,8 @@ macro(hen_build)
     if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
         message( "${MessageColor}CMAKE_INSTALL_PREFIX is not set${NC}. '/usr' is used by default")
         set (CMAKE_INSTALL_PREFIX "/usr")
+    else()
+        message( "CMAKE_INSTALL_PREFIX is set to ${MessageColor}${CMAKE_INSTALL_PREFIX}${NC}.")
     endif()
 
     if( NOT CMAKE_BUILD_TYPE)
@@ -183,7 +185,9 @@ macro(hen_build)
         list(APPEND SOURCE_PATHS ${ARGS_SOURCE_PATH})
         list(REMOVE_DUPLICATES SOURCE_PATHS)
     else()
-        message( FATAL_ERROR "${FatalColor}Error, you must provide a SOURCE_PATH argument${NC}")
+        # message( FATAL_ERROR "${FatalColor}Error, you must provide a SOURCE_PATH argument${NC}")
+        # Use local path
+        set(ARGS_SOURCE_PATH ".")
     endif()
 
     # Add the source path to the vala files
@@ -240,7 +244,7 @@ macro(hen_build)
 
     # Checking vala version
     if(NOT VALA_VERSION_MIN)
-        message ("${MessageColor}Using Vala 0.26.0 as minimum${NC}")
+        message ("Using Vala ${MessageColor}0.26${NC} as minimum")
         SET(VALA_VERSION_MIN "0.26.0" )
     endif()
     find_package (Vala REQUIRED)
@@ -349,7 +353,7 @@ macro(hen_build)
         else()
             add_library (${ARGS_NAME} SHARED ${VALA_C} ${C_FILES})
             if( NOT ARGS_SOVERSION)
-                message ("${MessageColor}The parameter SO_VERSION is not specified${NC} so '0' is used.")
+                message ("The parameter SO_VERSION is not specified so '0' is used.")
                 set( ARGS_SOVERSION "0")
             endif()
 

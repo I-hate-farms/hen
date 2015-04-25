@@ -58,7 +58,7 @@ macro(elementary_plug)
              ${ARGS_LICENSE}
     )
 
-    add_library (${ARGS_NAME} MODULE ${VALA_C} ${C_FILES})
+    # add_library (${ARGS_NAME} MODULE ${VALA_C} ${C_FILES})
     foreach( vala_local_pkg ${list_vala_local_packages})
         add_dependencies (${ARGS_NAME}  "${vala_local_pkg}")
     endforeach()

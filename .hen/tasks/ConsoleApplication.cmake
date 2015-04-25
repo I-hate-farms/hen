@@ -51,10 +51,10 @@ macro(console_application)
              ${ARGS_LICENSE}
     )
 
-    add_executable (${ARGS_NAME} ${VALA_C} ${C_FILES})
-    foreach( vala_local_pkg ${list_vala_local_packages})
-        add_dependencies (${ARGS_NAME}  "${vala_local_pkg}")
-    endforeach()
+    #add_executable (${ARGS_NAME} ${VALA_C} ${C_FILES})
+    #foreach( vala_local_pkg ${list_vala_local_packages})
+    #    add_dependencies (${ARGS_NAME}  "${vala_local_pkg}")
+    #endforeach()
     target_link_libraries (${ARGS_NAME} ${DEPS_LIBRARIES})
 
     install_elementary_cli (${ARGS_NAME})

@@ -90,11 +90,23 @@ endmacro()
 
 macro (install_apt_packges apt_packages)
 
+#    set (pkgs "")
+#    foreach(line IN LISTS apt_packages)
+#        string( STRIP "${line}" line)
+#        string( LENGTH "${line}" pkgs_len)
+#        if( pkgs_len GREATER 0 )
+#            message ("FOUND PKG: ${line}")
+#            list(APPEND pkgs "${line}")        
+#        endif()
+#    endforeach()
 
     string( REPLACE "," " " pkgs "${apt_packages}")
+    #string( REPLACE "," " " pkgs "${pkgs}")
     string( REPLACE ";" " " pkgs "${pkgs}")
-    string( REPLACE ";" "\n  . " pkgs "${dis_pkgs}")
-    set (dis_pkgs "  . ${dis_pkgs}")     
+    
+    string( REPLACE ";" "\n  . " dis_pkgs "${pkgs}")
+    set (dis_pkgs "  . ${dis_pkgs}")  
+
     string( STRIP "${pkgs}" pkgs)
     string( LENGTH "${pkgs}" pkgs_len)
 
@@ -128,8 +140,10 @@ macro (install_apt_packges apt_packages)
                     output
                 RETURN_VALUE 
                     result_code)
-            # message ("result_code: ${result_code}")
-            # message ("OUTPUT: ${output}")
+            if( NOT "${result_code}" STREQUAL "0")
+                message ("Failed to execute 'apt-get install -y ${pkgs}'. Resultcode: ${result_code}")
+                message ("OUTPUT: ${output}")
+            endif()
         endif()
     endif()
 endmacro()
