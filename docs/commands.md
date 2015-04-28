@@ -60,7 +60,7 @@ See how to package [for debian](packaging_for_debian.md)
 
 Launch your application if applicable. 
 
-While `Library` nor `ElementaryContract`can't be ran, `ElementaryPlug` are runnable by launching [switchboard]()
+While `Library` nor `ElementaryContract`can't be ran, `ElementaryPlug` are runnable by launching [switchboard](https://launchpad.net/switchboard)
 
 | name | option | description |
 |--------|----------|---------|
