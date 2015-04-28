@@ -1,14 +1,14 @@
 Hen supports the following commands: 
-  - [init](#init)
-  - [build](#build)
-  - [rebuild](#rebuild)
-  - [install](#install)
-  - [valadoc](#valadoc)
-  - [package](#package)
-  - [run](#run)
-  - [debug](#debug)
-  - [update](#update)
-  - [force-update](#force-update)
+  - [init](#init): create a `project.hen` for you
+  - [build](#build): build your binaries in `build/`
+  - [rebuild](#rebuild): delete your output folders `dist/` and `build/` and build your binaries
+  - [install](#install): install your binaries locally depending on the `PREFIX` (`usr/` by default)
+  - [valadoc](#valadoc): generate the [valadoc](www.valadoc.org) in the `dist/valadoc` folder
+  - [package](#package): package your binaries for your distribution (only `debian` like supported)
+  - [run](#run): run your application if applicable (doesn't apply to libraries)
+  - [debug](#debug): start a `gdb` session with your application
+  - [update](#update): update `hen` to the last version
+  - [force-update](#force-update): delete `hen` locally and start an `update` 
   
 ## Init
 
