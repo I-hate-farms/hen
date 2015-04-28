@@ -25,6 +25,7 @@ Generate the valadoc for all the binaries in `dist/<binary>` using enhanced [Par
 See Parrot [in action](http://i-hate-farms.github.io/parrot/)
 
 ## Package 
+> ./hen run [binary] 
 
 See how to package [for debian](packaging_for_debian.md)
 
@@ -33,8 +34,8 @@ See how to package [for debian](packaging_for_debian.md)
 > ./hen run [binary] 
 
 | name | option | description |
-|--------|----------|------------------------------------------------------------------------------------------------------|
-| binary | optional | the name of the binary to run. If left blank, the command runs the last binary that is not a library |
+|--------|----------|---------|
+| binary | optional | the name of the binary to run. If left blank, the command runs the last binary in the `project.hen` that is not a library |
  
 ## Debug
 
