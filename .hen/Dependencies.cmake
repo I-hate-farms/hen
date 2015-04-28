@@ -7,6 +7,7 @@
 #    - 0.4 : fix local_check_package for multiple packages (ox)
 #    - 0.5 : only install packages if necesseray (avoid sudo each time)
 #    - 0.6 : fix dependending project (ox)
+#    - 0.7 : multi dependencies 
 
 if( NOT DIR_ELEMENTARY_CMAKE )
     set(DIR_ELEMENTARY_CMAKE ${CMAKE_CURRENT_LIST_DIR})
@@ -160,6 +161,16 @@ macro (is_vala_package_in_debian vala_package in_debian)
 
     if( index GREATER -1 )
         set( in_debian "true")
+    endif()
+endmacro()
+
+macro (is_project_dependency package is_project)
+     read_dependency_file()
+     set( is_project "")
+     list(FIND PROTOTYPES ${package} index)
+
+    if( index GREATER -1 )
+        set( is_project "true")
     endif()
 endmacro()
 

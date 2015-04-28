@@ -65,4 +65,4 @@ macro(valadoc target outdir)
 	COMMENT
 		"Generating valadoc in ${outdir}"
 	)
-endmacro(valadoc)
+endmacro()

@@ -30,12 +30,14 @@ endif()
 	message ("${MessageColor}Building debian files...${NC}")
   
   # set up folder
-  SET (DEBIAN_PATH "${CURRENT_BINARY_DIR}/debian")
+  SET (DEBIAN_PATH "${CURRENT_BINARY_DIR}/${ARGS_NAME}/debian")
   file(MAKE_DIRECTORY "${DEBIAN_PATH}")
   file(MAKE_DIRECTORY "${DEBIAN_PATH}/source")  
   
-  # TODO Read license file
-  file(STRINGS "${CURRENT_SOURCE_DIR}/LICENSE" LICENSE_TEXT)
+  # TODO do something smart with the license
+  if(EXISTS "${CURRENT_SOURCE_DIR}/LICENSE")
+    file(STRINGS "${CURRENT_SOURCE_DIR}/LICENSE" LICENSE_TEXT)
+  endif() 
 
   # The date has the following format[19] (compatible and 
   # with the same semantics of RFC 2822 and RFC 5322):
@@ -118,12 +120,14 @@ endif()
   message ("  . Debian control files generated in ${DEBIAN_PATH}")
 	# Running debuild
 	message ("  . Running debuild. This may take a while...")
-  EXEC_PROGRAM( debuild  
-      ARGS
-          -i -us -uc -b
+  EXECUTE_PROCESS( 
+      COMMAND
+        debuild -i -us -uc -b
       OUTPUT_VARIABLE 
           output
-      RETURN_VALUE  
+      WORKING_DIRECTORY
+        ${CURRENT_BINARY_DIR}/${ARGS_NAME}
+      RESULT_VARIABLE  
           result_code)
   # message ("Debuild ouput: ${output}")
   if( NOT "${result_code}" STREQUAL "0")
@@ -138,10 +142,21 @@ endif()
 	SET (DEB_DBG_FILE "${ARGS_PACKAGE_NAME}-dbg_${ARGS_VERSION}_amd64")
 
   # Move the created file to dist/
-  file (RENAME "${CURRENT_SOURCE_DIR}/${DEB_FILE}.deb" "${DIST_PATH}/${DEB_FILE}.deb")
-  file (RENAME "${CURRENT_SOURCE_DIR}/${DEB_FILE}.changes" "${DIST_PATH}/${DEB_FILE}.changes")
-  file (RENAME "${CURRENT_SOURCE_DIR}/${DEB_FILE}.build" "${DIST_PATH}/${DEB_FILE}.build")
-  file (RENAME "${CURRENT_SOURCE_DIR}/${DEB_DBG_FILE}.deb" "${DIST_PATH}/${DEB_DBG_FILE}.deb")
+  file (RENAME "${CURRENT_BINARY_DIR}/${DEB_FILE}.deb" "${DIST_PATH}/${DEB_FILE}.deb")
+  file (RENAME "${CURRENT_BINARY_DIR}/${DEB_FILE}.changes" "${DIST_PATH}/${DEB_FILE}.changes")
+  file (RENAME "${CURRENT_BINARY_DIR}/${DEB_FILE}.build" "${DIST_PATH}/${DEB_FILE}.build")
+  file (RENAME "${CURRENT_BINARY_DIR}/${DEB_DBG_FILE}.deb" "${DIST_PATH}/${DEB_DBG_FILE}.deb")
 
-
+  EXECUTE_PROCESS( 
+      COMMAND
+        debuild clean
+      OUTPUT_VARIABLE 
+          output
+      WORKING_DIRECTORY
+        ${CURRENT_BINARY_DIR}/${ARGS_NAME}
+      RESULT_VARIABLE  
+          result_code)
+  # Delete folder because it was created with root permissions 
+  file(REMOVE_RECURSE ${DEBIAN_PATH})
+  
   message ("${MessageColor}Debian files ready${NC} in ${DIST_PATH}")

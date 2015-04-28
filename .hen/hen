@@ -215,7 +215,11 @@ do_install () {
       echo "----------"
       generate_cmakefile
       cd ${BUILD_FOLDER}
-      sudo make install
+      if [ ! -z "$PARAM" ]; then
+          sudo make install_${PARAM}
+      else
+        sudo make install
+      fi
       cd ..
       restore_cmakefile
 }
@@ -231,10 +235,15 @@ do_package () {
       generate_cmakefile
       cd ${BUILD_FOLDER}
       # By default we build for debian
-      if [ -z "$PARAM" ]; then
-          PARAM=debian
+      if [ ! -z "$PARAM" ]; then
+        SYSTEM=debian
+        if [ ! -z "$2" ]; then
+            SYSTEM=$2
+        fi 
+        sudo make package_${SYSTEM}_${PARAM}
+      else
+        sudo make package_debian
       fi
-      make package_${PARAM}
       cd ..
       restore_cmakefile
 }
@@ -248,7 +257,11 @@ do_run () {
       echo "----------"
       generate_cmakefile
       cd ${BUILD_FOLDER}
-      make run
+      if [ ! -z "$PARAM" ]; then
+          make run_${PARAM}
+      else
+        make run
+      fi
       cd ..
       restore_cmakefile
 }
@@ -262,7 +275,11 @@ do_debug () {
       echo "----------"
       generate_cmakefile
       cd ${BUILD_FOLDER}
-      make debug
+      if [ ! -z "$PARAM" ]; then
+          make debug_${PARAM}
+      else
+        make debug
+      fi
       cd ..
       restore_cmakefile
 }
@@ -312,6 +329,8 @@ do_internal_release () {
   zip -q -r ../dist/hen-latest.zip .
   cd ..
   cp ${DEST_FOLDER}/Hen-VERSION.txt ./dist/
+  cp ${DEST_FOLDER}/Hen-CHANGELOG.md ./CHANGELOG.md
+
   echo -e "${white}Release ready${NC}."
 }
 

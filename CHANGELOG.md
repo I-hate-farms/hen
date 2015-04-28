@@ -3,12 +3,18 @@
 - support po translation files
 - support threads
 
+* 0.9.24
+  - fix messages 
+  - remove valadoc 
+  - fix muti-targets (a deal is a deal)
+  - add C_OPTIONS to deal with gcc -lm
+
 * 0.9.23 
   - fix bugs in multi target
   - enable SRC to be empty
   - tweak messages 
   - fixing regression: library not installed in /usr/lib because generated CMakeLists.txt date was off
-  
+
 * 0.9.22
   - add libvala-0.28
   - fix ./hen build bugs

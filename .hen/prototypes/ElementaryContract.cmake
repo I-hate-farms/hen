@@ -83,10 +83,10 @@ macro(elementary_contract)
 
     install_elementary_app (${ARGS_NAME} ${ARGS_ICON} "${ARGS_DESKTOP}")
 
-    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON} DESTINATION share/icons/hicolor/48x48/apps)
-    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_CONTRACT} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/contractor)
+    # install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON} DESTINATION share/icons/hicolor/48x48/apps COMPONENT ${ELEM_NAME})
+    # install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_CONTRACT} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/contractor COMPONENT ${ELEM_NAME})
     # Support tasks 
-    build_valadoc () 
+    #build_valadoc () 
     package_debian ()
     create_execution_tasks ()
 endmacro()
@@ -108,8 +108,14 @@ macro(install_elementary_contract)
         message( FATAL_ERROR "${FatalColor}The CONTRACT file doesn't exist${NC}. File: ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_CONTRACT}")
     endif()
 
-    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON} DESTINATION share/icons/hicolor/48x48/apps)
-    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_CONTRACT} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/contractor)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON} DESTINATION share/icons/hicolor/48x48/apps COMPONENT ${ELEM_NAME})
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_CONTRACT} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/contractor COMPONENT ${ELEM_NAME})
 
+    add_custom_target(install_${ELEM_NAME}
+      DEPENDS ${ELEM_NAME}
+      COMMAND 
+          "${CMAKE_COMMAND}" -DCMAKE_INSTALL_COMPONENT=shared
+          -P "${CMAKE_BINARY_DIR}/cmake_install.cmake"
+    )
     create_uninstall_target ()
 endmacro()

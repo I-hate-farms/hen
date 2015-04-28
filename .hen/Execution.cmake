@@ -6,22 +6,22 @@
 
 macro (create_execution_tasks)
 	SET( EXECNAME "")
-	if( PROJECT_TYPE STREQUAL "APPLICATION")
+	if( BINARY_TYPE STREQUAL "APPLICATION")
 		 SET( EXECNAME "${CMAKE_CURRENT_BINARY_DIR}/${ARGS_NAME}")
 	endif() 
 
 	if( PROJECT_TYPE STREQUAL "PLUG")
 		 SET( EXECNAME "switchboard")
 	endif() 
-
-	if(EXECNAME) 
+	
+	if(NOT EXECNAME STREQUAL "") 
 		# Run 
 		add_custom_target(
 			run_${ARGS_NAME}
 		COMMAND 
 			${EXECNAME}
 		WORKING_DIRECTORY
-			"${CMAKE_CURRENT_BINARY_DIR}"
+			"${CMAKE_CURRENT_SOURCE_DIR}"
 		COMMENT 
 			"Running ${ARGS_NAME}..."
 		)
@@ -30,7 +30,7 @@ macro (create_execution_tasks)
 		COMMAND 
 			gdb -ex=run --args ${EXECNAME}
 		WORKING_DIRECTORY
-			"${CMAKE_CURRENT_BINARY_DIR}"
+			"${CMAKE_CURRENT_SOURCE_DIR}"
 		COMMENT 
 			"Running ${ARGS_NAME}..."
 		)

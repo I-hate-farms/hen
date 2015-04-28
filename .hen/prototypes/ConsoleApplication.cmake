@@ -59,13 +59,20 @@ macro(console_application)
 
     install_elementary_cli (${ARGS_NAME})
     # Support tasks 
-    build_valadoc () 
+    #build_valadoc () 
     package_debian ()
     create_execution_tasks ()
 endmacro()
 
 macro(install_elementary_cli ELEM_NAME)
-    install (TARGETS ${ELEM_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_FULL_BINDIR})
+    install (TARGETS ${ELEM_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_FULL_BINDIR} COMPONENT ${ELEM_NAME})
+    
+    add_custom_target(install_${ELEM_NAME}
+          DEPENDS ${ELEM_NAME}
+          COMMAND 
+              "${CMAKE_COMMAND}" -DCMAKE_INSTALL_COMPONENT=shared
+              -P "${CMAKE_BINARY_DIR}/cmake_install.cmake"
+        )
 
     create_uninstall_target ()
 endmacro()

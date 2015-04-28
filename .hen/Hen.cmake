@@ -25,6 +25,7 @@
 #    - 0.21: package debian files natively
 #    - 0.22: added AUTHOR, HOMEPAGE and LICENSE
 #    - 0.23: add run and debug tasks
+#    - 0.24: multi targets and C_OPTIONS
 
 # RELEASE
 # TODO * fix po file generation
@@ -73,12 +74,12 @@ include (Valadoc)
 include (PackageDebian)
 include (Execution)
 
-include (tasks/Application)
-include (tasks/ConsoleApplication)
-include (tasks/Library)
+include (prototypes/Application)
+include (prototypes/ConsoleApplication)
+include (prototypes/Library)
 
-include (tasks/ElementaryPlug)
-include (tasks/ElementaryContract)
+include (prototypes/ElementaryPlug)
+include (prototypes/ElementaryContract)
 # Comment this out to enable C compiler warnings
 add_definitions (-w)
 
@@ -114,6 +115,7 @@ if(NOT WIN32)
 endif()
 
 set (SOURCE_PATHS "")
+set (PROTOTYPES "")
 
 # project(hen_build)
 
@@ -176,6 +178,7 @@ macro(hen_build)
         message( "${MessageColor}Creating build for ${ARGS_NAME}...${NC}")
         message ("----------")
         project (${ARGS_NAME})
+        list(APPEND PROTOTYPES ${ARGS_NAME})
     else()
         message( FATAL_ERROR "${FatalColor}You must specify a NAME${NC}")
     endif()
@@ -278,7 +281,7 @@ macro(hen_build)
     string(FIND "${ARGS_VALA_OPTIONS}" "--target-glib" index)
     if( index GREATER -1 )
         # ... we display a warning
-        message( "${WarningColor}You don't need to precise '--target-glib 2.32'${NC} as it is added by default.")
+        message( "${WarningColor}You don't need to precise '--target-glib=2.32'${NC} as it is added by default.")
     else()
         # By default the new glibc is used: 2.32
         set( EXTRA_VALA_OPTIONS "--target-glib=2.32" )
@@ -376,7 +379,12 @@ macro(hen_build)
     # Add the C options
     foreach(opt ${ARGS_C_OPTIONS})
         # add_definitions ("${opt}")
-        set_target_properties( ${ARGS_NAME} PROPERTIES COMPILE_OPTIONS ${opt})
+        if( opt STREQUAL "-lm")
+            target_link_libraries(${ARGS_NAME} PRIVATE "m") 
+        else()
+            # set_target_properties( ${ARGS_NAME} PROPERTIES COMPILE_FLAGS ${opt})
+            set_property( TARGET ${ARGS_NAME} APPEND PROPERTY COMPILE_FLAGS ${opt} )
+        endif()
     endforeach()
     #include_directories (${ARGS_SOURCE_PATH})
 endmacro()
@@ -497,7 +505,8 @@ macro(handle_packages)
             SET (MY_CFLAGS "${MY_CFLAGS} ${flag}")
         endforeach()
         # message ("!!! MY_CFLAGS : ${MY_CFLAGS}")
-        set_target_properties( ${ARGS_NAME} PROPERTIES COMPILE_FLAGS ${MY_CFLAGS})
+        # set_target_properties( ${ARGS_NAME} PROPERTIES COMPILE_FLAGS ${MY_CFLAGS})
+        set_property( TARGET ${ARGS_NAME} APPEND PROPERTY COMPILE_FLAGS ${MY_CFLAGS} )
     endif()
     if( NOT "${${DEPSNAME}_LIBRARY_DIRS}" STREQUAL "" )
         # message ("!!! DIRS : ${${DEPSNAME}_LIBRARY_DIRS}")
@@ -509,5 +518,43 @@ macro(handle_packages)
         # link_libraries (${${DEPSNAME}_LIBRARIES})
         target_link_libraries(${ARGS_NAME} PRIVATE ${${DEPSNAME}_LIBRARIES}) 
     endif()
+
+    # Now brace yourself for something really crazy: 
+    # addind the dependencies of the other project dependencies 
+    # like echo for testing-echo
+    # All the dependencies are stored as double dollar variables 
+    # as set above
+    foreach(package ${PACKAGES})
+        set (is_project "")
+        is_project_dependency (${package} is_project)
+        if(is_project STREQUAL "true")
+            set (PRJ_DEPSNAME "DEPS_${package}_VAR")
+            # Let's add the project dependencies to the current project
+            if( NOT "${${PRJ_DEPSNAME}_CFLAGS}" STREQUAL "" )
+                # message ("!!! CFLAGS : ${${DEPSNAME}_CFLAGS}")
+                # add_definitions (${${DEPSNAME}_CFLAGS})
+                set (MY_CFLAGS "")
+                foreach( flag ${${PRJ_DEPSNAME}_CFLAGS} )
+                    SET (MY_CFLAGS "${MY_CFLAGS} ${flag}")
+                endforeach()
+                # message ("!!! MY_CFLAGS : ${MY_CFLAGS}")
+                # set_target_properties( ${ARGS_NAME} PROPERTIES COMPILE_FLAGS ${MY_CFLAGS})
+                set_property( TARGET ${ARGS_NAME} APPEND PROPERTY COMPILE_FLAGS ${MY_CFLAGS} )
+
+            endif()
+            if( NOT "${${PRJ_DEPSNAME}_LIBRARY_DIRS}" STREQUAL "" )
+                # message ("!!! DIRS : ${${DEPSNAME}_LIBRARY_DIRS}")
+                # link_directories (${${DEPSNAME}_LIBRARY_DIRS})
+                target_link_libraries(${ARGS_NAME} PRIVATE ${${PRJ_DEPSNAME}_LIBRARY_DIRS}) 
+            endif()
+
+            if( NOT "${${PRJ_DEPSNAME}_LIBRARIES}" STREQUAL "" )
+                # message ("!!! LIBS : ${${DEPSNAME}_LIBRARIES}")
+                # link_libraries (${${DEPSNAME}_LIBRARIES})
+                target_link_libraries(${ARGS_NAME} PRIVATE ${${PRJ_DEPSNAME}_LIBRARIES}) 
+            endif()
+        endif() 
+    endforeach()
+    
     target_compile_definitions(${ARGS_NAME} PUBLIC -DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\") 
 endmacro()   

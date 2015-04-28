@@ -112,19 +112,25 @@ macro(application)
 
     install_elementary_app (${ARGS_NAME} ${ARGS_ICON} "${ARGS_DESKTOP}")
     # Support tasks 
-    build_valadoc () 
+    #build_valadoc () 
     package_debian ()
     create_execution_tasks ()
 endmacro()
 
 macro(install_elementary_app ELEM_NAME ELEM_ICON ELEM_DESKTOP)
     #install (TARGETS ${CMAKE_PROJECT_NAME} DESTINATION bin)
-    install (TARGETS ${ELEM_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_FULL_BINDIR})
+    install (TARGETS ${ELEM_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_FULL_BINDIR} COMPONENT ${ELEM_NAME} )
     # Needed for elementary contract
     if(ELEM_DESKTOP)
-        install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ELEM_DESKTOP} DESTINATION share/applications)
+        install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ELEM_DESKTOP} DESTINATION share/applications COMPONENT ${ELEM_NAME})
     endif()  
-    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ELEM_ICON} DESTINATION share/icons/hicolor/48x48/apps)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ELEM_ICON} DESTINATION share/icons/hicolor/48x48/apps COMPONENT ${ELEM_NAME})
 
+    add_custom_target(install_${ELEM_NAME}
+      DEPENDS ${ELEM_NAME}
+      COMMAND 
+          "${CMAKE_COMMAND}" -DCMAKE_INSTALL_COMPONENT=shared
+          -P "${CMAKE_BINARY_DIR}/cmake_install.cmake"
+    )
     create_uninstall_target ()
 endmacro()
