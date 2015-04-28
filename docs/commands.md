@@ -31,9 +31,10 @@ See how to package [for debian](packaging_for_debian.md)
 ## Run 
 
 > ./hen run [binary] 
- name | type | description 
-+
- binary | optional | the name of the binary to run. If left blank, the command runs the last binary that is not a library
+
+| name | option | description |
+|--------|----------|------------------------------------------------------------------------------------------------------|
+| binary | optional | the name of the binary to run. If left blank, the command runs the last binary that is not a library |
  
 ## Debug
 
