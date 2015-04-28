@@ -1,14 +1,14 @@
 Hen supports the following commands: 
-  - [init](#Init)
-  - [build](#Build)
-  - [rebuild](#Rebuild]
-  - [install](#Install)
-  - [valadoc](#Valadoc)
-  - [package](#Package)
-  - [run](#Run)
-  - [debug)(#Debug)
-  - [update](#Update)
-  - [force-update](#Force-update)
+  - [init](#init)
+  - [build](#build)
+  - [rebuild](#rebuild)
+  - [install](#install)
+  - [valadoc](#valadoc)
+  - [package](#package)
+  - [run](#run)
+  - [debug](#debug)
+  - [update](#update)
+  - [force-update](#force-update)
   
 ## Init
 
@@ -25,6 +25,7 @@ See Parrot [in action](http://i-hate-farms.github.io/parrot/)
 
 ## Package 
 
+See how to package [for debian](packaging_for_debian.md)
 ## Run 
 
 ## Debug
