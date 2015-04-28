@@ -7,23 +7,23 @@ Hen supports the following commands:
   - [package](#package): package your binaries for your distribution (only `debian` like supported)
   - [run](#run): run your application if applicable (doesn't apply to libraries)
   - [debug](#debug): start a `gdb` session with your application
-  - [update](#update): update `hen` to the last version
+  - [update](#update): update `hen` to the latest version
   - [force-update](#force-update): delete `hen` locally and start an `update` 
   
 ## Init
 > ./hen init
 
-Create a `project.hen` for you
+Create a sample `project.hen` for you.
 
 ## Build
 > ./hen build 
 
-Build all your binaries in the `build/<binary>` folder
+Build all your binaries in the `build/<binary>` folder.
 
 ## Rebuild 
 > ./hen rebuild 
 
-Delete your output folders `dist/` and `build/` and build your binaries
+Delete your output folders `dist/` and `build/` and build your binaries.
  
 ## Install 
 > ./hen install [binary] 
@@ -38,14 +38,14 @@ Install your binaries locally depending on the `PREFIX` (`usr/` by default).
 ## Valadoc 
 > ./hen valadoc 
 
-Generate the [valadoc](www.valadoc.org) for all the binaries in `dist/<binary>` using enhanced [Parrot templates](https://github.com/I-hate-farms/parrot) 
+Generate the [valadoc](www.valadoc.org) for all the binaries in `dist/<binary>` using enhanced [Parrot templates](https://github.com/I-hate-farms/parrot).
 
-See Parrot [in action](http://i-hate-farms.github.io/parrot/)
+See Parrot [in action](http://i-hate-farms.github.io/parrot/).
 
 ## Package 
 > ./hen run [binary] [system] 
 
-Package your binaries for your packaging system (only `debian` supported at the moment)
+Package your binaries for your packaging system (only `debian` is supported at the moment).
 
 | name | option | description |
 |--------|----------|---------|
@@ -60,7 +60,7 @@ See how to package [for debian](packaging_for_debian.md)
 
 Launch your application if applicable. 
 
-While `Library` nor `ElementaryContract`can't be ran, `ElementaryPlug` are runnable by launching [switchboard](https://launchpad.net/switchboard)
+While `Library` nor `ElementaryContract`can't be ran, `ElementaryPlug` are runnable by launching [switchboard](https://launchpad.net/switchboard).
 
 | name | option | description |
 |--------|----------|---------|
@@ -76,8 +76,10 @@ Start a `gdb` session with your application for applicable binaries. See [run](#
 
 > ./hen update
 
+Update `hen` to the latest version if necessary.
+
 ## Force-update 
 
 > ./hen force-update
 
-
+Delete the `./hen` folder and start an `update` forcing an update even the latest version was installed.
