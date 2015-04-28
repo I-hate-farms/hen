@@ -1,4 +1,4 @@
-Hen defines the following binaries protypes: 
+Hen defines the following binaries prototypes: 
   - [ConsoleApplication](#consoleapplication)
   - [Application](#application)
   - [Library](#library)
