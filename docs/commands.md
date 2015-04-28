@@ -35,7 +35,7 @@ See how to package [for debian](packaging_for_debian.md)
 
 | name | option | description |
 |--------|----------|---------|
-| binary | optional | the name of the binary to run. If left blank, the command runs the last binary in the `project.hen` that is not a library |
+| binary | optional | the name of the binary to run.  If left blank, the command runs the last binary in the `project.hen` that is not a library |
  
 ## Debug
 
