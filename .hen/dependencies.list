@@ -11,6 +11,7 @@
 #    - 0.7 : add gconf for elementary-tweaks
 #    - 0.8 : add mx-1.0
 #    - 0.9 : add libvala-0.28 for afrodite
+#    - 0.10: add ivy
 
 # Columns:
 #   . (required): pc package
@@ -85,3 +86,4 @@ gconf-2.0                   -> libgconf2-dev
 packagekit-glib2            -> libpackagekit-glib2-dev, packagekit
 mx-1.0                      -> libmx-dev
 libvala-0.28                -> libvala-0.28-dev
+ivy                         -> libivy-dev

@@ -94,10 +94,10 @@ macro(install_elementary_library ELEM_NAME BUILD_TYPE)
         message( "Install destination is ${MessageColor}${CMAKE_INSTALL_LIBDIR}${NC}")
         install (TARGETS ${ELEM_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}    COMPONENT ${ELEM_NAME})
         # Install lib stuffs
-        install (FILES ${CMAKE_BINARY_DIR}/${ELEM_NAME}.pc              DESTINATION pkgconfig/        COMPONENT ${ELEM_NAME})
+        install (FILES ${CMAKE_BINARY_DIR}/${ELEM_NAME}.pc              DESTINATION lib/pkgconfig/        COMPONENT ${ELEM_NAME})
         install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ELEM_NAME}.vapi    DESTINATION share/vala/vapi/  COMPONENT ${ELEM_NAME})
         install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ELEM_NAME}.deps    DESTINATION share/vala/vapi/  COMPONENT ${ELEM_NAME})
-        install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ELEM_NAME}.h       DESTINATION ${ELEM_NAME}/     COMPONENT ${ELEM_NAME})
+        install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ELEM_NAME}.h       DESTINATION lib/${ELEM_NAME}/     COMPONENT ${ELEM_NAME})
 
         add_custom_target(install_${ELEM_NAME}
               DEPENDS ${ELEM_NAME}
