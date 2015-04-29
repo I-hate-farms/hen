@@ -24,6 +24,8 @@ macro (create_execution_tasks)
 			"${CMAKE_CURRENT_SOURCE_DIR}"
 		COMMENT 
 			"Running ${ARGS_NAME}..."
+		DEPENDS
+			${ARGS_NAME}
 		)
 		add_custom_target(
 			debug_${ARGS_NAME}
@@ -33,6 +35,8 @@ macro (create_execution_tasks)
 			"${CMAKE_CURRENT_SOURCE_DIR}"
 		COMMENT 
 			"Running ${ARGS_NAME}..."
+		DEPENDS
+			${ARGS_NAME}	
 		)
 	#else()
 		# Can't be executed
@@ -56,7 +60,7 @@ macro (create_execution_tasks)
 	#		"Error"
 	#	)
 	endif()
-
+	# FIXME Do it at the end of the script
 	if( NOT EXECUTION_TOP_TARGET_ADDED AND EXECNAME)
 		add_custom_target(
 			run

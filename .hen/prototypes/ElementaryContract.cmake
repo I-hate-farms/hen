@@ -86,7 +86,7 @@ macro(elementary_contract)
     # install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_ICON} DESTINATION share/icons/hicolor/48x48/apps COMPONENT ${ELEM_NAME})
     # install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_CONTRACT} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/contractor COMPONENT ${ELEM_NAME})
     # Support tasks 
-    #build_valadoc () 
+    build_valadoc () 
     package_debian ()
     create_execution_tasks ()
 endmacro()

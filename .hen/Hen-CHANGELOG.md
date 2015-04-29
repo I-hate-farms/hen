@@ -3,6 +3,9 @@
 - support po translation files
 - support threads
 
+* 0.9.25
+  - run, debug and package depends on build task
+
 * 0.9.24
   - fix messages 
   - remove valadoc 

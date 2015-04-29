@@ -4,65 +4,63 @@
 #    - 0.1 :
 #    - 0.2 : add comment
 
-include(ParseArguments)
-find_package(Valadoc REQUIRED)
-
 macro(build_valadoc)
-    # Create dist folder if necessary 
-    SET( DIST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist")
-    SET( DIST_VALADOC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dist/${ARGS_NAME}/valadoc/")
-    
-    if(NOT EXISTS "${DIST_VALADOC_PATH}")
-        file(MAKE_DIRECTORY "${DIST_VALADOC_PATH}")
-    endif()
-    
-    valadoc ( ${ARGS_NAME} "${DIST_VALADOC_PATH}" ${VALA_FILES}
-        PACKAGES
-            ${VALA_PACKAGES}
-        #OPTIONS
-        #CUSTOM_VAPIS
-        )
-    # Replace valadoc default style.css
-    # message ("XXX: ${DIST_VALADOC_PATH}/style.css")
-    #file (REMOVE "${DIST_VALADOC_PATH}/style.css")
-    #file (COPY "${DIR_ELEMENTARY_TEMPLATES}/valadoc_style.css" DESTINATION "${DIST_VALADOC_PATH}")
-    #file (RENAME "${DIST_VALADOC_PATH}/valadoc_style.css" "${DIST_VALADOC_PATH}/style.css")
+
+	write_valaodoc_to_script()
+	
+	add_custom_target(
+		valadoc_${ARGS_NAME}
+ 	COMMAND 
+ 		cmake -D "CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}" -D "CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}" -D "VARIABLES_FILE=${VALADOC_VAR_FILE}" -D "ARGS_NAME=${ARGS_NAME}" -D "DIR_ELEMENTARY_TEMPLATES=${DIR_ELEMENTARY_TEMPLATES}" -P "${DIR_ELEMENTARY_TEMPLATES}/../ValadocExec.cmake" 
+ 	WORKING_DIRECTORY
+ 		"${CMAKE_CURRENT_BINARY_DIR}"
+ 	COMMENT 
+ 		"Executing ValadocExec.cmake"
+ 	)
+
+ 	if( NOT VALADOC_TOP_TARGET_ADDED)
+		add_custom_target(
+			valadoc
+		DEPENDS
+			valadoc_${ARGS_NAME}
+		)
+		set(VALADOC_TOP_TARGET_ADDED "true")
+	endif ()
+
+
+
 endmacro()
 
-macro(valadoc target outdir)
-	parse_arguments(ARGS "PACKAGES;OPTIONS;CUSTOM_VAPIS" "" ${ARGN})
-	set(vala_pkg_opts "")
-	foreach(pkg ${ARGS_PACKAGES})
-		list(APPEND vala_pkg_opts "--pkg=${pkg}")
-	endforeach(pkg ${ARGS_PACKAGES})
+macro(write_valaodoc_to_script)
 
-	set(vapi_dir_opts "")
-	foreach(src ${ARGS_CUSTOM_VAPIS})
-		get_filename_component(pkg ${src} NAME_WE)
-		list(APPEND vala_pkg_opts "--pkg=${pkg}")
-		
-		get_filename_component(path ${src} PATH)
-		list(APPEND vapi_dir_opts "--vapidir=${path}")
-	endforeach(src ${ARGS_DEFAULT_ARGS})
-	list(REMOVE_DUPLICATES vapi_dir_opts)
+    # Write all the variables in the a script 
+    set(VALADOC_VAR_FILE ${CMAKE_BINARY_DIR}/valadoc_${ARGS_NAME}.cmake)
+    file(WRITE ${VALADOC_VAR_FILE} "")
 
-	add_custom_command(TARGET ${target}
-	COMMAND
-		${VALADOC_EXECUTABLE}
-	ARGS
-		"--force"
-		"-b" ${CMAKE_CURRENT_SOURCE_DIR}
-		"-o" ${outdir}
-		"--package-name=${CMAKE_PROJECT_NAME}"
-		"--package-version=${PROJECT_VERSION}"
-		${vala_pkg_opts}
-		${vapi_dir_opts}
-		${ARGS_OPTIONS}
-		${in_files} 
-	DEPENDS
-		${in_files}
-		${ARGS_CUSTOM_VAPIS}
-	COMMENT
-		"Generating valadoc in ${outdir}"
-	)
+    set (var "VALA_FILES")
+    set (VALUE ${${var}})
+    set (TEMP_VALUE "")
+    if(${var})
+        string(REPLACE "\\" "\\\\" VALUE ${${var}})
+    endif ()
+    foreach (item ${${var}})
+    	set (TEMP_VALUE "${TEMP_VALUE};${item}")
+    endforeach() 
+    file(APPEND ${VALADOC_VAR_FILE} "set(${var} \"${TEMP_VALUE}\")\n")
+
+
+    set (var "VALA_PACKAGES")
+    set (VALUE ${${var}})
+    set (TEMP_VALUE "")
+    if(${var})
+        string(REPLACE "\\" "\\\\" VALUE ${${var}})
+    endif ()
+    foreach (item ${${var}})
+    	set (TEMP_VALUE "${TEMP_VALUE};${item}")
+    endforeach() 
+    file(APPEND ${VALADOC_VAR_FILE} "set(${var} \"${TEMP_VALUE}\")\n")
+    
+    set (var "ARGS_VALA_OPTIONS")
+    set (VALUE "${EXTRA_VALA_OPTIONS} ${ARGS_VALA_OPTIONS}")
+		file(APPEND ${VALADOC_VAR_FILE} "set(${var} \"${VALUE}\")\n")
 endmacro()

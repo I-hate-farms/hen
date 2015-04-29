@@ -77,7 +77,7 @@ macro(library)
 
     install_elementary_library (${ARGS_NAME} ${ARGS_LINKING})
     # Support tasks 
-    # build_valadoc () 
+    build_valadoc () 
     package_debian ()
     create_execution_tasks ()
 endmacro()

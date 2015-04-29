@@ -558,3 +558,27 @@ macro(handle_packages)
     
     target_compile_definitions(${ARGS_NAME} PUBLIC -DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\") 
 endmacro()   
+
+macro(write_variables_to_script)
+    
+    # Write all the variables in the a script 
+    set(CacheForScript ${CMAKE_BINARY_DIR}/package_debian_${ARGS_NAME}.cmake)
+    file(WRITE ${CacheForScript} "")
+
+    get_cmake_property(Vars VARIABLES)
+    foreach(Var ${Vars})
+        
+            string(FIND ${Var} "CMAKE_" pos)
+        
+        # If variable doesn't start with CMAKE and is defined
+        set (VALUE ${${Var}})
+        if(${Var})
+            string(REPLACE "\\" "\\\\" VALUE ${${Var}})
+          endif ()
+          if( pos EQUAL -1 OR "${Var}" STREQUAL "CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT" OR 
+            "${Var}" STREQUAL "CMAKE_INSTALL_PREFIX")
+            file(APPEND ${CacheForScript} "set(${Var} \"${VALUE}\")\n")
+          endif()
+        
+    endforeach()
+endmacro() 

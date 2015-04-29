@@ -67,7 +67,7 @@ macro(elementary_plug)
     install_elementary_plug (${ARGS_NAME})
     create_uninstall_target ()
     # Support tasks 
-    #build_valadoc () 
+    build_valadoc () 
     package_debian ()
     create_execution_tasks ()
 endmacro()

@@ -112,7 +112,7 @@ macro(application)
 
     install_elementary_app (${ARGS_NAME} ${ARGS_ICON} "${ARGS_DESKTOP}")
     # Support tasks 
-    #build_valadoc () 
+    build_valadoc () 
     package_debian ()
     create_execution_tasks ()
 endmacro()
