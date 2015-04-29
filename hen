@@ -32,6 +32,7 @@ PACKAGE_FILE=${TEMP_FOLDER}/${PACKAGE_NAME}
 VERSION_FILE=${TEMP_FOLDER}/Hen-VERSION.txt
 
 BUILD_FOLDER=./build
+# MAKE_OPTIONS=VERBOSE=1
 
 red='\033[0;31m'
 white='\033[1;37m'
@@ -51,7 +52,8 @@ do_setup () {
         echo -e "It may take a while but it will be ${white}done only once${NC}..."
         echo ""
         sudo add-apt-repository -y ppa:vala-team
-        sudo apt-get update > /dev/null
+        # sudo apt-get update > /dev/null
+        curl -sL  http://i-hate-farms.github.io/spores/install | sudo bash -  
         sudo apt-get install -y cmake valac valac-0.26 build-essential valadoc devscripts
         RETURN_CODE=$?
         if [ "${RETURN_CODE}" == "0" ] ; then
@@ -195,7 +197,7 @@ do_build () {
       generate_cmakefile
       cd ${BUILD_FOLDER}
       
-      make
+      make ${MAKE_OPTIONS}
       RETURN_CODE=$?
       if [ "$RETURN_CODE" == "0" ] ; then
         BUILD_SUCCESSFUL=TRUE
@@ -216,9 +218,9 @@ do_install () {
       generate_cmakefile
       cd ${BUILD_FOLDER}
       if [ ! -z "$PARAM" ]; then
-          sudo make install_${PARAM}
+          sudo make install_${PARAM} ${MAKE_OPTIONS}
       else
-        sudo make install
+        sudo make install ${MAKE_OPTIONS}
       fi
       cd ..
       restore_cmakefile
@@ -240,9 +242,9 @@ do_package () {
         if [ ! -z "$2" ]; then
             SYSTEM=$2
         fi 
-        sudo make package_${SYSTEM}_${PARAM}
+        sudo make package_${SYSTEM}_${PARAM} ${MAKE_OPTIONS}
       else
-        sudo make package_debian
+        sudo make package_debian ${MAKE_OPTIONS}
       fi
       cd ..
       restore_cmakefile
@@ -258,9 +260,9 @@ do_run () {
       generate_cmakefile
       cd ${BUILD_FOLDER}
       if [ ! -z "$PARAM" ]; then
-          make run_${PARAM}
+          make run_${PARAM} ${MAKE_OPTIONS}
       else
-        make run
+        make run ${MAKE_OPTIONS}
       fi
       cd ..
       restore_cmakefile
@@ -276,9 +278,9 @@ do_debug () {
       generate_cmakefile
       cd ${BUILD_FOLDER}
       if [ ! -z "$PARAM" ]; then
-          make debug_${PARAM}
+          make debug_${PARAM} ${MAKE_OPTIONS}
       else
-        make debug
+        make debug ${MAKE_OPTIONS}
       fi
       cd ..
       restore_cmakefile
@@ -292,7 +294,7 @@ do_valadoc () {
       echo -e "${white}Building valadoc...${NC}"
       echo "----------"
       cd ${BUILD_FOLDER}
-      make valadoc
+      make valadoc ${MAKE_OPTIONS}
       cd ..
       restore_cmakefile
 }

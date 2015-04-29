@@ -7,6 +7,8 @@
   - run, debug and package depends on build task
   - fix libraries deployed partly in /usr instead of /usr/bin
   - add ivy to deps.list 
+  - add spores to hen setup process 
+  - use APPEND_STRING instead of APPEND
   
 * 0.9.24
   - fix messages 
