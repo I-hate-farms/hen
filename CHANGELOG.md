@@ -3,9 +3,10 @@
 - support po translation files
 - support threads
 
-* 0.9.26
+* 0.9.27
   - fix install output
   - fix packaging output
+  - fix weird libivy package error
 
 * 0.9.25
   - run, debug and package depends on build task
