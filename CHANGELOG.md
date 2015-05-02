@@ -3,23 +3,27 @@
 - support po translation files
 - support threads
 
+* 0.9.26
+  - fix install output
+  - fix packaging output
+
 * 0.9.25
   - run, debug and package depends on build task
   - fix libraries deployed partly in /usr instead of /usr/bin
-  - add ivy to deps.list 
-  - add spores to hen setup process 
+  - add ivy to deps.list
+  - add spores to hen setup process
   - use APPEND_STRING instead of APPEND
-  
+
 * 0.9.24
-  - fix messages 
-  - remove valadoc 
+  - fix messages
+  - remove valadoc
   - fix muti-targets (a deal is a deal)
   - add C_OPTIONS to deal with gcc -lm
 
-* 0.9.23 
+* 0.9.23
   - fix bugs in multi target
   - enable SRC to be empty
-  - tweak messages 
+  - tweak messages
   - fixing regression: library not installed in /usr/lib because generated CMakeLists.txt date was off
 
 * 0.9.22
@@ -28,13 +32,13 @@
 
 * 0.9.21
   - fails if there is nothing to build
-  - better messages 
+  - better messages
   - display the list of installed dependencies
   - FORMAT: BINARY_NAME => NAME
 
-* 0.9.20 
- - new valadoc style CSS 
- - fix install of libraries in /usr and not /usr/local/lib as the path 
+* 0.9.20
+ - new valadoc style CSS
+ - fix install of libraries in /usr and not /usr/local/lib as the path
    is not used by ldconfig by default
  - add package task to build debian files
  - FORMAT: add AUTHOR, COPYRIGHT, LICENSE and HOMEPAGE
@@ -45,25 +49,25 @@
 
 * 0.9.13
  - add force-update task
- - fix regression if your project requires built-in dependencies (eidete) 
+ - fix regression if your project requires built-in dependencies (eidete)
  - fix regression in installing desktop icon (eidete-videobin)
 
 * 0.9.12
- - rename cmake folder to .hen 
+ - rename cmake folder to .hen
  - add tasks: valadoc
  - first stab at deb building and providing default icons
 
-* 0.9.11 
- - self install 
- - add install task 
+* 0.9.11
+ - self install
+ - add install task
  - hen auto-install its dependencies (valac, cmake, build-essential) the first time
 
 * 0.9.10
  - generate desktop and icon file
- - add clean task 
+ - add clean task
  - improve onboarding experience
  - more documentation
- 
+
 * 0.9.9
  - only install apt packages if not present in the system (avoid asking for sudo without reason)
  - fix issues with gtk3.0 and ox
@@ -84,7 +88,7 @@
 * 0.9.5
  - fix comments
  - add rebuild task
- 
+
 * 0.9.4
  - add list options
  - add colors
@@ -99,7 +103,7 @@
  - add `hen.sh`
  - publish 0.9.1 to github
 
-* 0.9: 
+* 0.9:
 - 0.1 : initial release
 - 0.2 : support schemas
 - 0.3 : support app
