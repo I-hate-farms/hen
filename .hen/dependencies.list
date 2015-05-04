@@ -81,8 +81,9 @@ plank                       -> libplank-dev
 unity                       -> libunity-dev
 cheese-gtk                  -> libcheese-gtk-dev
 sqlite3                     -> libsqlite3-dev
-libvala-0.28                -> libvala-0.28-dev
-ivy                         -> libivy-dev
+
 gconf-2.0                   -> libgconf2-dev
 packagekit-glib2            -> libpackagekit-glib2-dev, packagekit
 mx-1.0                      -> libmx-dev
+libvala-0.28                -> libvala-0.28-dev
+ivy                         -> libivy-dev

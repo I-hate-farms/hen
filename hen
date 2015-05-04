@@ -107,7 +107,7 @@ do_update () {
       if [ -d "./build/" ] ; then
         rm -rf "./build/"
       fi
-
+      
       # Cleaning up
       rm -rf ${TEMP_FOLDER}
       echo -e "${white}Hen updated to ${SERVER_VERSION}${NC}"
@@ -115,11 +115,11 @@ do_update () {
 
 }
 
-do_force_update () {
+do_force_update () {    
     if [ -d ${DEST_FOLDER} ] ; then
         rm -rf ${DEST_FOLDER}
     fi
-    do_update
+    do_update 
 }
 
 do_prepare () {
@@ -140,7 +140,7 @@ do_prepare () {
         rm -rf ${BUILD_FOLDER}
       fi
       generate_cmakefile
-
+      
       mkdir ${BUILD_FOLDER}
       cd ${BUILD_FOLDER}
       cmake ..
@@ -154,14 +154,14 @@ generate_cmakefile () {
         # Remove old backup of present
         if [ -f "CMakeLists.txt.backup-hen" ] ; then
           rm CMakeLists.txt.backup-hen
-        fi
+        fi        
         mv CMakeLists.txt CMakeLists.txt.backup-hen
       fi
       cp ${DEST_FOLDER}/CMakeLists.template CMakeLists.txt
       cat project.hen >> CMakeLists.txt
       cat ${DEST_FOLDER}/CMakeLists.ending.template >> CMakeLists.txt
       # Setting up date not to fool cmake
-      touch -d "$(date -r project.hen --rfc-2822)" CMakeLists.txt
+      touch -d "$(date -r project.hen --rfc-2822)" CMakeLists.txt 
 }
 
 restore_cmakefile () {
@@ -196,7 +196,7 @@ do_build () {
       echo "----------"
       generate_cmakefile
       cd ${BUILD_FOLDER}
-
+      
       make ${MAKE_OPTIONS}
       RETURN_CODE=$?
       if [ "$RETURN_CODE" == "0" ] ; then
@@ -241,7 +241,7 @@ do_package () {
         SYSTEM=debian
         if [ ! -z "$2" ]; then
             SYSTEM=$2
-        fi
+        fi 
         sudo make package_${SYSTEM}_${PARAM} ${MAKE_OPTIONS}
       else
         sudo make package_debian ${MAKE_OPTIONS}
@@ -306,7 +306,7 @@ do_rebuild () {
   fi
   if [ -d "./dist"} ] ; then
     rm -rf "./dist"
-  fi
+  fi    
   do_build
 }
 
@@ -374,13 +374,13 @@ case "$OPERATION" in
    "package")do_package
    ;;
    "valadoc")do_valadoc
-   ;;
+   ;;     
    "run")do_run
-   ;;
+   ;;      
    "init")do_init
-   ;;
+   ;;      
    "debug")do_debug
-   ;;
+   ;;     
    "help")do_help
    ;;
    "--help")do_help

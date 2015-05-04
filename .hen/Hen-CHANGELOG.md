@@ -6,7 +6,7 @@
 * 0.9.28
   - handle packaging error better
 
-* 0.9.27
+ * 0.9.27
   - fix install output
   - fix packaging output
   - fix weird libivy package error

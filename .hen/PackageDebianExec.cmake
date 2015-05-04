@@ -27,7 +27,7 @@ if(NOT WIN32)
   set(WarningColor "${BoldYellow}")
 endif()
 
-  message ("${MessageColor}Building debian files...${NC}")
+	message ("${MessageColor}Building debian files...${NC}")
 
   # set up folder
   #SET (DEBIAN_PATH "${CURRENT_BINARY_DIR}/${ARGS_NAME}/debian")
@@ -120,8 +120,8 @@ endif()
   endif()
 
   message ("  . Debian control files generated in ${DEBIAN_PATH}")
-  # Running debuild
-  message ("  . Running debuild. This may take a while...")
+	# Running debuild
+	message ("  . Running debuild. This may take a while...")
   EXECUTE_PROCESS(
       COMMAND
         debuild -i -us -uc -b
@@ -134,15 +134,15 @@ endif()
           result_code)
   message ("Debuild ouput: ${output}")
   if( NOT "${result_code}" STREQUAL "0")
-    message ("${FatalColor}debuild failed${NC}, returning ${result_code}")
-    message ("Debuild ouput: ${output}")
+  	message ("${FatalColor}debuild failed${NC}, returning ${result_code}")
+  	message ("Debuild ouput: ${output}")
   endif()
 
-  SET (DIST_PATH "${CURRENT_SOURCE_DIR}/dist/${ARGS_NAME}")
-  file (MAKE_DIRECTORY "${DIST_PATH}")
+	SET (DIST_PATH "${CURRENT_SOURCE_DIR}/dist/${ARGS_NAME}")
+	file (MAKE_DIRECTORY "${DIST_PATH}")
 
-  SET (DEB_FILE "${ARGS_PACKAGE_NAME}_${ARGS_VERSION}_amd64")
-  SET (DEB_DBG_FILE "${ARGS_PACKAGE_NAME}-dbg_${ARGS_VERSION}_amd64")
+	SET (DEB_FILE "${ARGS_PACKAGE_NAME}_${ARGS_VERSION}_amd64")
+	SET (DEB_DBG_FILE "${ARGS_PACKAGE_NAME}-dbg_${ARGS_VERSION}_amd64")
 
   # Move the created file to dist/
   #SET (DEB_DEST "${CURRENT_BINARY_DIR}")

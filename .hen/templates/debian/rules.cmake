@@ -9,6 +9,9 @@
 %:
 	dh $@
 
+#build: 
+#	echo "XXXX BUILDING '$1' '$@' and this '@ARGS_PACKAGE_NAME@'"
+
 override_dh_strip:
 	dh_strip --dbg-package=@ARGS_PACKAGE_NAME@-dbg
 
