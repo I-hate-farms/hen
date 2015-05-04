@@ -3,6 +3,9 @@
 - support po translation files
 - support threads
 
+* 0.9.28
+  - handle packaging error better
+
 * 0.9.27
   - fix install output
   - fix packaging output
